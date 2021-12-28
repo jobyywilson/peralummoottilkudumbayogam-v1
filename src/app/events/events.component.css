@@ -1,0 +1,24 @@
+.sub-heading{
+    padding-top: 30px;
+
+   }
+   .foramation-image{
+    width: 165px;
+    height: 120px;
+}
+.content{
+     padding-bottom: 40px;;
+}
+
+.event-pic{
+    border-radius: 10px;
+  }
+.event-card{
+    width:80%;
+    text-align: -webkit-center;
+  }
+  .align-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

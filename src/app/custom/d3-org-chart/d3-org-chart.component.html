@@ -1,0 +1,26 @@
+<ng-select 
+bindLabel="nameAndCode"
+bindValue="nodeId"
+(search)="searchMember($event)"
+placeholder="Search member"
+(click)="expandChart(selectedMemberName)"
+[minTermLength] = 3
+[(ngModel)]="selectedMemberName">
+<ng-option *ngFor="let item of getData()" [value]="item">
+  <img class="thumbnail" height="15" width="15" [src]="item.profilePic?item.profilePic:'assets/img/user.png'"/> {{ item.name + ' (' + item.nodeId + ')' }}
+</ng-option>
+</ng-select>
+<div class="btn-action-button-list">
+  <button (click)="chart.zoomIn()" class="btn plus-btn"><i class="fa fa-plus icon-action" aria-hidden="true"></i>
+  </button>
+  <button  (click)="chart.zoomOut()" class="btn minus-btn"><i class="fa fa-minus icon-action" aria-hidden="true"></i>
+  </button>
+  <button (click)="chart.fit()" class="btn refresh-btn"><i class="fa fa-refresh icon-action" aria-hidden="true"></i>
+  </button>
+    
+</div>
+<div #chartContainer id="chartContainer">
+
+
+   
+</div>

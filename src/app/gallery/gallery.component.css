@@ -1,0 +1,16 @@
+
+.eventype-select{
+
+    justify-content: center;
+    align-items: center;
+}
+.eventtype{
+    padding-top:20px;
+    padding-bottom:40px;
+}
+mat-form-field{
+    min-width: 300px;
+}
+.gallery-img{
+    width: 100%;
+}

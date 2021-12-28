@@ -1,0 +1,42 @@
+<header id="header" class="fixed-top">
+    <div class="container d-flex  justify-content-between">
+      <!-- Uncomment below if you prefer to use an image logo -->
+      
+      <div style=" display: flex;align-items: center;">
+        <a href="#" class="logo logoimg"><img src="assets/img/logo.jpg" alt="" class="img-fluid"></a>
+        
+          <div class="row">
+            <h1 class="logo sub1"><a href="#">Kallooppara</a></h1>
+            <h1 class="logo sub2"><a href="#">Peralummoottil Kudumbayogam</a></h1>
+            
+          </div>
+        </div>
+      
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="/home">Home</a></li>
+          
+          
+   
+          <li class="dropdown"><a (click)="toggleDropdown()"><span>Kudumbayogam</span> 
+            <i class="fa fa-angle-down" ></i></a>
+            <ul class="ul-dropdown">
+              <li><a href="/about">About</a></li>
+              <li><a href="/history">History</a></li>
+              <li><a href="/office-bearers">Office bearers</a></li>
+              <li><a href="/administration">Administration</a></li>
+              <li><a href="/finance">Finance</a></li>
+              <li><a href="/venue">Venue</a></li>
+              <li><a href="/family-tree">Family tree</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+            </ul>
+          </li> 
+          <li><a href="/genealogy">Genealogy</a></li>
+          <li><a href="/contact">Contact us</a></li>
+        </ul>
+        <i class="fa fa-bars mobile-nav-toggle" (click)="toggleNavBar()"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header>

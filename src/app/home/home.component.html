@@ -1,0 +1,71 @@
+<section id="front-peralum">
+  <img class="img-fluid slide-img" [src]="images[2]" alt="Random third slide" />
+  
+</section>
+<!-- End Hero -->
+
+
+  <section id="about" class="about about-peralum">
+    <div class="container">
+      <div class="section-title">
+        <h2>Historilogy</h2>
+        <p>
+          PERALUMMOOTTIL KUDUMBAYOGAM, is an assemblage of persons that formed a
+          small congregation on or Before 1907 (as per the records reveals that
+          it commenced since then) to continue the relationship between families
+          and to bring them under one roof and helped the members of the family
+          to know each other and to promote mutual understanding among the
+          members of the Peralummoottil Kudumbayogam who are the descendants of
+          common ancestor-One <b>Thommy-a</b> member of the
+          <b>Karavadesseril</b> branch of the <b>Pakalomattom Tharvadu</b>.
+        </p>
+      </div>
+
+      <div class="row content">
+        <div class="col-lg-4 about-pic-div ">
+          <img src="assets/img/about/history-1.jpg" class="img-fluid about-pic"  />
+        </div>
+        <div class="col-lg-7 pt-1 pt-lg-0">
+          <p>
+            The said Thommy came from kuravilangad in the year 1700 A.D.He had
+            settled in the renowned ancient area of
+            <b>Central Travancore</b> namely <b>Kallooppara Pakuthy</b> in a
+            house called <b>Vellikkara</b> which is in
+            <b>Kavungumprayar Kara</b>. His family spread and flourished in various places at different house names.Peralummoottil Kudumbayogam now constitute more than 700 families scattered in Central Travancore, all over India, and in different parts of the world.The said family congregation has grown larger and is now called by the name of <b>Kallooppara Peralummoottil Kudumbayogam</b>.
+          </p>
+
+          <a href="/about" class="btn-learn-more">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+</section>
+<section id="events" class="about">
+    <div class="blog-home2 py-5">
+      <div class="container">
+          <div class="section-title">
+            <h2>Upcoming Events</h2>
+            </div>
+        <!-- Row  -->
+        <div class="row">
+          <!-- Column -->
+          <div id="event-list" *ngFor="let event  of eventList.slice(0, 3);" class="col-sm-3 on-hover">
+            <div class="card border-0 event-card ">
+              <a ><img class="card-img-top event-pic" src="{{event.coverPic}}" alt="wrappixel kit"></a>
+              <div class="date-pos bg-info-gradiant p-2 d-inline-block text-center rounded text-white position-absolute">{{event.monthShortName}}<span class="d-block">{{event.dayNo}}</span></div>
+              <h5 class="font-weight-medium mt-3"><a class="text-decoration-none link">{{event.name}}</a></h5>
+              <p class="mt-3">{{event.description}}</p>
+              <!-- <a href="#" class="text-decoration-none linking text-themecolor mt-2">Learn More</a> -->
+            </div>
+
+          </div>
+          <div class="col-md-2 align-center">
+            <a href="/events" class="view-all">View all</a>
+          </div> 
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- End #main -->

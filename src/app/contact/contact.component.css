@@ -1,0 +1,16 @@
+.btn-office-bearers{
+    background: #006fbe;
+    border: 0;
+    padding-left: 10px 30px;
+    margin-left: 12px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 4px;
+}
+.headquarters{
+    height:230px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+   
+}

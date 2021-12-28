@@ -1,0 +1,70 @@
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Gallery</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Gallery</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <div class="col eventtype">
+          <div  class="row eventype-select">
+            <mat-form-field>
+              <mat-label>Select year :</mat-label>
+            <mat-select (selectionChange)="loadEventTypes();loadPhotos();"  appearance="outline" [(ngModel)]="selectedYear" >
+              <mat-option *ngFor="let year of years" [value]="year">
+                {{year}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+            
+          <div class="row eventype-select">
+            <mat-form-field>
+              <mat-label>Select event type :</mat-label>
+            <mat-select (selectionChange)="loadEventTypes();loadPhotos();"  appearance="outline" [(ngModel)]="selectedEvent" >
+              <mat-option *ngFor="let event of eventType" [value]="event">
+                {{event}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+
+      
+        
+        
+      </div>
+
+   
+        <div class="row">
+          <div *ngFor="let photo of photoArray" class="col-lg-4 col-md-6 gallery-item">
+            <div class="gallery-wrap">
+              <img src="https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/gallery/{{photo.photoUrl}}" class="gallery-img" alt="">
+              <div class="gallery-info">
+                <p>{{photo.description}}</p>
+                <div class="gallery-links">
+                  <a href="https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/gallery/{{photo.photoUrl}}" class="glightbox" title="Home 1"><i class="bx bx-plus"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+  </main><!-- End #main -->
