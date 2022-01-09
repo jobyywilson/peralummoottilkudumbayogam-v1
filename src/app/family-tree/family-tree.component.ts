@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { CommonService } from '../service/common.service';
+import { CryptoService } from '../service/crypto.service';
 
 @Component({
   selector: 'app-family-tree',
@@ -11,12 +12,12 @@ export class FamilyTreeComponent implements OnInit {
 
   data:any;
 
-  constructor(private commonService : CommonService) {
+  constructor(private commonService : CommonService, private cryptoService:CryptoService) {
 
    }
 
   ngOnInit(): void {
-    this.loadTree("./assets/data/familyTree.json");
+    this.loadTree("./assets/data/familyData.json");
     // this.commonService.readFile("./assets/data/familyTree.json").subscribe(data=>{
     //   console.log(data)
     //   this.loadTree(data);
@@ -28,10 +29,10 @@ export class FamilyTreeComponent implements OnInit {
   loadTree(path:string){
     d3.json(path
     ).then((data:any) => {
-      this.data=data;
-    //this.data = JSON.parse(atob(data["data"]));
+      this.data = JSON.parse(this.cryptoService.decrypt(data.data))
       for(let index=0;index<this.data.length;index++){
         this.data[index].nameAndCode = this.data[index].nodeId +"-"+ this.data[index].name;
+        this.data[index].bornOn = this.data[index].bornOn;
         if(this.data[index] && this.data[index].profilePic){
           this.data[index].profilePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+this.data[index].nodeId+".jpg";
         }else{

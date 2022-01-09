@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'genealogy', component: GenealogyComponent },
+  { path: 'geneoalogy', component: GenealogyComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'contact', component: ContactComponent },
@@ -26,7 +27,9 @@ const routes: Routes = [
   { path: 'administration', component: AdministrationComponent },
   { path: 'finance', component: FinanceComponent },
   { path: 'office-bearers', component: OfficeBearersComponent },
-  { path: 'family-tree', component: FamilyTreeComponent }
+  { path: 'family-tree', component: FamilyTreeComponent },
+  {path: '**', redirectTo: '/home'}
+  
 ];
 
 @NgModule({

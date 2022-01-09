@@ -139,6 +139,16 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
           width = width/2 -20;
           
         }
+        let bornOn;
+        if(d.data.bornOn){
+          bornOn = `
+          <div style="color:white;margin-left:20px;margin-top:3px;font-size:10px;">${
+            d.data.bornOn
+          } - ${
+            d.data.diedOn?d.data.diedOn:''
+          } </div>
+          `
+        }
         let nodeHtml =  `
         <div style="font-family: 'Inter', sans-serif;background-color:${color};left:${left}px; position:absolute;margin-top:-1px; margin-left:-1px;width:${width}px;height:${d.height}px;border-radius:10px;border: 1px solid ${color}">
            <div style="background-color:white;position:absolute;margin-top:-25px;box-shadow: 0 0 9px 3px rgb(41 41 41 / 25%);margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
@@ -151,9 +161,12 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
           <div style="font-size:15px;color:white;margin-left:20px;margin-top:32px"> ${
             d.data.name
           } </div>
-          <div style="color:white;margin-left:20px;margin-top:3px;font-size:10px;"> ${
+          <div style="color:white;margin-left:20px;margin-top:3px;font-size:10px;"> (${
             d.data.nodeId
-          } </div>
+          })</div>
+          ${bornOn?bornOn:''}
+          
+          
 
 
        </div>`;

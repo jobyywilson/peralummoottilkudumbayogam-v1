@@ -1,4 +1,4 @@
-[functions]
+[build]
+  base = "/"
+  publish = "dist/"
   directory = "functions/"
-[functions.api_payment]
-  included_files = ["images/**"]

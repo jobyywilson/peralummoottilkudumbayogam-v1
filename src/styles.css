@@ -9,6 +9,7 @@
 # General
 --------------------------------------------------------------*/
 @import "~@ng-select/ng-select/themes/material.theme.css";
+@import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -993,7 +994,7 @@ section {
   color: #008df1;
 }
 
-@import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
+
 .blog-home2 {
   font-family: "Montserrat", sans-serif;
   color: #8d97ad;

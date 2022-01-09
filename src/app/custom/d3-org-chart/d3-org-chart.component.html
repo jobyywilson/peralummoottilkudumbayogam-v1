@@ -10,6 +10,7 @@ placeholder="Search member"
   <img class="thumbnail" height="15" width="15" [src]="item.profilePic?item.profilePic:'assets/img/user.png'"/> {{ item.name + ' (' + item.nodeId + ')' }}
 </ng-option>
 </ng-select>
+
 <div class="btn-action-button-list">
   <button (click)="chart.zoomIn()" class="btn plus-btn"><i class="fa fa-plus icon-action" aria-hidden="true"></i>
   </button>
@@ -17,6 +18,8 @@ placeholder="Search member"
   </button>
   <button (click)="chart.fit()" class="btn refresh-btn"><i class="fa fa-refresh icon-action" aria-hidden="true"></i>
   </button>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSd0UEWlTvg5srJzWvwY8NVX5FVGkiBCYmXdBe-BmeN_N8BEuA/viewform?usp=sf_link"><button  class="btn refresh-btn"><i class="fa fa-pencil icon-action" aria-hidden="true"></i>
+  </button></a>
     
 </div>
 <div #chartContainer id="chartContainer">
