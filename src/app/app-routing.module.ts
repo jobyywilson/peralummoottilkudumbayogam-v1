@@ -14,7 +14,7 @@ import { OfficeBearersComponent } from './office-bearers/office-bearers.componen
 import { VenueComponent } from './venue/venue.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/home', pathMatch: 'full' }, 
+  { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'events', component: EventsComponent },
   { path: 'about', component: AboutComponent },

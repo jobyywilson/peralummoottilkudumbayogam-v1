@@ -17,12 +17,21 @@ export class FamilyTreeComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.loadTree("./assets/data/familyData.json");
-    // this.commonService.readFile("./assets/data/familyTree.json").subscribe(data=>{
-    //   console.log(data)
-    //   this.loadTree(data);
+    //this.loadTree("./assets/data/familyData.json");
+    this.commonService.readFile("./assets/data/familyTree.json").subscribe(data=>{
+      console.log(data)
+      this.data = data;
+      for(let index=0;index<this.data.length;index++){
+        this.data[index].nameAndCode = this.data[index].nodeId +"-"+ this.data[index].name;
+        this.data[index].bornOn = this.data[index].bornOn;
+        if(this.data[index] && this.data[index].profilePic){
+          this.data[index].profilePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+this.data[index].nodeId+".jpg";
+        }else{
+          this.data[index].profilePic = "assets/img/user.png";
+        }
+      }
       
-    // });
+    });
 
   }
 

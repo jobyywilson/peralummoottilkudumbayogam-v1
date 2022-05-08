@@ -35,12 +35,13 @@
     "jquery": "^3.6.0",
     "login": "^0.8.0",
     "netlify": "^8.0.3",
-    "netlify-cms-app": "^2.15.58",
+    "netlify-cms-app": "^2.15.65",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^13.1.4",
     "@angular/cli": "^13.1.2",
     "@angular/compiler-cli": "~13.1.1",
     "@types/crypto-js": "^4.1.0",
