@@ -56,22 +56,6 @@ collections:
     format: 'json'
     fields:
       - { label: 'Members', name: members, widget: list, required: true ,summary: '{{fields.image}}',fields: [{ label: Name, name: name, widget: string , required: true },{ label: Postion, name: postion, widget: string , required: true},{ label: Mobile, name: mobile, widget: string , required: true},{ label: Address, name: address, widget: string , required: true},{ label: Image, name: image, widget: image , required: true}]}
-  - name: 'kaisthanasamithy'
-    label: 'Kaisthanasamithy'
-    folder: 'src/assets/content/kaisthanasamithy'
-    create: false
-    slug: '{{slug}}'
-    format: 'json'
-    fields:
-      - { label: 'Members', name: members, widget: list, required: true ,summary: '{{fields.image}}',fields: [{ label: Name, name: name, widget: string , required: true },{ label: Postion, name: postion, widget: string , required: true},{ label: Mobile, name: mobile, widget: string , required: true},{ label: Address, name: address, widget: string , required: true},{ label: Image, name: image, widget: image , required: true}]}
-  - name: 'sexton'
-    label: 'Sexton'
-    folder: 'src/assets/content/sexton'
-    create: false
-    slug: '{{slug}}'
-    format: 'json'
-    fields:
-      - { label: 'Members', name: members, widget: list, required: true ,summary: '{{fields.image}}',fields: [{ label: Name, name: name, widget: string , required: true },{ label: Mobile, name: mobile, widget: string , required: true},{ label: Address, name: address, widget: string , required: true},{ label: Image, name: image, widget: image , required: true}]}
   - name: 'auditors'
     label: 'Auditors'
     folder: 'src/assets/content/auditors'
@@ -80,15 +64,3 @@ collections:
     format: 'json'
     fields:
       - { label: 'Members', name: members, widget: list, required: true ,summary: '{{fields.image}}',fields: [{ label: Name, name: name, widget: string , required: true },{ label: Mobile, name: mobile, widget: string , required: true},{ label: Address, name: address, widget: string , required: true},{ label: Image, name: image, widget: image , required: true}]}
-  - name: 'vicar'
-    label: 'Vicar'
-    folder: 'src/assets/content/vicar'
-    create: false
-    slug: '{{slug}}'
-    format: 'json'
-    fields:
-       - { label: Name, name: name, widget: string , required: true }
-       - { label: 'Start date', name: startDate, widget: date, required: true ,format: 'MMMM YYYY' }
-       - { label: 'End date', name: endDate, widget: date, required: false ,format: 'MMMM YYYY' }
-       - { label: Baskiamos , name: wife, widget: string , required: false }
-       - { label: Childrens , name: childrens, widget: string , required: false }
