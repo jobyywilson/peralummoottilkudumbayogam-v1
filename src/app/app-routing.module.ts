@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'administration', component: AdministrationComponent },
   { path: 'finance', component: FinanceComponent },
   { path: 'office-bearers', component: OfficeBearersComponent },
+  { path: 'family-tree/:id', component: FamilyTreeComponent },
   { path: 'family-tree', component: FamilyTreeComponent },
   { path: 'events/:type/:id', component: EventDetailsComponent },
   {path: '**', redirectTo: '/home'}

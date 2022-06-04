@@ -2,6 +2,7 @@
     background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('/assets/img/tile.png');
     background-size: 15px;
     border:2px solid;
+    display: flex;
     
 }
 .btn-action-button-list{

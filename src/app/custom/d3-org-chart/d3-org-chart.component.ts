@@ -16,6 +16,7 @@ import * as d3 from 'd3';
 export class D3OrgChartComponent implements OnInit, OnChanges {
   @ViewChild('chartContainer') chartContainer!: ElementRef;
   @Input() data: any[] = [];
+  @Input() selectedUserId: any;
   selectedMemberName: any;
   previousNodeId :any;
   chart:any;
@@ -190,6 +191,10 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
        return nodeHtml;
       })
       .render();
+    if(this.selectedUserId){
+      this.expandChart(this.selectedUserId);
+    }
+
   }
 
 }

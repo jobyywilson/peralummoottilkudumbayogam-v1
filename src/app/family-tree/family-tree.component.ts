@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import * as d3 from 'd3';
 import { CommonService } from '../service/common.service';
 import { CryptoService } from '../service/crypto.service';
@@ -11,9 +12,14 @@ import { CryptoService } from '../service/crypto.service';
 export class FamilyTreeComponent implements OnInit {
 
   data:any;
+  selectedUserId : any;
 
-  constructor(private commonService : CommonService, private cryptoService:CryptoService) {
-
+  constructor(private commonService : CommonService, private cryptoService:CryptoService,private route: ActivatedRoute) {
+    let paramMap = this.route.snapshot.paramMap;
+    if(paramMap){
+      this.selectedUserId = paramMap.get("id");
+    }
+    
    }
 
   ngOnInit(): void {
