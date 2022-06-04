@@ -6,7 +6,7 @@ import { combineLatest, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommonService {
-  configUrl = 'https://api.github.com/repos/jobyywilson/stmtck/git/trees/master?recursive=1';
+  configUrl = 'https://api.github.com/repos/jobyywilson/peralummoottil-resource/git/trees/main?recursive=1';
 
   postInfo : any = [];
   eventsInfo : any = [];
