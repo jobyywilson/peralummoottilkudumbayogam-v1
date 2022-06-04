@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { combineLatest } from 'rxjs';
 import { CommonService } from '../service/common.service';
-import { ImageService } from '../service/image.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,7 +9,8 @@ import { ImageService } from '../service/image.service';
 })
 export class HomeComponent implements OnInit {
 
-  eventList : any=  [];
+  eventList : any = [];
+  postList : any = [];
   images = [1, 2, 3, 4].map((n) => `assets/img/slide/slide-${n}.jpg`);
 
   constructor(config: NgbCarouselConfig, private commonService :CommonService) {
@@ -20,12 +21,21 @@ export class HomeComponent implements OnInit {
     config.pauseOnHover = false;
   }
   ngOnInit(): void {
-    this.eventList = this.commonService.eventList;
+    this.loadData();
     console.log(this.eventList)
   }
 
-  loadImages(){
-
-  }
+  loadData(){
+    let combinedData = [this.commonService.getPostedInfo()]
+        combineLatest(combinedData).subscribe(
+          (data:any) => {
+            this.commonService.mapPostedInfo(data[0]);
+            this.eventList = this.commonService.eventsInfo;
+            this.postList = this.commonService.postInfo;
+            console.log(this.eventList)
+          },
+        (err:any) => console.error(err)
+        );
+    }
 
 }

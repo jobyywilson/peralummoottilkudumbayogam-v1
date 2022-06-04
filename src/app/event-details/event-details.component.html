@@ -1,0 +1,99 @@
+<main id="main">
+
+    <!-- ======= Blog Page ======= -->
+    <div class="blog-page area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-8 col-xs-12 event-details">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <!-- single-blog start -->
+                  <article class="blog-post-wrapper">
+
+                    <div class="post-information">
+                      <h2>{{data.title}}</h2>
+
+                      <div class="post-thumbnail">
+                          <img [src]="data.featuredImage" alt="" />
+                        </div>
+                        <div class="entry-meta">
+                          <span class="author-meta"><i class="bi bi-person"></i> <a href="#">admin</a></span>
+                          <span><i class="bi bi-clock"></i>{{data.date}}</span>
+                          <!-- <span class="tag-meta">
+                            <i class="bi bi-folder"></i>
+                            <a href="#">painting</a>,
+                            <a href="#">work</a>
+                          </span> -->
+                        </div>
+                      <div class="entry-content">
+                        <p>{{data.description}}</p>
+                      </div>
+                      <div *ngIf="data.galleryImages" id="portfolio" class="portfolio-area area-padding fix">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="section-headline text-center">
+                                  <h2>Gallery</h2>
+                                </div>
+                              </div>
+                            </div>
+                    
+                            <div  class="row awesome-project-content portfolio-container">
+                    
+                              <!-- portfolio-item start -->
+                              <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-app portfolio-item" *ngFor="let imageInfo  of data.galleryImages">
+                                <div class="single-awesome-project">
+                                  <div class="awesome-img">
+                                    <a href="#"><img [src]="imageInfo" alt="" /></a>
+                                    <div class="add-actions text-center">
+                                      <div class="project-dec">
+                                        <a class="glightbox" data-gallery="myGallery" [href]="imageInfo">
+                                          
+                                        </a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- portfolio-item end -->
+                    
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </article>
+                  <div class="clear"></div>
+                  <!-- single-blog end -->
+                </div>
+              </div>
+        
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="page-head-blog">
+              <div class="single-blog-page">
+                <!-- recent start -->
+                <div class="left-blog">
+                  <h4>recent post</h4>
+                  <div class="recent-post">
+                    <!-- start single post -->
+                    <div class="recent-single-post" *ngFor="let post of postList.slice(0, 5);">
+                      <div class="post-img">
+                        <a [href]="post.url">
+                          <img [src]="post.featuredImage" alt="">
+                        </a>
+                      </div>
+                      <div class="pst-content">
+                        <p><a [href]="post.url">{{post.title}}</a></p>
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div><!-- End Blog Page -->
+
+  </main>

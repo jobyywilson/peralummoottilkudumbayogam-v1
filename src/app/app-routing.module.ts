@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { ContactComponent } from './contact/contact.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
 import { EventsComponent } from './events/events.component';
 import { FamilyTreeComponent } from './family-tree/family-tree.component';
 import { FinanceComponent } from './finance/finance.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'finance', component: FinanceComponent },
   { path: 'office-bearers', component: OfficeBearersComponent },
   { path: 'family-tree', component: FamilyTreeComponent },
+  { path: 'events/:type/:id', component: EventDetailsComponent },
   {path: '**', redirectTo: '/home'}
   
 ];

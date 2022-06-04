@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     D3OrgChartComponent,
     BlogComponent,
     BlogListComponent,
-    FamilyTreeComponent
+    FamilyTreeComponent,
+    EventDetailsComponent
     
   ],
   imports: [

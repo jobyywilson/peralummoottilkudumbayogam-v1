@@ -40,32 +40,33 @@
     </div>
 
 </section>
-<section id="events" class="about">
-    <div class="blog-home2 py-5">
-      <div class="container">
-          <div class="section-title">
-            <h2>Upcoming Events</h2>
-            </div>
-        <!-- Row  -->
-        <div class="row">
-          <!-- Column -->
-          <div id="event-list" *ngFor="let event  of eventList.slice(0, 3);" class="col-sm-3 on-hover">
-            <div class="card border-0 event-card ">
-              <a ><img class="card-img-top event-pic" src="{{event.coverPic}}" alt="wrappixel kit"></a>
-              <div class="date-pos bg-info-gradiant p-2 d-inline-block text-center rounded text-white position-absolute">{{event.monthShortName}}<span class="d-block">{{event.dayNo}}</span></div>
-              <h5 class="font-weight-medium mt-3"><a class="text-decoration-none link">{{event.name}}</a></h5>
-              <p class="mt-3">{{event.description}}</p>
-              <!-- <a href="#" class="text-decoration-none linking text-themecolor mt-2">Learn More</a> -->
-            </div>
+<section id="blog" class="section">
 
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+
+      <h2>News and events</h2>
+    </div>
+
+    <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="col-md-6 col-lg-4 event"  *ngFor="let event  of postList.slice(0, 3);">
+        <div class="block-blog text-left">
+          <a [href]="event.url"><img [src]="event.featuredImage"  alt="img"></a>
+          <div class="content-blog">
+            <h4><a [href]="event.url">{{event.title}}</a></h4>
+            <span>{{event.date}}</span>
+            <a class="float-end readmore" [href]="event.url">read more</a>
           </div>
-          <div class="col-md-2 align-center">
-            <a href="/events" class="view-all">View all</a>
-          </div> 
-          
         </div>
       </div>
+      <div class="col align-to-center">
+        <p><a href="/events" class="btn btn-primary view-all">View all</a></p>
     </div>
-  </section>
+
+
+    </div>
+  </div>
+</section>
 
 <!-- End #main -->

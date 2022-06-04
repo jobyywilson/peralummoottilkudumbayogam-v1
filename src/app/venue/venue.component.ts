@@ -13,7 +13,7 @@ export class VenueComponent implements OnInit {
   venueDetails : any;
 
   ngOnInit(): void {
-    this.commonService.readFile("./assets/data/venue.json").subscribe(data=>{
+    this.commonService.readFile("./assets/data/venue.json").subscribe((data:any)=>{
       this.venueDetails = data;
     });
   }

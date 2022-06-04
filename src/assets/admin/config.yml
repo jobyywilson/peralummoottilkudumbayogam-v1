@@ -1,6 +1,7 @@
 # Backend https://www.netlifycms.org/docs/configuration-options/#backend
 backend:
   name: git-gateway
+  repo: jobyywilson/peralummoottilkudumbayogam-v1
   branch: main
 
 # Publish mode https://www.netlifycms.org/docs/configuration-options/#publish-mode
