@@ -58,7 +58,7 @@ export class FamilyTreeComponent implements OnInit {
       this.data = JSON.parse(this.cryptoService.decrypt(data.data))
       for(let member of this.data){
         member.nameAndCode = member.nodeId +"-"+ member.name;
-        let photoName ;
+        let photoName;
         if(this.memberPhotoInfo.has(member.nodeId+".jpg")){
           photoName = member.nodeId+".jpg";
         }
