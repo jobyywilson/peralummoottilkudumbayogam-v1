@@ -1,3 +1,7 @@
+
 .off-mem-image{
     max-width: 200px;
+}
+section{
+    padding: 10px 0 !important;
 }

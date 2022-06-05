@@ -14,280 +14,55 @@
       </div>
     </section>
 
-    <!-- ======= Story Intro Section ======= -->
-    <section id="story-intro" class="story-intro">
-      <div class="container">
-
-        <div class="row">
-
-          <div class="content col">
-            <h3>2022 Trust Board Members</h3>
-            <!-- <p class="fst-italic">
-              It requires greater strides for the rapid advances and alround growth of the Kudumbayogam by the personal presence and financial assistance of it's members.Therefore the full Co-operation of the members is solicited.
-            </p> -->
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Story Intro Section -->
-
     <!-- ======= Members Section ======= -->
-    <section id="members" class="members">
+    <section id="office" class="members">
       <div class="container">
+        <h2 >Trust Board Members 2022 - 2023</h2>
 
         <div class="row">
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
+          <div
+            class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
+            *ngFor="let member of officeMembers" 
+          >
             <div class="member">
-              <h5>Managing Trustee</h5>
+              <h5>{{ member.postion }}</h5>
               <div class="member-img">
-                <img src="assets/img/members/FrJoseKallumalickal.jpg" class="img-fluid off-mem-image" alt="">
+                <img [src]="member.image" class="img-fluid off-mem-image" alt="" />
               </div>
               <div class="member-info">
-                <h4>Rev. Fr. Jose Kallumalickal</h4>
-                <p>Marygiri Aramana, Thiruvalla<br> Mob: 9447152704</p>
+                <h4>{{ member.name }}</h4>
+                <p>
+                  {{ member.address }}<br />
+                  Mob: {{ member.mobile }}
+                </p>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Joint Managing Trustee</h5>
-              <div class="member-img">
-                <img src="assets/img/members/THOMAS_T_THURUTHIPPALLIL.jpg" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Thomas Thuruthipally</h4>
-                <p>Thuruthipally, Puthenpura<br> Mob: 9446351727</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Secretary</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Thomas V George</h4>
-                <p>Vazhuvelil<br> Mob: 9447409235</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Joint Secretary</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Reji Skaria</h4>
-                <p> Kalluvettukuzhiyil, Eraviperoor<br> Mob: 9048611437</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Treasurer</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Mathews T Varghese</h4>
-                <p>Thuruthiyil, Puthenpura<br> Mob: 9745322949</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Youth Representative</h5>
-              <div class="member-img">
-                <img src="assets/img/members/MANOJAMBALAKKADVIL.jpg" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Manoj Ambalakkadvil</h4>
-                <p>Kurichy<br> Mob: 9447304832</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Vanitha  Representative</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mrs. Annie Mathew</h4>
-                <p>Mukramannil , Karavadaseri<br> Mob: 9447359542</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
+          <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+              <div class="member">
                 <div class="member-img">
-                  <img src="assets/img/members/Jose_K_Varughes.jpg" class="img-fluid off-mem-image" alt="">
+                  <img src="assets/img/blank-profile-picture.png" class="img-fluid" alt="">
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                  </div>
                 </div>
                 <div class="member-info">
-                  <h4>Mr. Jose K. Varughese</h4>
-                  <p>Kallumalickal, Othera East<br> Mob: 9496619988</p>
-                </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
-              <div class="member-img">
-                <img src="assets/img/members/V_J_PHILIP.jpg" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. V.J. Philip</h4>
-                <p>Kaippallimannil Kozhencherry<br> Mob: 9744756313</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Jose Pannikotu</h4>
-                <p>Kaippallimannil Kozhencherry<br> Mob: 8281224441</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. K T Varghese</h4>
-                <p>Kambiyil,Manarkadu<br> Mob: 7042755950</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Saji Varghese</h4>
-                <p>Ambalakadavil, Kunnumpuram<br> Mob: 9495706326</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. George A Koshy</h4>
-                <p>Azaknalmalayil , Puthnpura<br> Mob: 9446474514</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
-              <div class="member-img">
-                <img src="assets/img/members/THOMAS_V_JOHN.jpg" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Thomas V. John (Binu)</h4>
-                <p>Vazhuvelil<br> Mob: 9946664692</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. John Jacob</h4>
-                <p>Kudubham<br> Mob: 9846652433</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Board member</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Manu Varghese</h4>
-                <p>Edekallor Malayil<br> Mob: 9446811618</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Leagal Advisor</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Abraham Abraham</h4>
-                <p>Pannikottu , Cheriyaveloor<br> Mob: -</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>IT Co - Ordinator</h5>
-              <div class="member-img">
-                <img src="assets/img/blank-profile-picture.png" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. Joby Wilson Mathews</h4>
-                <p>Thuruthiyil , Puthenpura<br> Mob: -</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin">
-            <div class="member">
-              <h5>Auditor</h5>
-              <div class="member-img">
-                <img src="assets/img/members/JOHNSON_TRESSURER.jpg" class="img-fluid off-mem-image" alt="">
-              </div>
-              <div class="member-info">
-                <h4>Mr. K.S. Johnson</h4>
-                <p>Kadackethukalayi, Kallooppara<br> Mob: 9666568452</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-              <div class="member-img">
-                <img src="assets/img/members/member-2.jpg" class="img-fluid off-mem-image" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <h4>Niall Katz</h4>
+                  <span>Marketing</span>
+                  <p>Aut ex esse explicabo quia harum ea accusamus excepturi. Temporibus at quia quisquam veritatis impedit. Porro laborum voluptatum sed necessitatibus a saepe. Deserunt laborum quasi consequatur voluptatum iusto sint qui fuga vel. Enim eveniet sed quibusdam rerum in. Non dicta architecto consequatur quo praesentium nesciunt.</p>
                 </div>
               </div>
-              <div class="member-info">
-                <h4>Niall Katz</h4>
-                <span>Marketing</span>
-                <p>Aut ex esse explicabo quia harum ea accusamus excepturi. Temporibus at quia quisquam veritatis impedit. Porro laborum voluptatum sed necessitatibus a saepe. Deserunt laborum quasi consequatur voluptatum iusto sint qui fuga vel. Enim eveniet sed quibusdam rerum in. Non dicta architecto consequatur quo praesentium nesciunt.</p>
-              </div>
-            </div>
-          </div> -->
-
+            </div> -->
         </div>
-
+        
+    
+    
       </div>
-    </section><!-- End Members Section -->
+    </section>
+    <!-- End Members Section -->
+    
 
 </div>

@@ -7,6 +7,7 @@ import { combineLatest, Observable } from 'rxjs';
 })
 export class CommonService {
   configUrl = 'https://api.github.com/repos/jobyywilson/peralummoottilkudumbayogam-v1/git/trees/main?recursive=1';
+  memberPhotoUrl = 'https://api.github.com/repos/jobyywilson/peralummoottil-resource/git/trees/main?recursive=1';
 
   postInfo : any = [];
   eventsInfo : any = [];
@@ -14,6 +15,9 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
+  getMemberPhotoInfo(){
+    return this.doGet(this.memberPhotoUrl);
+  }
   getPostedInfo(){
     return this.doGet(this.configUrl);
   }
