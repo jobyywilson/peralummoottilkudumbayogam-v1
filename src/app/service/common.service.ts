@@ -108,9 +108,12 @@ export class CommonService {
     postRawData.filePath = fileName
     postRawData.url = "events/posts/"+fileName.replace("src/assets/content/posts/","");
     let galleryImages=[]
-    for(let image of postRawData.galleryImages){
-      galleryImages.push("assets/static"+image)
+    if(postRawData.galleryImages){
+      for(let image of postRawData.galleryImages){
+        galleryImages.push("assets/static"+image)
+      }
     }
+
     postRawData.galleryImages=galleryImages
     return postRawData
   }
