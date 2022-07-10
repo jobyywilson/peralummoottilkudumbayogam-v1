@@ -1,9 +1,11 @@
 {
+  "diedOn": "2022-06-07T10:32:53.451Z",
   "funeralAt": "2022-06-11T08:30:14.588Z",
   "name": "K. P. Joseph",
-  "age": 57,
-  "description": "ചെറിയവേളൂർ ശാഖയിൽ കല്ലൂർ ശ്രീ. K. P. ജോസഫ്. കുടുംബയോഗത്തിന്റെ മുൻ വനിതാ സെക്രട്ടറി Smt. രേണു ജോസഫ് ഭാര്യയാണ്",
-  "address": "Kallur , Cherivellur Sakha",
   "featuredImage": "/images/uploads/photo1654611791.jpeg",
-  "code":"8C-1.2.2.5.1.2"
+  "code": "8C-1.2.2.5.1.2",
+  "address": "Kallur , Cherivellur Sakha",
+  "title": "K. P. ജോസഫ്",
+  "description": "ചെറിയവേളൂർ ശാഖയിൽ കല്ലൂർ ശ്രീ. K. P. ജോസഫ്. കുടുംബയോഗത്തിന്റെ മുൻ വനിതാ സെക്രട്ടറി Smt. രേണു ജോസഫ് ഭാര്യയാണ്",
+  "age": 57
 }
