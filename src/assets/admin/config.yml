@@ -48,7 +48,9 @@ collections:
       - { label: Age, name: age, widget: number , required: true , value_type: "int", min: 1 , max: 101}
       - { label: Address, name: address, widget: markdown }
       - { label: 'Funeral At', name: funeralAt, widget: datetime , required: true }
-      - { label: About, name: about, widget: string}
+      - { label: About, name: about, widget: string, required: true}
+      - { label: 'Photo', name: featuredImage, widget: image, required: true }
+      - { label: 'Member code', name: code, widget: string, required: true }
   - name: 'officeBearers'
     label: 'Parish Officers'
     folder: 'src/assets/content/officeBearers'
