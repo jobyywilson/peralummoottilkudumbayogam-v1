@@ -530,3 +530,6 @@ img{
   height: 100%;
   width: 100%;
 }
+.event{
+  min-width: 300px;
+}

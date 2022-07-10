@@ -66,9 +66,7 @@ export class CommonService {
       }
       else if(fileName.includes(obituariesPath)){
         let obituary = await this.doGet(fileName.replace("src/","")).toPromise()
-        obituary.filePath = fileName
-        obituary.url = "events/obituary/"+fileName.replace("src/assets/content/obituaries/","")
-        this.obituariesInfo.push(obituary)
+        this.obituariesInfo.push(this.mapObituaries(obituary,fileName))
       }
     }
     this.postInfo.push(...this.eventsInfo);
@@ -93,6 +91,15 @@ export class CommonService {
     return `${monthName} ${day}, ${year}`
   }
 
+  mapObituaries(obituaryRawData:any,fileName:any){
+    obituaryRawData.featuredImage = 'assets/static'+obituaryRawData.featuredImage;
+    obituaryRawData.funeralAt = this.mapDate(obituaryRawData.funeralAt)
+    obituaryRawData.filePath = fileName
+    obituaryRawData.url = "obituaries/event/"+fileName.replace("src/assets/content/obituaries/","");
+    obituaryRawData.galleryImages=[]
+    return obituaryRawData
+  }
+
   mapEvent(eventRawData:any,fileName:any){
     eventRawData.featuredImage = 'assets/static'+eventRawData.featuredImage;
     eventRawData.date = this.mapDate(eventRawData.time)
@@ -101,6 +108,8 @@ export class CommonService {
     eventRawData.galleryImages=[]
     return eventRawData
   }
+
+
   mapPost(postRawData:any,fileName:any){
   
     postRawData.featuredImage = 'assets/static'+postRawData.featuredImage;

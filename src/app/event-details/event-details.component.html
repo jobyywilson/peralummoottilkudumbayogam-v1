@@ -12,21 +12,16 @@
 
                     <div class="post-information">
                       <h2>{{data.title}}</h2>
-
                       <div class="post-thumbnail">
                           <img [src]="data.featuredImage" alt="" />
                         </div>
                         <div class="entry-meta">
                           <span class="author-meta"><i class="bi bi-person"></i> <a href="#">admin</a></span>
-                          <span><i class="bi bi-clock"></i>{{data.date}}</span>
-                          <!-- <span class="tag-meta">
-                            <i class="bi bi-folder"></i>
-                            <a href="#">painting</a>,
-                            <a href="#">work</a>
-                          </span> -->
+                          <span *ngIf="type=='posts'"><i class="bi bi-clock"></i>{{data.date}}</span>
+                          <span *ngIf="type=='obituaries'"><i class="bi bi-clock"></i>{{data.funeralAt}}</span>
                         </div>
                       <div class="entry-content">
-                        <p>{{data.description}}</p>
+                        <p *ngIf="type=='posts' || type=='obituaries'">{{data.description}}</p>
                       </div>
                       <div *ngIf="data.galleryImages" id="portfolio" class="portfolio-area area-padding fix">
                           <div class="container">

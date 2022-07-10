@@ -19,7 +19,7 @@
         <!-- Start single blog -->
  
           <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-4" *ngFor="let event  of postList.slice(0, 5);">
+            <div class="event col-md-4 col-sm-4 col-xs-4" *ngFor="let event  of postList.slice(0, 5);">
               <div class="single-blog">
                 <div class="single-blog-img">
                   <a [href]="event.url">
@@ -27,16 +27,23 @@
                   </a>
                 </div>
                 <div class="blog-meta">
-                  <span class="date-type">
-                    <i class="bi bi-calendar"></i>{{event.date}}
-                  </span>
+                  <span *ngIf="type=='posts'" class="date-type"><i class="bi bi-calendar"></i>{{event.date}}</span>
+                  <span *ngIf="type=='obituaries'" class="date-type"><i class="bi bi-calendar"></i>{{event.funeralAt}}</span>
                 </div>
-                <div class="blog-text">
+                <div *ngIf="type=='posts'" class="blog-text">
                   <h4>
                     <a [href]="event.url">{{event.title}}</a>
                   </h4>
                   <p>
                     {{event.description.substring(0,200)}}
+                  </p>
+                </div>
+                <div *ngIf="type=='obituaries'" class="blog-text">
+                  <h4>
+                    <a [href]="event.url">{{event.name}} ({{event.age}})</a>
+                  </h4>
+                  <p>
+                    {{event.about.substring(0,200)}}
                   </p>
                 </div>
                 <span>

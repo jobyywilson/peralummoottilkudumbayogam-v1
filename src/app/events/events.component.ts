@@ -28,8 +28,7 @@ export class EventsComponent implements OnInit {
   loadData(){
     this.commonService.getPostedInfo().subscribe(
            async data => {
-            let events = await this.commonService.mapPostedInfo(data);
-           
+            let events = await this.commonService.mapPostedInfo(data)
             let type  = this.type.toString()
             if(type === "posts"){
               this.postList = events["posts"]
@@ -37,7 +36,6 @@ export class EventsComponent implements OnInit {
             else if(type === "obituaries"){
               this.postList = events["obituaries"]
             }
-            console.log( this.postList)
           },
         (err:any) => console.error(err)
         );
