@@ -9,8 +9,8 @@ import { CommonService } from '../service/common.service';
 })
 export class HomeComponent implements OnInit {
 
-  eventList : any = [];
   postList : any = [];
+  obituaryList : any = [];
   images = [1, 2, 3, 4].map((n) => `assets/img/slide/slide-${n}.jpg`);
 
   constructor(config: NgbCarouselConfig, private commonService :CommonService) {
@@ -22,17 +22,14 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loadData();
-    console.log(this.eventList)
   }
 
   loadData(){
-    let combinedData = [this.commonService.getPostedInfo()]
-        combineLatest(combinedData).subscribe(
-          (data:any) => {
-            this.commonService.mapPostedInfo(data[0]);
-            this.eventList = this.commonService.eventsInfo;
-            this.postList = this.commonService.postInfo;
-            console.log(this.eventList)
+    this.commonService.getPostedInfo().subscribe(
+          async (data:any) => {
+            let events = await this.commonService.mapPostedInfo(data)
+            this.postList = events["posts"];
+            this.obituaryList = events["obituaries"];
           },
         (err:any) => console.error(err)
         );

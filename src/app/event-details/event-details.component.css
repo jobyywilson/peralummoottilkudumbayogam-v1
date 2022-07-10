@@ -182,6 +182,11 @@
   display: block;
   overflow: hidden;
   padding: 15px 10px;
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
 }
 
 .ready-btn {
@@ -690,4 +695,11 @@ img{
     height: 100%;
     width: 100%;
   }
-  
+  .post-thumbnail{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  .obituaries-image{
+    max-width: 300px;
+  }

@@ -32,11 +32,16 @@ export class EventDetailsComponent implements OnInit {
   }
 
   loadPostInfo(){
-    let combinedData = [this.commonService.getPostedInfo()]
-        combineLatest(combinedData).subscribe(
-          data => {
-            this.commonService.mapPostedInfo(data[0]);
-            this.postList = this.commonService.postInfo;
+    this.commonService.getPostedInfo().subscribe(
+          async data => {
+            let events = await this.commonService.mapPostedInfo(data);
+            let type  = this.type.toString()
+            if(type === "posts"){
+              this.postList = events["posts"]
+            }
+            else if(type === "obituaries"){
+              this.postList = events["obituaries"]
+            }
           },
         (err:any) => console.error(err)
         );

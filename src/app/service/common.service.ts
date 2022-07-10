@@ -95,7 +95,7 @@ export class CommonService {
     obituaryRawData.featuredImage = 'assets/static'+obituaryRawData.featuredImage;
     obituaryRawData.funeralAt = this.mapDate(obituaryRawData.funeralAt)
     obituaryRawData.filePath = fileName
-    obituaryRawData.url = "obituaries/event/"+fileName.replace("src/assets/content/obituaries/","");
+    obituaryRawData.url = "events/obituaries/"+fileName.replace("src/assets/content/obituaries/","");
     obituaryRawData.galleryImages=[]
     return obituaryRawData
   }

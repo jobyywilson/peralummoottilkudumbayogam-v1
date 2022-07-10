@@ -27,8 +27,8 @@
                   </a>
                 </div>
                 <div class="blog-meta">
-                  <span *ngIf="type=='posts'" class="date-type"><i class="bi bi-calendar"></i>{{event.date}}</span>
-                  <span *ngIf="type=='obituaries'" class="date-type"><i class="bi bi-calendar"></i>{{event.funeralAt}}</span>
+                  <span *ngIf="type=='posts'" class="date-type"> <i class="fa fa-calendar"></i>{{event.date}}</span>
+                  <span *ngIf="type=='obituaries'" class="date-type"><i class="fa fa-calendar"></i>{{event.funeralAt}}</span>
                 </div>
                 <div *ngIf="type=='posts'" class="blog-text">
                   <h4>
@@ -39,11 +39,11 @@
                   </p>
                 </div>
                 <div *ngIf="type=='obituaries'" class="blog-text">
-                  <h4>
+                  <h2>
                     <a [href]="event.url">{{event.name}} ({{event.age}})</a>
-                  </h4>
+                  </h2>
                   <p>
-                    {{event.about.substring(0,200)}}
+                    {{event.description.substring(0,200)}}
                   </p>
                 </div>
                 <span>

@@ -104,10 +104,10 @@ carousel-item{
 
 #blog .block-blog .content-blog {
   display: inline-block;
-  min-height: 125px;
+  min-height: 100px;
   padding: 20px 10px;
   width: 100%;
-  
+  text-align: center;
 }
 
 #blog .block-blog .content-blog h4 {
@@ -165,4 +165,19 @@ carousel-item{
       justify-content: center;
       align-items: center;
   }
+}
+.event-detail{
+  align-items: center;
+  justify-content: center;
+}
+.obituariesList{
+  max-width: 300px;
+}
+.event-heading{
+  font: 32px "Raleway", sans-serif;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+.section{
+  padding: 30px 0;;
 }
