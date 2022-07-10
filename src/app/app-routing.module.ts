@@ -17,7 +17,7 @@ import { VenueComponent } from './venue/venue.component';
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'events', component: EventsComponent },
+  { path: 'events/:type', component: EventsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'genealogy', component: GenealogyComponent },
   { path: 'geneoalogy', component: GenealogyComponent },

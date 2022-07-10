@@ -83,7 +83,7 @@ export class CommonService {
 
     localStorage.setItem('posts', JSON.stringify(this.postInfo));
     localStorage.setItem('obituaries', JSON.stringify(this.obituariesInfo));
-  
+    return {"posts":this.postInfo,"obituaries":this.obituariesInfo}
   }
 
   mapDate(rawDate:any){

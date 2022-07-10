@@ -4,7 +4,8 @@
   <div class="header-bg page-area">
     <div class="container position-relative">
       <div class="section-title">
-        <h2>News and Events</h2>
+        <h2 *ngIf="type=='posts'">News and Events</h2>
+        <h2 *ngIf="type=='obituaries'">Obituaries</h2>
       </div>
     </div>
   </div><!-- End Blog Header -->
@@ -26,10 +27,6 @@
                   </a>
                 </div>
                 <div class="blog-meta">
-                  <!-- <span class="comments-type">
-                    <i class="bi bi-chat"></i>
-                    <a href="#">11 comments</a>
-                  </span> -->
                   <span class="date-type">
                     <i class="bi bi-calendar"></i>{{event.date}}
                   </span>
@@ -47,16 +44,6 @@
                 </span>
               </div>
             </div>
-            
-            <!-- <div class="blog-pagination">
-              <ul class="pagination">
-                <li class="page-item"><a href="#" class="page-link">&lt;</a></li>
-                <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">&gt;</a></li>
-              </ul>
-            </div> -->
           </div>
     
        
