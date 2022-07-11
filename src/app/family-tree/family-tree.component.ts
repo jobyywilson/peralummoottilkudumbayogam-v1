@@ -36,17 +36,18 @@ export class FamilyTreeComponent implements OnInit {
     })
     
     // this.commonService.readFile("./assets/data/familyTree.json").subscribe(data=>{
-    //   console.log(data)
-    //   this.data = data;
-    //   for(let index=0;index<this.data.length;index++){
-    //     this.data[index].nameAndCode = this.data[index].nodeId +"-"+ this.data[index].name;
-    //     this.data[index].bornOn = this.data[index].bornOn;
-    //     if(this.data[index] && this.data[index].profilePic){
-    //       this.data[index].profilePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+this.data[index].nodeId+".jpg";
-    //     }else{
-    //       this.data[index].profilePic = "assets/img/user.png";
-    //     }
-    //   }
+    //   console.log(this.cryptoService.encrypt(data))
+
+
+      // for(let index=0;index<this.data.length;index++){
+      //   this.data[index].nameAndCode = this.data[index].nodeId +"-"+ this.data[index].name;
+      //   this.data[index].bornOn = this.data[index].bornOn;
+      //   if(this.data[index] && this.data[index].profilePic){
+      //     this.data[index].profilePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+this.data[index].nodeId+".jpg";
+      //   }else{
+      //     this.data[index].profilePic = "assets/img/user.png";
+      //   }
+      // }
       
     // });
 
@@ -54,11 +55,12 @@ export class FamilyTreeComponent implements OnInit {
 
   loadTree(path:string){
     d3.json(path
-    ).then((data:any) => {
-      this.data = JSON.parse(this.cryptoService.decrypt(data.data))
+      ).then((data:any) => {
+        this.data = this.cryptoService.decrypt(data.data)
       for(let member of this.data){
         member.nameAndCode = member.nodeId +"-"+ member.name;
         let photoName;
+        let spousePhotoName;
         if(this.memberPhotoInfo.has(member.nodeId+".jpg")){
           photoName = member.nodeId+".jpg";
         }
@@ -67,12 +69,28 @@ export class FamilyTreeComponent implements OnInit {
         }else if(this.memberPhotoInfo.has(member.nodeId+".png")){
           photoName = member.nodeId+".png";
         }
-        if(member && photoName){
-          member.profilePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+photoName;
+        if(this.memberPhotoInfo.has(member.nodeId+".S.jpeg")){
+          spousePhotoName = member.nodeId+".S.jpeg";
+        } else if(this.memberPhotoInfo.has(member.nodeId+".S.png")){
+          spousePhotoName = member.nodeId+"S.png";
+        } else if(this.memberPhotoInfo.has(member.nodeId+".S.jpg")){
+          spousePhotoName = member.nodeId+".S.jpg";
+        }
+
+
+        if(member){
+          if(photoName){
+            member.profilePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+photoName;
         }else{
           member.profilePic = "assets/img/user.png";
         }
+        if(spousePhotoName){
+          member.spousePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+spousePhotoName;
+        }else{
+          member.spousePic = "assets/img/user.png";
+        }
       }
+    }
       let prevIndex = 0;
       // setInterval((d:any) => {
       //   data[prevIndex]._highlighted = 'false';

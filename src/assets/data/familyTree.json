@@ -214,7 +214,7 @@
     {"nodeId":"9A-1.1.3.1.3.1.1","name":"Dr.Juby Thomas","homeName":"Kallumalickal","place":"Thelliyoor (China)","parentNodeId":"8A-1.1.3.1.3.1"},
     {"nodeId":"6A-1.1.4.1","name":"Pappy (Chandapillai)","homeName":"Azhakathumannil Kudumbom","place":"Puramattom","parentNodeId":"5A-1.1.4"},
     {"nodeId":"6A-1.1.4.2","name":"Oonnoonny(Idicheria)","homeName":"Azhakathumannil","place":"Puramattom","parentNodeId":"5A-1.1.4"},
-    {"nodeId":"7A-1.1.4.1.1","name":"Chandappillai (Ponnachan)","homeName":"Azhakathumannil","place":"Puramattom","parentNodeId":"6A-1.1.4.1"},
+    {"nodeId":"7A-1.1.4.1.1","name":"Chandappillai (Ponnachan)","homeName":"Azhakathumannil","place":"Puramattom","parentNodeId":"6A-1.1.4.1", "spouse":"Mariamma Edi Cheriya"},
     {"nodeId":"8A-1.1.4.1.1.1","name":"Saji","homeName":"Azhakathumannil","place":"Puramattom","parentNodeId":"7A-1.1.4.1.1"},
     {"nodeId":"9A-1.1.4.1.1.1.1","name":"","homeName":"Azhakathumannil","place":"Puramattom","parentNodeId":"8A-1.1.4.1.1.1"},
     {"nodeId":"9A-1.1.4.1.1.1.2","name":"","homeName":"Azhakathumannil","place":"Puramattom","parentNodeId":"8A-1.1.4.1.1.1"},

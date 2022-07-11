@@ -6,32 +6,23 @@ import * as CryptoJS from 'crypto-js';
 })
 export class CryptoService {
 
-  keyText : string  = "hf8685nfhfhjs9h8"
+  keyText : string  = "hf8685345fhjs9h8"
 
-  encrypt(plainText: string) {
-    const key = CryptoJS.enc.Utf8.parse(this.keyText);
-    const iv1 = CryptoJS.enc.Utf8.parse(this.keyText);
-    const encrypted = CryptoJS.AES.encrypt(plainText, key, {
-        keySize: 16,
-        iv: iv1,
-        mode: CryptoJS.mode.ECB,
-        padding: CryptoJS.pad.Pkcs7
-    });
-
-    return encrypted + "";
+  encrypt(data: any) {
+    return CryptoJS.AES.encrypt(JSON.stringify(data), this.keyText).toString();
   }
 
 
-  decrypt(cipher: string) {
-    const key = CryptoJS.enc.Utf8.parse(this.keyText);
-    const iv1 = CryptoJS.enc.Utf8.parse(this.keyText);
-    const plainText = CryptoJS.AES.decrypt(cipher, key, {
-        keySize: 16,
-        iv: iv1,
-        mode: CryptoJS.mode.ECB,
-        padding: CryptoJS.pad.Pkcs7
-    });
-
-    return plainText.toString(CryptoJS.enc.Utf8);
+  decrypt(data: string) {
+    try {
+      let decryptData;
+      const bytes = CryptoJS.AES.decrypt(data, this.keyText);
+      if (bytes.toString()) {
+        decryptData =  JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      }
+      return decryptData;
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

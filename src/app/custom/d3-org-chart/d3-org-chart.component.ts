@@ -171,15 +171,12 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
        </div>`;
        if(d.data.spouse){
-        return nodeHtml+`
+        return nodeHtml+`<svg style="position:fixed" width="900" ><line x1="294" y1="60" x2="400" y2="60" stroke="black" fill="none" stroke="black" stroke-width="3px"/></svg>
         <div style="font-family: 'Inter', sans-serif;background-color:${color};left:${left+left+left}px; position:absolute;margin-top:-1px; margin-left:-1px;width:${width}px;height:${d.height}px;border-radius:10px;border: 1px solid ${color}">
            <div style="background-color:white;position:absolute;margin-top:-25px;box-shadow: 0 0 9px 3px rgb(41 41 41 / 25%);margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
            <img src=" ${
-            d.data.profilePic?d.data.profilePic:"assets/img/user.png"
+            d.data.spousePic
           }" style="position:absolute;margin-top:-30px;margin-left:${10}px;border-radius:100px;width:60px;height:60px;" />
-          
-         
-
          <div style="font-size:15px;color:white;margin-left:20px;margin-top:32px"> ${
           d.data.spouse
          } </div>

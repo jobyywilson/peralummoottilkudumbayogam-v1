@@ -40,7 +40,7 @@
                 </div>
                 <div *ngIf="type=='obituaries'" class="blog-text">
                   <h2>
-                    <a [href]="event.url">{{event.name}} ({{event.age}})</a>
+                    <a [href]="event.url">{{event.title}} ({{event.age}})</a>
                   </h2>
                   <p>
                     {{event.description.substring(0,200)}}
