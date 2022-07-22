@@ -69,12 +69,12 @@ export class FamilyTreeComponent implements OnInit {
         }else if(this.memberPhotoInfo.has(member.nodeId+".png")){
           photoName = member.nodeId+".png";
         }
-        if(this.memberPhotoInfo.has(member.nodeId+".S.jpeg")){
-          spousePhotoName = member.nodeId+".S.jpeg";
-        } else if(this.memberPhotoInfo.has(member.nodeId+".S.png")){
+        if(this.memberPhotoInfo.has(member.nodeId+"S.jpeg")){
+          spousePhotoName = member.nodeId+"S.jpeg";
+        } else if(this.memberPhotoInfo.has(member.nodeId+"S.png")){
           spousePhotoName = member.nodeId+"S.png";
-        } else if(this.memberPhotoInfo.has(member.nodeId+".S.jpg")){
-          spousePhotoName = member.nodeId+".S.jpg";
+        } else if(this.memberPhotoInfo.has(member.nodeId+"S.jpg")){
+          spousePhotoName = member.nodeId+"S.jpg";
         }
 
 
