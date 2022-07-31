@@ -76,7 +76,7 @@ export class CommonService {
       return -(moment(leftTime).diff(moment(rightTime)))
     });
     this.obituariesInfo = this.obituariesInfo.sort(function (left :any, right: any) {
-      return (moment(left.funeralAt).diff(moment(right.funeralAt)))
+      return (moment(right.funeralAt).diff(moment(left.funeralAt)))
     });
 
     localStorage.setItem('posts', JSON.stringify(this.postInfo));
