@@ -64,10 +64,21 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       let tempData = []
       let index = 0;
       for(let item of this.data){
-        if(item.nameAndCode.toLowerCase().indexOf(this.term.toLowerCase()) !== -1){
+        if(item.nameAndCode.toLowerCase().indexOf(this.term.toLowerCase()) !== -1 ){
           tempData.push(item);
           index++;
         }
+        // if(item.spouse && item.spouse.toLowerCase().indexOf(this.term.toLowerCase()) !== -1){
+        //   let spouceItem = JSON.parse(JSON.stringify(item));
+        //   spouceItem.name = item.spouse
+        //   spouceItem.nodeId = item.nodeId
+        //   spouceItem.nameAndCode = item.nodeId +'-'+item.spouse
+        //   spouceItem.spouse = null
+        //   spouceItem.profilePic = spouceItem.spousePic
+        //   spouceItem.spousePic = null
+        //   tempData.push(spouceItem);
+        //   index++;
+        // }
         if(index>10){
           return tempData;
         }
