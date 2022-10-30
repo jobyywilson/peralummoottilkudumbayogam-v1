@@ -25,7 +25,17 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
   constructor() {}
   
 
-  ngOnInit() {}
+  ngOnInit() {
+    // let _this = this;
+  //   var checkIfExists = setInterval(function() {
+  //     var exists = document.querySelector('.svg-chart-container');
+  
+  //     if (exists) {
+  //         clearInterval(checkIfExists);
+  //         _this.updateLink();
+  //     }
+  // }, 2000);
+  }
 
   ngAfterViewInit() {
     
@@ -33,6 +43,8 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       this.chart = new OrgChart();
     }
     this.updateChart();
+    
+
   }
 
   searchMember(event : any):any{
@@ -111,15 +123,17 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     if (!this.chart) {
       return;
     }
+    let _this= this
     this.chart
       .container(this.chartContainer.nativeElement)
       .data(this.data)
-      .nodeWidth((d: any) => d.data.spouse?420:200)
+      .nodeWidth((d: any) => d.children||d._children?420:200)
       .nodeHeight((d :any) => 120)
       .compact(false)
       .compactMarginBetween((d:any) => 65)
       .compactMarginPair((d:any) => 100)
       .initialZoom(0.7)
+      
       .linkUpdate(function (d:any,i:any, arr:any) {
         for(var index=0;index<arr.length;index++){
           d3.select(arr[index])
@@ -127,6 +141,8 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
                 d.data._upToTheRootHighlighted ? '#14760D' : 'black'
               )
           .attr("stroke-width",(d:any) => '3px' );
+          
+          
         }
         
       })
@@ -144,11 +160,14 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       .nodeContent(function(d:any) {
         const color = '#665ed0';
 
-        let width = d.width;
-        let left = 0;
-        if(d.data.spouse){
-          left = width/4;
-          width = width/2 -20;
+        let width = d.width/2;
+        let start = 0
+        if(!d.parent){
+          start = 60
+        }
+        if(!(d.children||d._children)){
+  
+          width = width*2;
           
         }
         // let bornOn;
@@ -162,7 +181,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
         //   `
         // }
         let nodeHtml =  `
-        <div style="font-family: 'Inter', sans-serif;background-color:${color};left:${left}px; position:absolute;margin-top:-1px; margin-left:-1px;width:${width}px;height:${d.height}px;border-radius:10px;border: 1px solid ${color}">
+        <div style="font-family: 'Inter', sans-serif;background-color:${color};left:${11}px; position:absolute;width:${width -20}px;height:${d.height}px;border-radius:10px;border: 1px solid ${color}">
            <div style="background-color:white;position:absolute;margin-top:-25px;box-shadow: 0 0 9px 3px rgb(41 41 41 / 25%);margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
            <img src=" ${
              d.data.profilePic?d.data.profilePic:"assets/img/user.png"
@@ -181,28 +200,70 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
 
        </div>`;
-       if(d.data.spouse){
-        return nodeHtml+`<svg style="position:fixed" width="900" ><line x1="294" y1="60" x2="400" y2="60" stroke="black" fill="none" stroke="black" stroke-width="3px"/></svg>
-        <div style="font-family: 'Inter', sans-serif;background-color:${color};left:${left+left+left}px; position:absolute;margin-top:-1px; margin-left:-1px;width:${width}px;height:${d.height}px;border-radius:10px;border: 1px solid ${color}">
-           <div style="background-color:white;position:absolute;margin-top:-25px;box-shadow: 0 0 9px 3px rgb(41 41 41 / 25%);margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
-           <img src=" ${
-            d.data.spousePic
-          }" style="position:absolute;margin-top:-30px;margin-left:${10}px;border-radius:100px;width:60px;height:60px;" />
-         <div style="font-size:15px;color:white;margin-left:20px;margin-top:32px"> ${
-          d.data.spouse
-         } </div>
+        if(d.children||d._children){
+         return nodeHtml+`<svg style="position:fixed" width="900"><line x1="200" y1="60" x2="220" y2="60" stroke="black" fill="none" stroke-width="3px"></line><line x1="210" y1="${start}" x2="210" y2="120" stroke="black" fill="none" stroke-width="3px"></line></svg>
+       <div style="font-family: 'Inter', sans-serif;background-color:${color};left:${width+10}px; position:absolute;width:${width-20}px;height:${d.height}px;border-radius:10px;border: 1px solid ${color}">
+       <div style="background-color:white;position:absolute;margin-top:-25px;box-shadow: 0 0 9px 3px rgb(41 41 41 / 25%);margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
+       <img src=" ${
+        d.data.spousePic
+      }" style="position:absolute;margin-top:-30px;margin-left:${10}px;border-radius:100px;width:60px;height:60px;" />
+     <div style="font-size:15px;color:white;margin-left:20px;margin-top:32px"> ${
+      d.data.spouse?d.data.spouse:`Spouse`
+     } </div>
 
 
 
-       </div>`;
+   </div>`;
       }
        return nodeHtml;
       })
       .render();
+
+
+  
     if(this.selectedUserId){
       this.expandChart(this.selectedUserId);
     }
+    
+  }
+  updateLink(){
+    let elements = document.querySelectorAll(".links-wrapper > .link")
+    if(elements){
+      elements.forEach(path=>{
+        let dRaw = path.getAttribute("d");
+        if(dRaw){
+          let dFormated = dRaw.replace(/\s+/g, " ").trim();
+          let dArray = dFormated.split(" ");
+          let isPositive = Number(dArray[1]) >= 0;
+          dArray[1] = this.formatPath(dArray[1],isPositive) 
 
+          dArray[4] = this.formatPath(dArray[4],isPositive)
+          dArray[7]= this.formatPath(dArray[7],isPositive) 
+          dArray[10]= this.formatPath(dArray[10],isPositive)
+          dArray[13]= this.formatPath(dArray[13],isPositive) 
+          dArray[15]= this.formatPath(dArray[15],isPositive) 
+          dArray[17]= this.formatPath(dArray[17],isPositive) 
+          let formatedD = dArray.join(" ")
+          path.setAttribute("d",formatedD)
+        }
+      })
+    }
+  }
+
+  formatPath(str:string,isPositive:boolean){
+     let formatedPath =  isPositive?Number(str)+100:Number(str)-100;
+     return formatedPath.toString()
   }
 
 }
+//<path class="link" d="M 100 360 L 100 360 L 100 360 L 100 360 C 100 330 100 330 -130 330 L -190 330 C -220 330 -220 330 -220 300 L -220 300" fill="none" stroke="black" stroke-width="3px"></path>
+// <path class="link" d="
+//                   M -540 360
+//                   L -540 360
+//                   L -540 360
+//                   L -540 360
+//                   C  -540 330 -540 330 -510 330
+//                   L -250 330
+//                   C  -220  330 -220  330 -220 300
+//                   L -220 300
+//        " fill="none" stroke="black" stroke-width="3px"></path>
