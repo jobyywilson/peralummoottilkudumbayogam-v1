@@ -531,5 +531,8 @@ img{
   width: 100%;
 }
 .event{
-  min-width: 300px;
+  max-width: 300px;
+}
+.post-container{
+  justify-content: center;
 }

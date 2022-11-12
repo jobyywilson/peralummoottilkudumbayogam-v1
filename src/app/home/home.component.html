@@ -22,10 +22,10 @@
       </div>
 
       <div class="row content">
-        <div class="col-lg-4 about-pic-div ">
+        <div class="col-md-4 about-pic-div ">
           <img src="assets/img/about/history-1.jpg" class="img-fluid about-pic"  />
         </div>
-        <div class="col-lg-7 pt-1 pt-lg-0">
+        <div class="col-md-7 pt-1 pt-lg-0">
           <p>
             The said Thommy came from kuravilangad in the year 1700 A.D.He had
             settled in the renowned ancient area of
@@ -48,7 +48,7 @@
 
       <div class="col-md-6 col-lg-4 event"  *ngFor="let event  of postList.slice(0, 3);">
         <div class="block-blog text-left">
-          <a [href]="event.url"><img [src]="event.featuredImage"  alt="img"></a>
+          <a  [href]="event.url"><img class="main-image"[src]="event.featuredImage"  alt="img"></a>
           <div class="content-blog">
             <h4><a [href]="event.url">{{event.title}}</a></h4>
             <span>{{event.date}}</span>
@@ -74,7 +74,7 @@
 
       <div class="col-md-6 col-lg-4 obituariesList"  *ngFor="let event  of obituaryList.slice(0, 5);">
         <div class="block-blog text-left">
-          <a [href]="event.url"><img [src]="event.featuredImage"  alt="img"></a>
+          <a [href]="event.url"><img class="obituaries-main-image" [src]="event.featuredImage"  alt="img"></a>
           <div class="content-blog">
             <h3>
               <a [href]="event.url">{{event.title}} ({{event.age}})</a>

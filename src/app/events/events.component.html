@@ -18,8 +18,8 @@
         <!-- End left sidebar -->
         <!-- Start single blog -->
  
-          <div class="row">
-            <div class="event col-md-4 col-sm-4 col-xs-4" *ngFor="let event  of postList.slice(0, 5);">
+          <div class="row post-container">
+            <div class="event col-md-4 col-sm-4 col-xs-4" *ngFor="let event  of postList;">
               <div class="single-blog">
                 <div class="single-blog-img">
                   <a [href]="event.url">

@@ -150,6 +150,7 @@ carousel-item{
 }
 .block-blog{
   box-shadow: 0 0 0 0 rgb(0 0 0 / 20%), 0 0 4px 0 rgb(0 0 0 / 19%);
+  border-radius: 10px;
 }
 
 @media (min-width: 992px) {
@@ -180,4 +181,14 @@ carousel-item{
 }
 .section{
   padding: 30px 0;;
+}
+.main-image{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  object-fit:scale-down
+}
+.obituaries-main-image{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
