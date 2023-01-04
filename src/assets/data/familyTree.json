@@ -2678,7 +2678,7 @@
 {"nodeId":"8G-1.3.1.4.1.2","name":"Priya Reeba Alex","homeName":"Kottackal","place":"St.Thomas Mt Chennai","parentNodeId":"7G-1.3.1.4.1"},
 {"nodeId":"6G-1.3.2.1","name":"A George- Ex Singapore","homeName":"Kottackal Mount","place":"Manjeri Malappuram","parentNodeId":"5G-1.3.2"},
 {"nodeId":"6G-1.3.2.2","name":"K A Abraham","homeName":"Kottackal","place":"Kallooppara","parentNodeId":"5G-1.3.2"},
-{"nodeId":"6G-1.3.2.3","name":"K A Thomas (Baby)","homeName":"Kottackal","place":"Kallooppara","parentNodeId":"5G-1.3.2"},
+{"nodeId":"6G-1.3.2.3","name":"K A Thomas (Baby)","homeName":"Kottackal","place":"Kallooppara","parentNodeId":"5G-1.3.2","spouse":"Marykutty Thomas"},
 {"nodeId":"6G-1.3.2.4","name":"K C Alexander","homeName":"Kottackal","place":"Kallooppara","parentNodeId":"5G-1.3.2"},
 {"nodeId":"6G-1.3.2.5","name":"K A Mathai (Thankachan) P W D Rtd.","homeName":"Kottackal","place":"Kallooppara","parentNodeId":"5G-1.3.2"},
 {"nodeId":"7G-1.3.2.1.1","name":"Prof. George Abraham (Mohan)","homeName":"Kottackal","place":"Sulthan Battery","parentNodeId":"6G-1.3.2.1"},
