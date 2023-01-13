@@ -127,7 +127,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     this.chart
       .container(this.chartContainer.nativeElement)
       .data(this.data)
-      .nodeWidth((d: any) => d.children||d._children?420:200)
+      .nodeWidth((d: any) => d.children||d._children||d.data.spouse?420:200)
       .nodeHeight((d :any) => 120)
       .compact(false)
       .compactMarginBetween((d:any) => 65)
@@ -165,7 +165,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
         if(!d.parent){
           start = 60
         }
-        if(!(d.children||d._children)){
+        if(!(d.children||d._children||d.data.spouse)){
   
           width = width*2;
           
@@ -200,7 +200,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
 
        </div>`;
-        if(d.children||d._children){
+        if(d.children||d._children||d.data.spouse){
          return nodeHtml+`<svg style="position:fixed" width="900"><line x1="200" y1="60" x2="220" y2="60" stroke="black" fill="none" stroke-width="3px"></line><line x1="210" y1="${start}" x2="210" y2="120" stroke="black" fill="none" stroke-width="3px"></line></svg>
        <div style="font-family: 'Inter', sans-serif;background-color:${color};left:${width+10}px; position:absolute;width:${width-20}px;height:${d.height}px;border-radius:10px;border: 1px solid ${color}">
        <div style="background-color:white;position:absolute;margin-top:-25px;box-shadow: 0 0 9px 3px rgb(41 41 41 / 25%);margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
