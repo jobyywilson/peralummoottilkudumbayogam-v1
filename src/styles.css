@@ -9,7 +9,6 @@
 # General
 --------------------------------------------------------------*/
 @import "~@ng-select/ng-select/themes/material.theme.css";
-@import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -19,7 +18,7 @@ html {
 }
 a {
   color: #006fbe;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 a:hover {
@@ -28,7 +27,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: Poppins,sans-serif ;
 }
 
 /*--------------------------------------------------------------
@@ -1070,7 +1069,7 @@ section {
     background: linear-gradient(to right, #188ef4 0%, #316ce8 100%);
 }
 .container{
-  max-width: 100%;
+  max-width: 100% !important;
 }
 
 

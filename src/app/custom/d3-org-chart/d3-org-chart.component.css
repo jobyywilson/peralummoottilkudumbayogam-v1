@@ -1,15 +1,17 @@
 #chartContainer{
-    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('/assets/img/tile.png');
-    background-size: 15px;
-    border:2px solid;
+  background-color: #efefed;
     display: flex;
-    
+    width: 100%;
 }
 .btn-action-button-list{
     cursor: pointer;
     width:100px;
     padding: 20px;
     position: absolute;
+    pointer-events: none;
+}
+.action-button{
+  pointer-events: auto;
 }
 .btn-action-button:hover {
     opacity: 0.7;
@@ -19,9 +21,6 @@
   }
   .thumbnail{
     margin-right:5px;
-}
-ng-select{
-    max-width:400px;
 }
 .refresh-btn, .plus-btn, .minus-btn{
   border-radius: 0px;
@@ -41,4 +40,121 @@ ng-select{
 }
 .refresh-btn:hover, .plus-btn:hover, .minus-btn:hover {
   opacity: 0.7;
+}
+/* The side navigation menu */
+.sidenav {
+  margin-top: 2px;
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: absolute; /* Stay in place */
+  z-index: -1; /* Stay on top */
+  box-shadow: 0 1px 2px rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  right: 0;
+  background-color: white; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/* #nameAndCodeSelector{
+  max-width: 300px;
+  min-width: 300px;
+  z-index: 4;
+  background-color: white;
+  border-radius: 10px;
+  margin: 8px 0 8px 8px;
+  position: absolute;
+  padding: 0px;
+}
+.ng-select.custom ::ng-deep  .ng-select-container {
+  border-bottom: thin solid white !important;
+} */
+#memberName{
+  word-wrap: break-word;
+  color: black;
+  text-align: center;
+}
+#profilePicInfo{
+  display: flex;
+  justify-content: center;
+}
+.profilePicInfo{
+  display: flex;
+  justify-content: center;
+}
+#profilePic{
+  border-radius:100px;
+  width:80px;
+  height:80px;
+  background-color:#ededed;
+}
+#memberNameInfo{
+  padding:10px;
+  display: flex;
+  justify-content: center;
+}
+.example-container {
+
+  margin: 12px;
+  border: 1px solid #555;
+}
+
+mat-drawer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.memberInfo{
+  box-shadow: 0 1px 2px rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  background-color: white;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  justify-content: end;
+  padding: 7px;
+}
+@media (max-width: 500px) {
+  mat-drawer{
+    width: 100%;
+  }
+}
+@media (min-width: 500px) {
+  mat-drawer{
+    width: 300px;
+  }
 }

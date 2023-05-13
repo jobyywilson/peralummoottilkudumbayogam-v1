@@ -1,0 +1,63 @@
+{
+    "title": "Committee",
+    "members":[
+        {
+            "officeBearerUserId":"6C-1.2.2.5",
+            "name": "Rev. Barthaloma Corepiscopa",
+            "address": "Kallur, Puramattam",
+            "postion": "President",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },
+        {
+            "officeBearerUserId":"8b-1.2.1.3.2.2",
+            "name": "Rev. Fr. T N Joseph",
+            "address": "Thotupurath, M North",
+            "postion": "Vice President",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"7C-1.2.2.3.1",
+            "name": "Adv P J Kurien",
+            "address": "Pannikottu",
+            "postion": "Vice President",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"6F-2.2.3.2",
+            "name": "P T Varghese",
+            "address": "Vazhuvellil",
+            "postion": "General Secretary",
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8D-1.4.3.2.1.2",
+            "name": "Joseph T Thuruthipalli",
+            "address": "Puthenpura",
+            "postion": "Secretary",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"",
+            "name": "Abraham Varghese",
+            "address": "Kunnumpurathu",
+            "postion": "Organizing Secretary",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },
+        {
+            "officeBearerUserId":"6G-2.2.1.4",
+            "name": "K K Thomas",
+            "address": "Palamoottil",
+            "postion": "Treasurer",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },
+        {
+            "officeBearerUserId":"",
+            "name": "George Mathew",
+            "address": "Kunnumpurathu",
+            "postion": "Auditor"
+        }
+    
+    ]
+}

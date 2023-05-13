@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +28,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { CommonService } from './service/common.service';
 
+export function fetchMemberPhotoInfo(commonService: CommonService): Function {
+  return () => commonService.fetchMemberPhotoInfo();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +67,12 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    CommonService,
+    // { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [LoginService] },
+    { provide: APP_INITIALIZER, useFactory: fetchMemberPhotoInfo, multi: true, deps: [CommonService] }
+
+  ],
   bootstrap: [AppComponent,AppRoutingModule]
 })
 export class AppModule { }

@@ -8,15 +8,23 @@ import { combineLatest, Observable } from 'rxjs';
 export class CommonService {
   configUrl = 'https://api.github.com/repos/jobyywilson/peralummoottilkudumbayogam-v1/git/trees/main?recursive=1';
   memberPhotoUrl = 'https://api.github.com/repos/jobyywilson/peralummoottil-resource/git/trees/main?recursive=1';
-
+  memberIdWithPhotos = new Set();
   postInfo : any = [];
   eventsInfo : any = [];
   obituariesInfo : any = [];
 
   constructor(private http: HttpClient) { }
 
-  getMemberPhotoInfo(){
-    return this.doGet(this.memberPhotoUrl);
+  fetchMemberPhotoInfo(){
+    return this.doGet(this.memberPhotoUrl).subscribe(rawData=>{
+      let tree = rawData.tree;
+      let members = new Set();
+      for(let memberPhotoInfo of tree){
+        members.add(memberPhotoInfo.path);
+      }
+      this.memberIdWithPhotos = members;
+    },
+    (err:any) => console.error(err));
   }
   getPostedInfo(){
     return this.doGet(this.configUrl);
@@ -127,11 +135,7 @@ export class CommonService {
     return postRawData
   }
 
-  mapOfficers(officeRawData:any){
-    let rawData = officeRawData["members"]
-    rawData.map((obj:any)=> obj.image = "assets/static"+obj.image)
-    return rawData;
-  }
+
 
   public readFile(path :string): Observable<any> {
     return this.http.get(path);

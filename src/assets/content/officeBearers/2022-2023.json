@@ -1,132 +1,145 @@
 {
-    "title": "Trust Board Members 2022 -2023",
+    "title": "Trust Board Members",
     "members":[
         {
+            "officeBearerUserId":"8A-1.1.3.1.1.5",
             "name": "Rev. Fr. Jose Kallumalickal",
             "address": "Marygiri Aramana, Thiruvalla",
             "postion": "Managing Trustee",
             "mobile": "9447152704",
-            "image":"/images/uploads/FrJoseKallumalickal.jpg"
+            "image1":"/images/uploads/FrJoseKallumalickal.jpg"
         },
         {
-            "name": "Mr. Thomas Thuruthipally",
+            "name": "Thomas T Thuruthipally",
+            "officeBearerUserId":"8D-1.4.3.2.1.3",
             "address": "Thuruthipally, Puthenpura",
             "postion": "Joint Managing Trustee",
             "mobile": "9446351727",
-            "image":"/images/uploads/THOMAS_T_THURUTHIPPALLIL.jpg"
+            "image1":"/images/uploads/THOMAS_T_THURUTHIPPALLIL.jpg"
         },
         {
-            "name": "Mr. Thomas V George",
+            "name": "Thomas V George",
+            "officeBearerUserId":"8F-2.1.1.2.2.3",
             "address": "Vazhuvelil",
             "postion": "Secretary",
             "mobile": "9447409235",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. Reji Skaria",
+            "name": "Reji Skaria",
             "address": "Kalluvettukuzhiyil, Eraviperoor",
             "postion": "Joint Secretary",
             "mobile": "9048611437",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. Mathews T Varghese",
+            "name": "Mathews T Varghese",
+            "officeBearerUserId":"8D-1.1.2.4.2.2",
             "address": "Thuruthiyil, Puthenpura",
             "postion": "Treasurer",
             "mobile": "9745322949",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
     
         {
-            "name": "Mr. Manoj Ambalakkadvil",
+            "officeBearerUserId":"7H-1.2.1.3.2",
+            "name": "Manoj Ambalakkadvil",
             "address": "Kurichy",
-            "postion": "Youth Representative",
+            "postion": "Youth Secretary",
             "mobile": "9447304832",
-            "image":"/images/uploads/MANOJAMBALAKKADVIL.jpg"
+            "image1":"/images/uploads/MANOJAMBALAKKADVIL.jpg"
         },
         {
             "name": "Mrs. Annie Mathew",
             "address": "Mukramannil , Karavadaseri",
-            "postion": "Vanitha  Representative",
+            "postion": "Lady Secretary",
             "mobile": "9447359542",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. Jose K. Varughese",
+            "name": "Jose K. Varughese",
+            "officeBearerUserId":"8A-1.1.3.1.2.1",
             "address": "Kallumalickal, Othera East",
             "postion": "Board Member",
             "mobile": "9496619988",
-            "image":"/images/uploads/Jose_K_Varughes.jpg"
+            "image1":"/images/uploads/Jose_K_Varughes.jpg"
         },
         {
-            "name": "Mr. V.J. Philip",
+            "name": "V.J. Philip",
+            "officeBearerUserId":"8b-1.1.1.2.2.1",
             "address": "Kaippallimannil Kozhencherry",
             "postion": "Board Member",
             "mobile": "9744756313",
-            "image":"/images/uploads/V_J_PHILIP.jpg"
+            "image1":"/images/uploads/V_J_PHILIP.jpg"
         },
         {
-            "name": "Mr. Jose Pannikotu",
+            "name": "Jose Pannikotu",
             "address": "Kaippallimannil Kozhencherry",
             "postion": "Board Member",
             "mobile": "8281224441",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. K T Varghese",
+            "name": "K T Varghese",
             "address": "Kambiyil,Manarkadu",
             "postion": "Board Member",
             "mobile": "7042755950",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. Saji Varghese",
+            "name": "Saji Varghese",
+            "officeBearerUserId": "8E-1.1.1.2.3.1",
             "address": "Ambalakadavil, Kunnumpuram",
             "postion": "Board Member",
             "mobile": "9495706326",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. George A Koshy",
+            "name": "George A Koshy",
+            "officeBearerUserId":"7D-2.1.4.2.6",
             "address": "Azaknalmalayil , Puthenpura",
             "postion": "Board Member",
             "mobile": "9446474514",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. Thomas V. John (Binu)",
+            "name": "Thomas V. John (Binu)",
             "address": "Vazhuvelil",
             "postion": "Board Member",
             "mobile": "9946664692",
-            "image":"/images/uploads/THOMAS_V_JOHN.jpg"
+            "image1":"/images/uploads/THOMAS_V_JOHN.jpg"
         },
         {
-            "name": "Mr. John Jacob",
+            "name": "John Jacob",
+            "officeBearerUserId":"7G-2.2.1.2.3",
             "address": "Kudubham",
             "postion": "Board Member",
             "mobile": "9846652433",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. Manu Varghese",
+            "name": "Manu Varghese",
+            "officeBearerUserId":"7H-1.3.1.1.1",
             "address": "Edekallor Malayil",
             "postion": "Board Member",
             "mobile": "9446811618",
-            "image":"/images/uploads/blank-profile-picture.png"
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. Abraham Abraham",
+            "name": "Abraham Abraham",
+            "officeBearerUserId":"8C-1.2.2.2.5.1",
             "address": "Pannikottu , Cheriyaveloor",
             "postion": "Leagal Advisor",
-            "mobile": "-",
-            "image":"/images/uploads/blank-profile-picture.png"
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "name": "Mr. Joby Wilson Mathews",
+            "name": "Joby Wilson Mathews",
+            "officeBearerUserId":"9D-1.1.2.4.2.2.2",
             "address": "Thuruthiyil , Puthenpura",
             "postion": "IT Co - Ordinator",
-            "mobile": "-",
-            "image":"/images/uploads/blank-profile-picture.png"
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
         }
     ]
 }

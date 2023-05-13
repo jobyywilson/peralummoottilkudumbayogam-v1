@@ -1,0 +1,61 @@
+{
+    "title": "Committee",
+    "members":[
+        {
+            "officeBearerUserId":"8A-1.1.3.1.1.5",
+            "name": "Rev. Fr. Jose Kallumalickal",
+            "address": "Marygiri Aramana, Thiruvalla",
+            "postion": "President",
+            
+            "image":"/images/uploads/FrJoseKallumalickal.jpg"
+        },{
+            "officeBearerUserId":"7G-1.3.1.1.2",
+            "name": "John Varghese",
+            "address": "Kottackal",
+            "postion": "Vice President",
+            
+            "image":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"7D-2.1.4.2.6",
+            "name": "George A Koshy",
+            "address": "Azhakanl malayil",
+            "postion": "Vice President",
+            
+            "image":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"7C-1.4.1.2.1",
+            "name": "K V Philip",
+            "address": "Kunnumpurathu",
+            "postion": "Vice President",
+            
+            "image":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8F-2.2.2.5.2.1",
+            "name": "Thomas V John",
+            "address": "Vazhuvellil",
+            "postion": "General Secretary",
+            
+            "image":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8C-1.7.4.1.2.1",
+            "name": "K I Joyikutty",
+            "address": "Kuraginadu",
+            "postion": "Secretary",
+            
+            "image":"/images/uploads/blank-profile-picture.png"
+        },
+        {
+            "name": "Thomas T Thuruthipally",
+            "officeBearerUserId":"8D-1.4.3.2.1.3",
+            "address": "Thuruthipally, Puthenpura",
+            "postion": "Organizing Secretary",
+            "mobile": "9446351727",
+            "image1":"/images/uploads/THOMAS_T_THURUTHIPPALLIL.jpg"
+        },{
+            "officeBearerUserId":"8F-2.2.1.1.1.1",
+            "name": "Biju Kurien",
+            "address": "Vazhuvellil",
+            "postion": "Website Coordinator"
+        }
+    ]
+}

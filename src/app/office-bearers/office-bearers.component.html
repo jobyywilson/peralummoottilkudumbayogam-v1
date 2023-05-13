@@ -17,17 +17,64 @@
     <!-- ======= Members Section ======= -->
     <section id="office" class="members">
       <div class="container">
-        <h2 >Trust Board Members 2022 - 2023</h2>
+        
 
-        <div class="row">
+        <div class="col-sm-4 col-md-4 year-selection" data-aos="fade-right">
+          <div class="row">
+            <div class="col-sm-2 col-md-5 year">
+              <h3>Year : </h3>
+            </div>
+            <div class="col-sm-5 col-md-7">
+              <select (change)="onYearchange($event.target)" class="form-select" aria-label="Default select example">
+                <option *ngFor="let year of years">{{year}}</option>
+              </select>
+              
+            </div>
+            
+          </div>
+    
+        </div>
+        <h3 *ngIf="selectedOffice">{{selectedOffice.title}}</h3>
+        <div *ngIf="selectedOffice" class="row">
           <div
             class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
-            *ngFor="let member of officeMembers" 
+            *ngFor="let member of selectedOffice.officeMembers" 
           >
             <div class="member">
               <h5>{{ member.postion }}</h5>
               <div class="member-img">
                 <img [src]="member.image" class="img-fluid off-mem-image" alt="" />
+              </div>
+              <div class="member-info">
+                <h4>{{ member.name }}</h4>
+                <p  *ngIf="member.mobile && member.mobile!='-'">
+                  {{ member.address }}<br />
+                  Mob: {{ member.mobile }}
+                </p>
+                <p *ngIf="!member.mobile">
+                  {{ member.address }}<br />
+                </p>
+              </div>
+            </div>
+          </div>
+    <!--     
+        <div class="row mb-5 align-items-end">
+          <div class="col-md-6" data-aos="fade-right">
+            <h4>Kaisthanasamithy</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
+            *ngFor="let member of selectedOffice.kaisthanasamithy"
+          >
+            <div class="member">
+              <div class="member-img">
+                <img
+                  src="assets/img/blank-profile-picture.png"
+                  class="img-fluid off-mem-image"
+                  alt=""
+                />
               </div>
               <div class="member-info">
                 <h4>{{ member.name }}</h4>
@@ -38,26 +85,64 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-              <div class="member">
-                <div class="member-img">
-                  <img src="assets/img/blank-profile-picture.png" class="img-fluid" alt="">
-                  <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Niall Katz</h4>
-                  <span>Marketing</span>
-                  <p>Aut ex esse explicabo quia harum ea accusamus excepturi. Temporibus at quia quisquam veritatis impedit. Porro laborum voluptatum sed necessitatibus a saepe. Deserunt laborum quasi consequatur voluptatum iusto sint qui fuga vel. Enim eveniet sed quibusdam rerum in. Non dicta architecto consequatur quo praesentium nesciunt.</p>
-                </div>
-              </div>
-            </div> -->
         </div>
-        
+        <div class="row mb-5 align-items-end">
+          <div class="col-md-6" data-aos="fade-right">
+            <h4>Auditors</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
+            *ngFor="let member of selectedOffice.auditors"
+          >
+            <div class="member">
+              <div class="member-img">
+                <img
+                  src="assets/img/blank-profile-picture.png"
+                  class="img-fluid off-mem-image"
+                  alt=""
+                />
+              </div>
+              <div class="member-info">
+                <h4>{{ member.name }}</h4>
+                <p>
+                  {{ member.address }}<br />
+                  Mob: {{ member.mobile }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="row mb-5 align-items-end">
+          <div class="col-md-6" data-aos="fade-right">
+            <h4>Sexton</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
+            *ngFor="let member of selectedOffice.sextons"
+          >
+            <div class="member">
+              <div class="member-img">
+                <img
+                  src="assets/img/blank-profile-picture.png"
+                  class="img-fluid off-mem-image"
+                  alt=""
+                />
+              </div>
+              <div class="member-info">
+                <h4>{{ member.name }}</h4>
+                <p>
+                  {{ member.address }}<br />
+                  Mob: {{ member.mobile }}
+                </p>
+              </div>
+            </div>
+          </div>-->
+        </div>
     
     
       </div>

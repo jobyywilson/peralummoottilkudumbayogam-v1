@@ -1,0 +1,52 @@
+{
+    "title": "Committee",
+    "members":[
+        {
+            "officeBearerUserId":"8A-1.1.3.1.1.5",
+            "name": "Rev. Fr. Jose Kallumalickal",
+            "address": "Marygiri Aramana, Thiruvalla",
+            "postion": "President",
+            
+            "image1":"/images/uploads/FrJoseKallumalickal.jpg"
+        },{
+            "officeBearerUserId":"7G-1.3.1.1.2",
+            "name": "John Varghese",
+            "address": "Kottackal",
+            "postion": "General Secretary",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8F-2.2.2.5.2.1",
+            "name": "Thomas V John",
+            "address": "Vazhuvellil",
+            "postion": "Secretary",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"7C-1.4.1.2.1",
+            "name": "K V Philip",
+            "address": "Kunnumpurathu",
+            "postion": "Organizing Secretary",
+            
+            "image":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"9C-1.6.1.1.1.1.1",
+            "name": "Anil Thomas John",
+            "address": "Karimpanamuriyil",
+            "postion": "Youth Secretary",
+            
+            "image":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8b-2.3.1.3.1.1S",
+            "name": "Elsamma Jose",
+            "address": "Mannukuzhiyil Karavadesseril",
+            "postion": "Lady Secretary"
+        },
+        {
+            "officeBearerUserId":"7E-2.2.2.3.1",
+            "name": "K M Varghese",
+            "address": "Kunnumpurathu",
+            "postion": "Auditor"
+        }
+    ]
+}

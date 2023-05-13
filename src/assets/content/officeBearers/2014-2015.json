@@ -1,0 +1,79 @@
+{
+    "title": "Committee",
+    "members":[
+        {
+            "officeBearerUserId":"8A-1.1.3.1.1.5",
+            "name": "Rev. Fr. Jose Kallumalickal",
+            "address": "Marygiri Aramana, Thiruvalla",
+            "postion": "President",
+            
+            "image1":"/images/uploads/FrJoseKallumalickal.jpg"
+        },{
+            "officeBearerUserId":"7b-2.1.1.6.1",
+            "name": "C N Thampy",
+            "address": "Chalungal",
+            "postion": "Vice President",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8F-2.1.1.2.2.3",
+            "name": "Thomas V George",
+            "address": "Vazhuvellil",
+            "postion": "General Secretary",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"9A-1.1.2.1.2.1.1",
+            "name": "P K Geevarghese",
+            "address": "Pathanath",
+            "postion": "Secretary",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8A-1.1.3.1.1.2",
+            "name": "A C Mathew",
+            "address": "Ritta k villa, Vellikara",
+            "postion": "Organizing Secretary",
+            
+            "image":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"7H-1.3.1.2.1",
+            "name": "E I Varughese",
+            "address": "Edakkalloor Malayil",
+            "postion": "Organizing Secretary",
+            
+            "image":"/images/uploads/b lank-profile-picture.png"
+        },{
+            "officeBearerUserId":"7D-2.1.4.2.6",
+            "name": "George A Koshy",
+            "address": "Azhakanl malayil",
+            "postion": "Treasurer",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8F-2.2.2.5.2.1",
+            "name": "Thomas V John",
+            "address": "Vazhuvellil",
+            "postion": "Youth Secretary",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"8D-1.4.4.1.1.1S",
+            "name": "Mariamma Thomas",
+            "address": "Varaputhra Malayil",
+            "postion": "Lady Secretary"
+        },{
+            "officeBearerUserId":"7E-3.3.4.2.2",
+            "name": "Sam Kurian",
+            "address": "Kakkanattil",
+            "postion": "Website Coordinator"
+        },
+        {
+            "officeBearerUserId":"7E-2.2.2.3.1",
+            "name": "K M Varghese",
+            "address": "Kunnumpurathu",
+            "postion": "Auditor"
+        }
+
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "title": "Committee",
+    "members":[
+        {
+            "officeBearerUserId":"6C-1.2.2.5",
+            "name": "Rev. Barthaloma Corepiscopa",
+            "address": "Kallur, Puramattam",
+            "postion": "President",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },
+        {
+            "officeBearerUserId":"8b-1.2.1.3.2.2",
+            "name": "Rev. Fr. T N Joseph",
+            "address": "Thotupurath, M North",
+            "postion": "Vice President",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },{
+            "officeBearerUserId":"6E-3.3.4.1",
+            "name": "K V Kurien",
+            "address": "Kakkanad, Hillgardens",
+            "postion": "General Secretary",
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },
+        {
+            "officeBearerUserId":"8C-1.5.2.2.3.1",
+            "name": "K V Jacob",
+            "address": "Kannolil",
+            "postion": "Secretary",
+            
+            "image1":"/images/uploads/blank-profile-picture.png"
+        },
+        {
+            "officeBearerUserId":"6G-1.3.1.2",
+            "name": "K C Mathai",
+            "address": "Kottackal",
+            "postion": "Treasurer"
+        },
+        {
+            "officeBearerUserId":"7D-2.1.4.1.1",
+            "name": "P E Mammen",
+            "address": "Pooratethu",
+            "postion": "Auditor"
+        },
+        {
+            "officeBearerUserId":"7E-2.2.2.3.1",
+            "name": "K M Varghese",
+            "address": "Kunnumpurathu",
+            "postion": "Auditor"
+        }
+
+        
+    ]
+}
