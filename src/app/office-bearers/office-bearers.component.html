@@ -22,7 +22,7 @@
         <div class="col-sm-4 col-md-4 year-selection" data-aos="fade-right">
           <div class="row">
             <div class="col-sm-2 col-md-5 year">
-              <h3>Year : </h3>
+              <h6>Year : </h6>
             </div>
             <div class="col-sm-5 col-md-7">
               <select (change)="onYearchange($event.target)" class="form-select" aria-label="Default select example">
@@ -35,7 +35,7 @@
     
         </div>
         <h3 *ngIf="selectedOffice">{{selectedOffice.title}}</h3>
-        <div *ngIf="selectedOffice" class="row">
+        <div *ngIf="selectedOffice" class="row member-list">
           <div
             class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
             *ngFor="let member of selectedOffice.officeMembers" 
@@ -46,7 +46,7 @@
                 <img [src]="member.image" class="img-fluid off-mem-image" alt="" />
               </div>
               <div class="member-info">
-                <h4>{{ member.name }}</h4>
+                <h6>{{ member.name }}</h6>
                 <p  *ngIf="member.mobile && member.mobile!='-'">
                   {{ member.address }}<br />
                   Mob: {{ member.mobile }}

@@ -573,10 +573,9 @@ section {
   font-size: 18px;
   margin: 0 2px;
 }
-.members .member .member-info h4 {
-  font-weight: 700;
+.members .member .member-info h6 {
   margin: 15px 0 5px 0;
-  font-size: 18px;
+  font-size: 16px;
 }
 .members .member .member-info span {
   display: block;
