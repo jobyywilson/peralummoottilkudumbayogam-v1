@@ -27,7 +27,8 @@
         },
         {
             "name": "Reji Skaria",
-            "address": "Kalluvettukuzhiyil, Eraviperoor",
+            "officeBearerUserId":"7H-2.1.2.1.2",
+            "address": "Kalluvettukuzhiyil House, Pynummoode, Vallamkulam",
             "postion": "Joint Secretary",
             "mobile": "9048611437",
             "image1":"/images/uploads/blank-profile-picture.png"
@@ -74,7 +75,7 @@
         },
         {
             "name": "Jose Pannikotu",
-            "address": "Kaippallimannil Kozhencherry",
+            "address": "Pannikotte House, Cheriyaveloor, Puramattom",
             "postion": "Board Member",
             "mobile": "8281224441",
             "image1":"/images/uploads/blank-profile-picture.png"
@@ -112,7 +113,7 @@
         {
             "name": "John Jacob",
             "officeBearerUserId":"7G-2.2.1.2.3",
-            "address": "Kudubham",
+            "address": "Palamoottil, Eraviperoor",
             "postion": "Board Member",
             "mobile": "9846652433",
             "image1":"/images/uploads/blank-profile-picture.png"

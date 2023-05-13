@@ -590,6 +590,7 @@ section {
   font-size: 14px;
   line-height: 26px;
   color: #777777;
+  width:200px;
 }
 .members .member:hover .social {
   bottom: 0;
