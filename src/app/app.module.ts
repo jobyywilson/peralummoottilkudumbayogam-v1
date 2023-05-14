@@ -29,10 +29,29 @@ import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { CommonService } from './service/common.service';
-
-export function fetchMemberPhotoInfo(commonService: CommonService): Function {
-  return () => commonService.fetchMemberPhotoInfo();
+export function fetchMemberPhotoInfo(commonService: CommonService) {
+  return () => {
+    return new Promise((resolve, reject) => {
+      // Perform the initialization logic, such as calling the API
+      commonService.fetchMemberPhotoInfo().subscribe(
+        (rawData) => {
+          let tree = rawData.tree;
+          let members = new Set();
+          for(let memberPhotoInfo of tree){
+            members.add(memberPhotoInfo.path);
+          }
+          commonService.memberIdWithPhotos = members;
+          resolve(members);
+        },
+        (error) => {
+          console.log(error)
+          resolve({});
+        }
+      );
+    });
+  };
 }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +89,7 @@ export function fetchMemberPhotoInfo(commonService: CommonService): Function {
   providers: [
     CommonService,
     // { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [LoginService] },
-    { provide: APP_INITIALIZER, useFactory: fetchMemberPhotoInfo, multi: true, deps: [CommonService] }
+    { provide: APP_INITIALIZER, useFactory: fetchMemberPhotoInfo, multi: true, deps: [CommonService]  }
 
   ],
   bootstrap: [AppComponent,AppRoutingModule]

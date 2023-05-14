@@ -16,15 +16,7 @@ export class CommonService {
   constructor(private http: HttpClient) { }
 
   fetchMemberPhotoInfo(){
-    return this.doGet(this.memberPhotoUrl).subscribe(rawData=>{
-      let tree = rawData.tree;
-      let members = new Set();
-      for(let memberPhotoInfo of tree){
-        members.add(memberPhotoInfo.path);
-      }
-      this.memberIdWithPhotos = members;
-    },
-    (err:any) => console.error(err));
+    return this.doGet(this.memberPhotoUrl) 
   }
   getPostedInfo(){
     return this.doGet(this.configUrl);
