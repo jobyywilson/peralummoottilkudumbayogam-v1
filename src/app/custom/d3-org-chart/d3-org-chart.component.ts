@@ -155,8 +155,6 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       .compactMarginPair((d:any) => 100)
       .siblingsMargin((node:any) => 100)
       .neightbourMargin((node1:any, node2:any) =>{
-        console.log(node1)
-        console.log(node2)
         return 20;
       } )
       .initialZoom(0.7)
