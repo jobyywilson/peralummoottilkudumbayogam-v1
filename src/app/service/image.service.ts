@@ -39,10 +39,10 @@ public getUserPhotoUrl(userId:string){
         let profilePic = "assets/img/user.png"
         let spousePic =  "assets/img/user.png"
           if(photoName){
-            profilePic = "https://family-search-image.netlify.app/"+photoName;
+            profilePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+photoName;
         }
         if(spousePhotoName){
-          spousePic = "https://family-search-image.netlify.app/"+spousePhotoName;
+          spousePic = "https://raw.githubusercontent.com/jobyywilson/peralummoottil-resource/main/"+spousePhotoName;
         }else{
           spousePic = "assets/img/user.png";
         }
