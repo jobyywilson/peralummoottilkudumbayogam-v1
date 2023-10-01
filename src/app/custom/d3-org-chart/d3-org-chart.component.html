@@ -2,22 +2,11 @@
 
 
 
-<ng-select 
-bindLabel="nameAndCode"
-bindValue="nodeId"
-appearance="outline"
-(search)="searchMember($event)"
-placeholder="Search member"
-(click)="expandChart(selectedMemberName)"
-[minTermLength] = 3
-[(ngModel)]="selectedMemberName">
-<ng-option *ngFor="let item of getData()" [value]="item">
-  <img class="thumbnail" height="15" width="15" [src]="item.profilePic?item.profilePic:'assets/img/user.png'"/> {{ item.name + ' (' + item.nodeId + ')' }}
-</ng-option>
-</ng-select>
-<mat-drawer-container  class="example-container" hasBackdrop="false">
+
+<mat-drawer-container hasBackdrop="false">
   <mat-drawer  class="memberInfo" #drawer mode="side">
-    <div *ngIf="selectedMemberToView!=null" >
+
+    <div *ngIf="selectedMemberToView!=null" class="profile">
       <mat-toolbar color="primary">
         <button mat-icon-button (click)="closeSideNav()">
           <mat-icon>close</mat-icon>
@@ -33,20 +22,37 @@ placeholder="Search member"
     </div>
   </mat-drawer>
   <mat-drawer-content>
-    <div #chartContainer id="chartContainer">
-      <div class="btn-action-button-list">
-        <button (click)="chart.zoomIn()" class="btn plus-btn action-button"><i class="fa fa-plus icon-action" aria-hidden="true"></i>
-        </button>
-        <button  (click)="chart.zoomOut()" class="btn minus-btn action-button"><i class="fa fa-minus icon-action" aria-hidden="true"></i>
-        </button>
-        <button (click)="chart.fit()" class="btn refresh-btn action-button"><i class="fa fa-refresh icon-action" aria-hidden="true"></i>
-        </button>
-        <a class="action-button" href="https://docs.google.com/forms/d/e/1FAIpQLSd0UEWlTvg5srJzWvwY8NVX5FVGkiBCYmXdBe-BmeN_N8BEuA/viewform?usp=sf_link"><button  class="btn refresh-btn action-button"><i class="fa fa-pencil icon-action" aria-hidden="true"></i>
-        </button></a>
-          
+    <div class = "select-dropdown-in-tree-main">
+      <div class="select-dropdown in-tree-main">
+        <ng-select 
+        class="custom"
+        bindLabel="name"
+        bindValue="nodeId"
+        appearance="outline"
+        (search)="searchMember($event)"
+        placeholder="Search member"
+        (click)="expandChart(selectedMemberName)"
+        [minTermLength] = 3
+        [(ngModel)]="selectedMemberName">
+        <ng-option *ngFor="let item of getData()" [value]="item">
+          <img class="thumbnail" height="15" width="15" [src]="item.profilePic?item.profilePic:'assets/img/user.png'"/> {{ item.name }}
+        </ng-option>
+        </ng-select>
       </div>
-     
-       
+    </div>
+    
+    <div class="btn-action-button-list">
+      <button (click)="chart.zoomIn()" class="btn plus-btn action-button"><i class="fa fa-plus icon-action" aria-hidden="true"></i>
+      </button>
+      <button  (click)="chart.zoomOut()" class="btn minus-btn action-button"><i class="fa fa-minus icon-action" aria-hidden="true"></i>
+      </button>
+      <button (click)="chart.fit()" class="btn refresh-btn action-button"><i class="fa fa-refresh icon-action" aria-hidden="true"></i>
+      </button>
+      <a class="action-button" href="https://docs.google.com/forms/d/e/1FAIpQLSd0UEWlTvg5srJzWvwY8NVX5FVGkiBCYmXdBe-BmeN_N8BEuA/viewform?usp=sf_link"><button  class="btn refresh-btn action-button"><i class="fa fa-pencil icon-action" aria-hidden="true"></i>
+      </button></a>
+        
+    </div>
+    <div #chartContainer id="chartContainer">
     </div>
   </mat-drawer-content>
 

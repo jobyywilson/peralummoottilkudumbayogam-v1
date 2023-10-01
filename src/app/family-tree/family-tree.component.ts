@@ -18,7 +18,11 @@ export class FamilyTreeComponent implements OnInit {
   constructor(private commonService : CommonService, private cryptoService:CryptoService,private route: ActivatedRoute,private imageService:ImageService) {
     let paramMap = this.route.snapshot.paramMap;
     if(paramMap){
-      this.selectedUserId = paramMap.get("id");
+      let selectedUserId : any = paramMap.get("id");
+      if(selectedUserId && selectedUserId.endsWith("S")){
+        selectedUserId = selectedUserId.slice(0, selectedUserId.length - 1);
+      }
+      this.selectedUserId = selectedUserId
     }
     
    }

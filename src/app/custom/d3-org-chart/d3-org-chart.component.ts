@@ -45,16 +45,6 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
 
   }
-    // let _this = this;
-  //   var checkIfExists = setInterval(function() {
-  //     var exists = document.querySelector('.svg-chart-container');
-  
-  //     if (exists) {
-  //         clearInterval(checkIfExists);
-  //         _this.updateLink();
-  //     }
-  // }, 2000);
-  
 
   ngAfterViewInit() {
     
@@ -206,12 +196,14 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       //   }
       // })
       .nodeUpdate((node:any,i:any,arr:any) =>{
-
+        if(this.isSideMenuOpened && _this.selectedMemberName == node.data.nodeId){
+          _this.prepareMemberDataToView(node,false);
+          _this.toogleSideNav()
+        }
         d3.select(arr[i]).select('#main-node').on('click',d=>{
           _this.prepareMemberDataToView(d.currentTarget.__data__,false);
           _this.toogleSideNav()
           
-            // Do whatever you want, you can access original data via d.data property
         })
         d3.select(arr[i]).select('#spouse').on('click',d=>{
           _this.prepareMemberDataToView(d.currentTarget.__data__,true);
@@ -283,8 +275,8 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
        </div>`;
       })
-      .expandLevel(10)
       .render();
+  this.chart.fit();
   this.chart.getChartState().svg.on("wheel.zoom", null);
   this.updateLink()
     if(this.selectedUserId){
