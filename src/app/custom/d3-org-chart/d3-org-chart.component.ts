@@ -10,7 +10,8 @@ import { OrgChart } from 'd3-org-chart';
 import * as d3 from 'd3';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ImageService } from 'src/app/service/image.service';
-
+import { CommonService } from 'src/app/service/common.service';
+import { CryptoService } from 'src/app/service/crypto.service';
 
 @Component({
   selector: 'app-d3-org-chart',
@@ -26,12 +27,13 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
   selectedMemberToView: any;
   selectedMemberName: any;
+  selectedMemberOfficeDetails: any = [];
   previousNodeId :any;
   isSideMenuOpened: boolean = false;
   chart:any;
   term:string='';
   isRemovedEventList : boolean = false;
-  constructor(private imageService: ImageService) {
+  constructor(private imageService: ImageService,private commonService: CommonService,private cryptoService:CryptoService) {
     try{
       this.drawer.toggle();
     }catch(err){
@@ -345,15 +347,76 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     }
 
   prepareMemberDataToView(selectedMember : any , isSpouse :boolean){
-    let memberName = selectedMember.data.name;
+
+    let memberId = selectedMember.data.nodeId
+    if(this.selectedMemberToView && 
+      this.selectedMemberToView.nodeId == memberId &&
+      this.selectedMemberToView.isSpouse == isSpouse){
+      return;
+    }
     let memberProfilePic = selectedMember.data.profilePic;
     if(isSpouse){
-      memberName = selectedMember.data.spouse;
       memberProfilePic = selectedMember.data.spousePic;
+      memberId = `${memberId}S`
     }
-    this.selectedMemberToView = {name : memberName,profilePic:memberProfilePic }
-  }
+    this.commonService.doGet(`.netlify/functions/users/${memberId}`).subscribe((memberInfo)=>{
+      let responseData = this.cryptoService.decryptAndParse( memberInfo.data)
+      this.selectedMemberToView = responseData.length >0 ? responseData[0]:{}
+      let bornOn = this.selectedMemberToView.bornOn?this.selectedMemberToView.bornOn:'';
+      let diedOn = this.selectedMemberToView.diedOn;
 
+      let lifeTime = ''
+      if(diedOn){
+        lifeTime = `${this.formatDate(bornOn)} - ${this.formatDate(diedOn)} `
+      }
+
+      let memberName = this.selectedMemberToView.name
+      let nickName = this.selectedMemberToView.nickname
+      let about = this.selectedMemberToView.about 
+      let address = this.selectedMemberToView.address ?this.selectedMemberToView.address:''
+      let place = this.selectedMemberToView.place ?this.selectedMemberToView.place :''
+      if(address && place){
+        address = `${address}, ${place}`
+      }
+      else if(place){
+        address = place
+      }
+      
+      this.selectedMemberToView.lifeTime= lifeTime
+      this.selectedMemberToView.profilePic=  memberProfilePic
+      this.selectedMemberToView.about  = about ? about:'-'
+      this.selectedMemberToView.address  = address ? address:'-'
+      this.selectedMemberToView.memberName = nickName ?`${memberName} (${nickName})` : memberName
+      if(this.selectedMemberToView.isOfficeBearer){
+        this.commonService.doGet(`.netlify/functions/officeBearers/${memberId}`).subscribe((memberInfo)=>{
+          let responseData = this.cryptoService.decryptAndParse( memberInfo.data)
+          this.selectedMemberOfficeDetails = responseData
+        });
+      }
+    });
+    this.selectedMemberToView = null
+    this.selectedMemberOfficeDetails = []
+  }
+  formatDate(inputDate:string) {
+    try{
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    
+    const dateParts = inputDate.split("-");
+    const year = dateParts[0];
+    const month = months[parseInt(dateParts[1], 10) - 1];
+    const day = parseInt(dateParts[2], 10);
+    
+    const formattedDate = `${day} ${month} ${year}`;
+    return formattedDate;
+    }catch(e){
+      console.error(e)
+    }
+    return ''
+    
+}
 }
 //<path class="link" d="M 100 360 L 100 360 L 100 360 L 100 360 C 100 330 100 330 -130 330 L -190 330 C -220 330 -220 330 -220 300 L -220 300" fill="none" stroke="black" stroke-width="3px"></path>
 // <path class="link" d="

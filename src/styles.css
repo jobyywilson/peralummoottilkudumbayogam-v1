@@ -9,6 +9,9 @@
 # General
 --------------------------------------------------------------*/
 @import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~material-icons/iconfont/material-icons.css";
+
+@import "./spinner.css";
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;

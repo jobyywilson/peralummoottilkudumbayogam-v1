@@ -5,19 +5,53 @@
 
 <mat-drawer-container hasBackdrop="false">
   <mat-drawer  class="memberInfo" #drawer mode="side">
+    <mat-toolbar color="primary" class="profile-toolbar">
+      <button mat-icon-button (click)="closeSideNav()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <div *ngIf="selectedMemberToView==null"  >
+      <div class="spinner-container">
+        <div class="spinner"></div>
+    </div>
+    </div>
 
-    <div *ngIf="selectedMemberToView!=null" class="profile">
-      <mat-toolbar color="primary">
-        <button mat-icon-button (click)="closeSideNav()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-toolbar>
+    <div *ngIf="selectedMemberToView!=null" >
+
       <div class="profilePicInfo">
         <img id="profilePic" [src]="selectedMemberToView.profilePic" />
       </div>
        
         <div id="memberNameInfo">
           <h5 id="memberName">{{ selectedMemberToView.name }}</h5>
+          <p id="lifeTime">{{ selectedMemberToView.lifeTime }}</p>
+          <div class="member-info">
+          <h6 >About</h6>
+          <div class="member-info-data member-office-about">
+          <p class="text-italics">{{selectedMemberToView.about}}</p>
+          </div>
+        </div>
+        <div class="member-info ">
+          <h6 >Address</h6>
+          <div class="member-info-data member-office-address">
+          <p class="text-italics">{{selectedMemberToView.address}}</p>
+        </div>
+        </div>
+         
+          <div *ngIf="selectedMemberToView.isOfficeBearer" class="member-info ">
+            <h6 >Office positions</h6>
+            <div class="member-info-data member-office-postions">
+              <div *ngIf="selectedMemberOfficeDetails==null"  >
+                <div class="spinner-container">
+                  <div class="spinner"></div>
+              </div>
+              </div>
+              <p *ngFor="let position of selectedMemberOfficeDetails" class="text-italics">{{position.year}} as {{position.postion}}</p>
+
+            </div>
+
+          </div>
+
         </div>
     </div>
   </mat-drawer>
@@ -52,7 +86,14 @@
       </button></a>
         
     </div>
+
+    
     <div #chartContainer id="chartContainer">
+      <div *ngIf="data==null"  class="tree-spinner">
+        <div class="spinner-container">
+          <div class="spinner"></div>
+      </div>
+      </div>
     </div>
   </mat-drawer-content>
 

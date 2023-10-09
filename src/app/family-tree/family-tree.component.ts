@@ -29,7 +29,7 @@ export class FamilyTreeComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.loadTree("./assets/data/familyData.json");
+    this.loadTree(".netlify/functions/users");
     // this.commonService.readFile("./assets/data/familyTree.json").subscribe(data=>{
     //   console.log(this.cryptoService.encrypt(data))
 
@@ -52,7 +52,7 @@ export class FamilyTreeComponent implements OnInit {
   loadTree(path:string){
     d3.json(path
       ).then((data:any) => {
-        this.data = this.cryptoService.decrypt(data.data)
+        this.data = this.cryptoService.decryptAndParse(data.data)
       for(let member of this.data){
         member.nameAndCode = member.nodeId +"-"+ member.name;
         let photoInfo = this.imageService.getUserPhotoUrl(member.nodeId)

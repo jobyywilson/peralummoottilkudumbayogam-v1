@@ -108,12 +108,21 @@
 }
 */
 
-
+.text-italics{
+  font-style: italic;
+}
 
 #memberName{
   word-wrap: break-word;
   color: black;
   text-align: center;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+#lifeTime{
+  text-align: center;
+  font-size: 12px;
 }
 #profilePicInfo{
   display: flex;
@@ -130,9 +139,8 @@
   background-color:#ededed;
 }
 #memberNameInfo{
-  padding:10px;
-  display: flex;
-  justify-content: center;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .mat-drawer-container{
   height: 100%;
@@ -225,10 +233,24 @@ mat-drawer-content {
 ::ng-deep .ng-dropdown-panel.ng-select-bottom{
   top: calc(100% + 0.45em);
 }
-.profile{
+.profile-toolbar{
   padding-top: 20px;
 }
-
+.member-info-data{
+  overflow: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fffbfb;
+}
+.tree-spinner{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #efefed;
+}
 
 .ng-select.custom.ng-select-single ::ng-deep .ng-select-container .ng-value-container .ng-input {
   position: absolute;
@@ -238,4 +260,20 @@ mat-drawer-content {
 }
 .ng-select.ng-select-single ::ng-deep .ng-select-container.ng-appearance-outline .ng-clear-wrapper {
   bottom: 9px;
+}
+.member-info{
+  padding-bottom:10px;
+  padding-top:10px;
+}
+.svg-chart-container{
+  height:100%;
+}
+.member-office-postions{
+  height:150px;
+}
+.member-office-about{
+  height:80px;
+}
+.member-office-address{
+  height:80px;
 }
