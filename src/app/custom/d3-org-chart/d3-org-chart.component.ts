@@ -117,11 +117,12 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       
       
       this.chart.setUpToTheRootHighlighted(nodeId);
+      this.chart.setCentered(nodeId);
       this.chart.setExpanded(nodeId).render();
       this.chart.collapse('1X');
       this.chart.expand('1X');
-      this.chart.setCentered(nodeId);
-      this.previousNodeId=nodeId;
+     
+            this.previousNodeId=nodeId;
     }
     
     
@@ -279,6 +280,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
        </div>`;
       })
       .render();
+  this.chart.expand('2X-1');
   this.chart.fit();
   this.chart.getChartState().svg.on("wheel.zoom", null);
   this.updateLink()

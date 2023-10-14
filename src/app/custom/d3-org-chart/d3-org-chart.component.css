@@ -11,7 +11,7 @@
     position: absolute;
     pointer-events: none;
     right:2px;
-    bottom: 2px;
+    bottom: 10px;
 
 }
 .action-button{
@@ -261,8 +261,8 @@ mat-drawer-content {
   padding-bottom:10px;
   padding-top:10px;
 }
-.svg-chart-container{
-  height:100%;
+#chartContainer svg{
+  height:100% !important;
 }
 .member-office-postions{
   height:150px;
