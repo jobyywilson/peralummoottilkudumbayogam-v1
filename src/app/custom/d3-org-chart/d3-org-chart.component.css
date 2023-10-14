@@ -113,30 +113,26 @@
 }
 
 #memberName{
-  word-wrap: break-word;
   color: black;
   text-align: center;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  font-weight: bold;
 }
 #lifeTime{
   text-align: center;
   font-size: 12px;
 }
-#profilePicInfo{
-  display: flex;
-  justify-content: center;
-}
 .profilePicInfo{
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 #profilePic{
-  border-radius:100px;
-  width:80px;
-  height:80px;
-  background-color:#ededed;
+    border-radius: 100px;
+    width: 60px;
+    height: 60px;
+    background-color: #ededed;
 }
 #memberNameInfo{
   padding-left: 30px;
@@ -179,7 +175,7 @@ mat-drawer-content {
 }
 @media (min-width: 500px) {
   mat-drawer{
-    width: 300px;
+    width: 358px;
     
   }
   .select-dropdown-in-tree-main{
@@ -276,4 +272,51 @@ mat-drawer-content {
 }
 .member-office-address{
   height:80px;
+}
+
+.mat-name-title{
+  font-family: Roboto, sans-serif;
+  line-height: 20px;
+  font-size: 20px;
+  letter-spacing: .0125em;
+  font-weight: 500;
+}
+.mat-name-sub-title{
+  font-family: Roboto, sans-serif;
+  line-height: 20px;
+  font-size: 17px;
+  letter-spacing: .0125em;
+  font-weight: 500;
+}
+.mat-card-header .mat-card-title {
+  margin-bottom: 0px;
+}
+.mat-card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.mat-name-subtitle{
+  color: rgba(0, 0, 0, .54);
+  font-family: Roboto, sans-serif;
+  line-height: 22px;
+  font-size: 14px;
+  letter-spacing: .0071428571em;
+  font-weight: 500;
+}
+
+.header-image {
+  width: 80px;
+  height: 80px;
+  background-color: #ededed;
+}
+.mat-card-sm-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.mat-card{
+  border-bottom-color: #DADDE1;
+  border-bottom-style: solid;
 }

@@ -1,0 +1,6 @@
+<p>{{ truncatedText }}
+    <a class="show-more" *ngIf="text && hasTextMoreThanLimit" (click)="toggleText()">Show {{ showMore ? 'less' : 'more' }}</a>
+
+</p>
+<span *ngIf="showMore && text">{{ remainingText }}
+</span>

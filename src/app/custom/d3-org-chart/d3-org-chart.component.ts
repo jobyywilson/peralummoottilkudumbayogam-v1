@@ -362,14 +362,6 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     this.commonService.doGet(`.netlify/functions/users/${memberId}`).subscribe((memberInfo)=>{
       let responseData = this.cryptoService.decryptAndParse( memberInfo.data)
       this.selectedMemberToView = responseData.length >0 ? responseData[0]:{}
-      let bornOn = this.selectedMemberToView.bornOn?this.selectedMemberToView.bornOn:'';
-      let diedOn = this.selectedMemberToView.diedOn;
-
-      let lifeTime = ''
-      if(diedOn){
-        lifeTime = `${this.formatDate(bornOn)} - ${this.formatDate(diedOn)} `
-      }
-
       let memberName = this.selectedMemberToView.name
       let nickName = this.selectedMemberToView.nickname
       let about = this.selectedMemberToView.about 
@@ -382,41 +374,26 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
         address = place
       }
       
-      this.selectedMemberToView.lifeTime= lifeTime
+      
       this.selectedMemberToView.profilePic=  memberProfilePic
-      this.selectedMemberToView.about  = about ? about:'-'
-      this.selectedMemberToView.address  = address ? address:'-'
+      this.selectedMemberToView.about  = about
+      this.selectedMemberToView.address  = address
       this.selectedMemberToView.memberName = nickName ?`${memberName} (${nickName})` : memberName
       if(this.selectedMemberToView.isOfficeBearer){
         this.commonService.doGet(`.netlify/functions/officeBearers/${memberId}`).subscribe((memberInfo)=>{
           let responseData = this.cryptoService.decryptAndParse( memberInfo.data)
-          this.selectedMemberOfficeDetails = responseData
+          this.selectedMemberOfficeDetails = responseData;
+          let items = []
+          for(let info of responseData){
+            items.push({key:info.postion,value:info.year})
+          }
+          this.selectedMemberOfficeDetails = items
         });
       }
     });
     this.selectedMemberToView = null
     this.selectedMemberOfficeDetails = []
   }
-  formatDate(inputDate:string) {
-    try{
-      const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-    
-    const dateParts = inputDate.split("-");
-    const year = dateParts[0];
-    const month = months[parseInt(dateParts[1], 10) - 1];
-    const day = parseInt(dateParts[2], 10);
-    
-    const formattedDate = `${day} ${month} ${year}`;
-    return formattedDate;
-    }catch(e){
-      console.error(e)
-    }
-    return ''
-    
-}
 }
 //<path class="link" d="M 100 360 L 100 360 L 100 360 L 100 360 C 100 330 100 330 -130 330 L -190 330 C -220 330 -220 330 -220 300 L -220 300" fill="none" stroke="black" stroke-width="3px"></path>
 // <path class="link" d="

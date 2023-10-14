@@ -3,7 +3,7 @@ const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const ENCRYPT_KEY  = process.env.ENCRYPT_KEY
 const PATH = "/.netlify/functions/officeBearers/"
 const OFFICE_BEARERS_URL = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/office_bearers'
-const GET_ALL_OFFICE_BEARERS = `${OFFICE_BEARERS_URL}?select=name,address,postion,year&order=year.asc`
+const GET_ALL_OFFICE_BEARERS = `${OFFICE_BEARERS_URL}?select=name,address,postion,year&order=year.desc`
 
 exports.handler = (event, context, callback) => {
     let nodeId ;
@@ -18,7 +18,7 @@ exports.handler = (event, context, callback) => {
 
       let url = GET_ALL_OFFICE_BEARERS
       if(nodeId){
-        url = `${OFFICE_BEARERS_URL}?officeBearerUserId=eq.${nodeId}&select=postion,year&order=year.asc`
+        url = `${OFFICE_BEARERS_URL}?officeBearerUserId=eq.${nodeId}&select=postion,year&order=year.desc`
       }
       axios.get(url, { headers: myHeaders, responseType: 'json' }) .then(json => {
         callback(null, {

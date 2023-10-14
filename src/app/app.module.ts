@@ -29,6 +29,9 @@ import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { CommonService } from './service/common.service';
+import { MemberInfoComponent } from './custom/member-info/member-info.component';
+import { TextInfoComponent } from './custom/text-info/text-info.component';
+import { ListTextInfoComponent } from './custom/list-text-info/list-text-info.component';
 export function fetchMemberPhotoInfo(commonService: CommonService) {
   return () => {
     return new Promise((resolve, reject) => {
@@ -73,7 +76,10 @@ export function fetchMemberPhotoInfo(commonService: CommonService) {
     BlogComponent,
     BlogListComponent,
     FamilyTreeComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    MemberInfoComponent,
+    TextInfoComponent,
+    ListTextInfoComponent
     
   ],
   imports: [
