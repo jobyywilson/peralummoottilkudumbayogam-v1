@@ -119,6 +119,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       
       //this.chart.setUpToTheRootHighlighted(nodeId);
       this.chart.setExpanded(nodeId).render();
+      this.chart.setExpanded(nodeId).render();
       
       this.previousNodeId=nodeId;
     }
