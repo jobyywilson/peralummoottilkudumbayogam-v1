@@ -114,14 +114,13 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     if(nodeId && nodeId != this.previousNodeId){
       
       this.chart.clearHighlighting();
-      this.chart.collapseAll(nodeId);
-      this.chart.setCentered(nodeId);
+      
       
       this.chart.setUpToTheRootHighlighted(nodeId);
       this.chart.setExpanded(nodeId).render();
       this.chart.collapse('1X');
       this.chart.expand('1X');
-      
+      this.chart.setCentered(nodeId);
       this.previousNodeId=nodeId;
     }
     
