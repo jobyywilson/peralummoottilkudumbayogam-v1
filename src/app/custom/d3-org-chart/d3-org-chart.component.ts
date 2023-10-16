@@ -110,22 +110,23 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     }
    
   }
-  expandChart(nodeId : any){
-    if(nodeId && nodeId != this.previousNodeId){
-      
+
+  expandChart(nodeId: any) {
+    if (nodeId && nodeId != this.previousNodeId) {
+
       this.chart.clearHighlighting();
-      
-      
+      this.chart.collapseAll();
+
       this.chart.setUpToTheRootHighlighted(nodeId);
       this.chart.setCentered(nodeId);
       this.chart.setExpanded(nodeId).render();
       this.chart.collapse('1X');
       this.chart.expand('1X');
-     
-            this.previousNodeId=nodeId;
+
+      this.previousNodeId = nodeId;
     }
-    
-    
+
+
   }
   ngOnChanges() {
     this.updateChart();
