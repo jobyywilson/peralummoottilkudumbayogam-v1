@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'list-text-info',
@@ -8,14 +8,20 @@ import { Component, Input } from '@angular/core';
 export class ListTextInfoComponent {
 
   @Input() listInfo: any[]=[];
+
+  @Output() expandMemberById = new EventEmitter<string>();
+
   fullList : any[] = []
   limit : number = 6;
   showMore : boolean = false;
 
 
   ngOnChanges(){
+    this.fullList = this.listInfo
     this.toggle()
-    
+  }
+  openLink(nodeId:string){
+    this.expandMemberById.emit(nodeId)
   }
 
   toggle() {

@@ -1,27 +1,22 @@
 const axios = require('axios');
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const ENCRYPT_KEY  = process.env.ENCRYPT_KEY
-const PATH = "/.netlify/functions/users/"
-const SUPABASE_HOST = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/user'
-const GET_ALL_MEMBERS = `${SUPABASE_HOST}?isSpouse=eq.false&select=nodeId,name,parentNodeId,spouse&order=nodeId.asc`
+const RELATIONSHIP_URL = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/relationship'
 
 exports.handler = (event, context, callback) => {
 
-    let nodeId ;
-    if(event.path.indexOf(PATH)!== -1){
-        nodeId =event.path.replace(PATH,"")
-    }
+    let nodeId = event.queryStringParameters.memberId;
     const myHeaders = {
         'Authorization': `Bearer ${SUPABASE_API_KEY}`,
         'apiKey': SUPABASE_API_KEY
       };
-      let users = []
-
-      let url = GET_ALL_MEMBERS
-      if(nodeId){
-        let spouseParamName = isSpouseNodeId(nodeId)?'secondaryParentMemberId':'parentNodeId';
-        url = `${SUPABASE_HOST}?nodeId=eq.${nodeId}&select=*,parents:relationship!user_parent_relationship_id_fkey(primary:relationship_primary_member_id_fkey(nodeId,name),secondary:relationship_secondary_member_id_fkey(nodeId,name)),childrens:user!${spouseParamName}(nodeId,name)`
+      let url = ''
+      if(isSpouseNodeId(nodeId)){
+        url = `${RELATIONSHIP_URL}?secondary_member_id=eq.${nodeId}&select=spouse:relationship_primary_member_id_fkey(nodeId,name)`
+      }else{
+        url = `${RELATIONSHIP_URL}?primary_member_id=eq.${nodeId}&select=spouse:relationship_secondary_member_id_fkey(nodeId,name)`
       }
+
       axios.get(url, { headers: myHeaders, responseType: 'json' }) .then(json => {
         callback(null, {
             statusCode: 200,
@@ -31,16 +26,15 @@ exports.handler = (event, context, callback) => {
     .catch(ex => callback(ex));
 };
 
-function isSpouseNodeId(nodeId) {
-    return /^(.*S\d*)$/.test(nodeId);
-  }
 
 function getEncryptedData(data){
     let encryptedData = encrypt(JSON.stringify(data))
     return JSON.stringify({"data":encryptedData})
 }
 
-
+function isSpouseNodeId(nodeId) {
+    return /^(.*S\d*)$/.test(nodeId);
+  }
 function encrypt(data) {
     var encryptedText = '';
     for (var i = 0; i < data.length; i++) {

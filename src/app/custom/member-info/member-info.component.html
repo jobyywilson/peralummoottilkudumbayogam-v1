@@ -1,66 +1,314 @@
 <div>
     <div style="margin-top: 0px;">
-        <div style="border-bottom-left-radius: 4px;border-top-left-radius: 4px;border-top-right-radius: 4px;height: 100%;width: 100%;border-bottom-right-radius: 4px;background-color: rgba(255,255,255,1);overflow-y: auto;">
-                <div>
-                                                    <div style="padding-bottom: 16px;padding-left: 12px;border-top-color:  #DADDE1;padding-right: 12px;padding-top: 30px;">
-                                                        <div style="flex-direction: row;align-items: flex-end;">
-                                                            <div style="
+        <div
+            style="border-bottom-left-radius: 4px;border-top-left-radius: 4px;border-top-right-radius: 4px;height: 100%;width: 100%;border-bottom-right-radius: 4px;background-color: rgba(255,255,255,1);overflow-y: auto;">
+            <div>
+                <div
+                    style="padding-bottom: 16px;padding-left: 12px;border-top-color:  #DADDE1;padding-right: 12px;padding-top: 30px;">
+                    <div style="flex-direction: row;align-items: flex-end;">
+                        <div style="
 display: flex;
 ">
-                                                                <div style="flex-grow: 1;align-items: center;display: flex;"><img height="52" [src]="'https://family-search-image.netlify.app/'+memberInfo.nodeId+'.png'" width="52" alt="" style="background-color: #ededed;border-top-left-radius: 50%;border-bottom-right-radius: 50%;flex-grow: 0;flex-shrink: 0;border-top-right-radius: 50%;border-bottom-left-radius: 50%;margin-right: 8px;">
-                                                                    <div style="zoom: 1;">
-                                                                        <div >
-                                                                            <div aria-level="3" role="heading" style="word-break: break-word;min-width: 0;text-align: left;word-wrap: break-word;font-weight: 700;white-space: inherit;color: rgba(28,43,51,1);font-size: 1rem!important;font-family: Optimistic Display,system-ui,sans-serif!important;line-height: 1.25!important;">{{memberInfo.name}}
-                                                                                <div *ngIf="memberInfo.lifeTime" style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">{{memberInfo.lifeTime}}
-                                                                                </div>
-                                                                                <div  style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">{{memberInfo.nodeId}}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
+                            <div style="flex-grow: 1;align-items: center;display: flex;"><img height="52"
+                                    [src]="'https://family-search-image.netlify.app/'+memberInfo.nodeId+'.png'"
+                                    width="52" alt=""
+                                    style="background-color: #ededed;border-top-left-radius: 50%;border-bottom-right-radius: 50%;flex-grow: 0;flex-shrink: 0;border-top-right-radius: 50%;border-bottom-left-radius: 50%;margin-right: 8px;">
+                                <div style="zoom: 1;">
+                                    <div>
+                                        <div aria-level="3" role="heading"
+                                            style="word-break: break-word;min-width: 0;text-align: left;word-wrap: break-word;font-weight: 700;white-space: inherit;color: rgba(28,43,51,1);font-size: 1rem!important;font-family: Optimistic Display,system-ui,sans-serif!important;line-height: 1.25!important;">
+                                            {{memberInfo.name}}
+                                            <div *ngIf="memberInfo.lifeTime"
+                                                style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">
+                                                {{memberInfo.lifeTime}}
+                                            </div>
+                                            <div
+                                                style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">
+                                                {{memberInfo.nodeId}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
 
-                                                                </div>
-                                                                <div style="flex-grow: 0;">
-                                                                    <div aria-busy="false" role="button" tabindex="0" style="border-bottom-left-radius: 4px;margin-right: 0;text-align: inherit;border-left-style: none;max-width: 100%;border-top-style: none;z-index: 0;border-top-left-radius: 4px;margin-left: 0;position: relative;flex-direction: row;border-bottom-width: 0;border-bottom-style: none;padding-top: 8px;padding-left: 12px;cursor: pointer;border-top-right-radius: 4px;flex-shrink: 0;min-height: 0;display: inline-flex;align-items: center;-webkit-user-select: none;border-top-width: 0;box-sizing: border-box;margin-bottom: 0;border-right-width: 0;border-right-style: none;margin-top: 0;flex-basis: auto;min-width: 0;border-left-width: 0;padding-right: 12px;border-bottom-right-radius: 4px;padding-bottom: 8px;vertical-align: middle;text-decoration: none;list-style: none;transition-property: background-color;transition-duration: .1s;outline-offset: -1px;-webkit-tap-highlight-color: transparent;background-color: rgba(0,0,0,0);border-left-color: var(--always-dark-overlay);border-right-color: var(--always-dark-overlay);touch-action: manipulation;border-top-color: var(--always-dark-overlay);font-weight: 400;border-bottom-color: var(--always-dark-overlay);-webkit-font-smoothing: antialiased;transition-timing-function: cubic-bezier(0,0,1,1);outline-style: none;color: rgba(28,43,51,1);"><span style="min-width: 0;width: 100%;word-wrap: normal;color: inherit;font-weight: inherit;white-space: inherit;font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
-                                                                            <div style="display: flex;">
-                                                                                <div data-sscoverage-ignore="true" style="position: absolute;overflow-y: hidden;width: 1px;overflow-x: hidden;height: 1px;white-space: nowrap;margin-bottom: -1px;clip: rect(1px,1px,1px,1px);margin-top: -1px;margin-left: -1px;margin-right: -1px;">
-                                                                                   </div>
-                                                                                <div style="transition-duration: .2s;opacity: 1;flex-grow: 1;flex-direction: row;min-height: 0;align-items: center;display: flex;min-width: 0;width: 100%;justify-content: center;transition-property: opacity,transform;flex-wrap: nowrap;transition-timing-function: cubic-bezier(.08,.52,.52,1);">
-                                                                                    <div role="presentation" style="flex-grow: 0;flex-shrink: 0;display: inline-flex;color: inherit;">
-                                                                                        <button mat-icon-button (click)="toggle()">
-                                                                                            <mat-icon>close</mat-icon>
-                                                                                          </button>
-                                                                                    </div>&ZeroWidthSpace;
-                                                                                </div>
-                                                                            </div>
-                                                                        </span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div style="border-top-style: solid;border-top-width: 1px;padding-bottom: 16px;padding-left: 12px;border-top-color:  #DADDE1;padding-right: 12px;padding-top: 16px;">
-                                                        <div aria-level="3" role="heading" style="min-width: 0;text-align: left;word-wrap: normal;font-weight: 700;white-space: inherit;color: rgba(28,43,51,1);font-size: 1rem!important;font-family: Optimistic Display,system-ui,sans-serif!important;line-height: 1.25!important;">About</div>
-                                                        <div style="min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
-                                                            <text-info [text]="memberInfo.about"></text-info>
-                                                        </div>
-                                                    </div>
-                                                    <div style="border-top-style: solid;border-top-width: 1px;padding-bottom: 16px;padding-left: 12px;border-top-color:  #DADDE1;padding-right: 12px;padding-top: 16px;">
-                                                        <div aria-level="3" role="heading" style="min-width: 0;text-align: left;word-wrap: normal;font-weight: 700;white-space: inherit;color: rgba(28,43,51,1);font-size: 1rem!important;font-family: Optimistic Display,system-ui,sans-serif!important;line-height: 1.25!important;">Address</div>
-                                                        <div style="min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
-                                                            <text-info [text]="memberInfo.address"></text-info>
-                                                        </div>
-                                                    </div>
-                                                    <div *ngIf="memberInfo.isOfficeBearer" style="border-top-style: solid;border-top-width: 1px;padding-bottom: 16px;padding-left: 12px;border-top-color:  #DADDE1;padding-right: 12px;padding-top: 16px;">
-                                                        <div aria-level="3" role="heading" style="min-width: 0;text-align: left;word-wrap: normal;font-weight: 700;white-space: inherit;color: rgba(28,43,51,1);font-size: 1rem!important;font-family: Optimistic Display,system-ui,sans-serif!important;line-height: 1.25!important;">Office positions</div>
-                                                        <div style="display:grid;min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
-                                                         
-                                                               <list-text-info [listInfo]="officeInfo"></list-text-info>
-                                           
-                                                        </div>
-                                                    </div>
-                                                </div>
+                            </div>
+                            <div style="flex-grow: 0;">
+                                <div aria-busy="false" role="button" tabindex="0"
+                                    style="border-bottom-left-radius: 4px;margin-right: 0;text-align: inherit;border-left-style: none;max-width: 100%;border-top-style: none;z-index: 0;border-top-left-radius: 4px;margin-left: 0;position: relative;flex-direction: row;border-bottom-width: 0;border-bottom-style: none;padding-top: 8px;padding-left: 12px;cursor: pointer;border-top-right-radius: 4px;flex-shrink: 0;min-height: 0;display: inline-flex;align-items: center;-webkit-user-select: none;border-top-width: 0;box-sizing: border-box;margin-bottom: 0;border-right-width: 0;border-right-style: none;margin-top: 0;flex-basis: auto;min-width: 0;border-left-width: 0;padding-right: 12px;border-bottom-right-radius: 4px;padding-bottom: 8px;vertical-align: middle;text-decoration: none;list-style: none;transition-property: background-color;transition-duration: .1s;outline-offset: -1px;-webkit-tap-highlight-color: transparent;background-color: rgba(0,0,0,0);border-left-color: var(--always-dark-overlay);border-right-color: var(--always-dark-overlay);touch-action: manipulation;border-top-color: var(--always-dark-overlay);font-weight: 400;border-bottom-color: var(--always-dark-overlay);-webkit-font-smoothing: antialiased;transition-timing-function: cubic-bezier(0,0,1,1);outline-style: none;color: rgba(28,43,51,1);">
+                                    <span
+                                        style="min-width: 0;width: 100%;word-wrap: normal;color: inherit;font-weight: inherit;white-space: inherit;font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
+                                        <div style="display: flex;">
+                                            <div data-sscoverage-ignore="true"
+                                                style="position: absolute;overflow-y: hidden;width: 1px;overflow-x: hidden;height: 1px;white-space: nowrap;margin-bottom: -1px;clip: rect(1px,1px,1px,1px);margin-top: -1px;margin-left: -1px;margin-right: -1px;">
+                                            </div>
+                                            <div
+                                                style="transition-duration: .2s;opacity: 1;flex-grow: 1;flex-direction: row;min-height: 0;align-items: center;display: flex;min-width: 0;width: 100%;justify-content: center;transition-property: opacity,transform;flex-wrap: nowrap;transition-timing-function: cubic-bezier(.08,.52,.52,1);">
+                                                <div role="presentation"
+                                                    style="flex-grow: 0;flex-shrink: 0;display: inline-flex;color: inherit;">
+                                                    <button mat-icon-button (click)="toggle()">
+                                                        <mat-icon>close</mat-icon>
+                                                    </button>
+                                                </div>&ZeroWidthSpace;
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel [expanded]="true" [hideToggle]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                About
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <text-info *ngIf="!hasEditAccess"  [text]="memberInfo.about"></text-info>
+                        <mat-form-field *ngIf="hasEditAccess" appearance="outline">
+                            <mat-label>Add about {{memberInfo.name}} </mat-label>
+                            <textarea  matInput
+                            cdkTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=5
+                             placeholder="Add about">{{memberInfo.about}}</textarea>
+                          </mat-form-field>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel [expanded]="true" [hideToggle]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Address
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <text-info [text]="memberInfo.address"></text-info>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel *ngIf="memberInfo.spouses && memberInfo.spouses.length>0" [expanded]="true" [hideToggle]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Spouse
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+
+
+
+                        <div style="display:grid;min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
+                            <list-text-info 
+                                [listInfo]="memberInfo.spouses"
+                                (expandMemberById)="expandMemById($event)"></list-text-info>
+                            <!-- <div *ngIf="spouseInfo" class="edit-form">
+                                <mat-label>
+                                    New Relationship Information
+                                </mat-label>
+                                <mat-form-field appearance="outline" class="add-spouse-field">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput type="text" [(ngModel)]="spouseInfo.firstName">
+
+                                    <button *ngIf="spouseInfo.firstName" matSuffix mat-icon-button aria-label="Name"
+                                        (click)="spouseInfo.firstName=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="add-spouse-field">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput type="text" [(ngModel)]="spouseInfo.lastName">
+                                    <button *ngIf="spouseInfo.lastName" matSuffix mat-icon-button aria-label="Name"
+                                        (click)="spouseInfo.lastName=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                                <mat-checkbox id="relationship-checkbox"
+                                    [(ngModel)]="spouseInfo.isCurrentlyInRelationShip">
+                                    In Relationship
+                                </mat-checkbox>
+                                <mat-form-field *ngIf="spouseInfo.isCurrentlyInRelationShip" appearance="outline">
+                                    <mat-label>Enter relationship start date</mat-label>
+                                    <input matInput [matDatepicker]="picker"
+                                        [(ngModel)]="spouseInfo.relationShipStartDate">
+                                    <mat-hint>DD/MM/YYYY</mat-hint>
+                                    <mat-datepicker-toggle class="rangeDatePicker" matIconSuffix
+                                        [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+
+                                <mat-form-field *ngIf="!spouseInfo.isCurrentlyInRelationShip" appearance="outline">
+                                    <mat-label> Enter relationship date range</mat-label>
+                                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+
+                                        <input matStartDate formControlName="start" placeholder="Start date"
+                                            [(ngModel)]="spouseInfo.relationShipStartDate">
+                                        <input matEndDate formControlName="end" placeholder="End date"
+                                            [(ngModel)]="spouseInfo.relationShipEndDate">
+
+                                    </mat-date-range-input>
+                                    <mat-datepicker-toggle class="rangeDatePicker" matIconSuffix
+                                        [for]="picker"></mat-datepicker-toggle>
+
+                                    <mat-date-range-picker #picker></mat-date-range-picker>
+
+                                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+
+                                    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid
+                                        start date</mat-error>
+                                    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end
+                                        date</mat-error>
+                                </mat-form-field>
+                            </div> -->
+
+
+
+                        </div>
+                        <!-- <div class="col add-toolbar">
+                            <mat-toolbar-row>
+                                <button *ngIf="!spouseInfo" mat-icon-button color="primary"
+                                    (click)="onClickAddSpouseButton()" aria-label="Add">
+                                    <mat-icon class="form-button">add_circle</mat-icon>
+                                </button>
+                                <div *ngIf="spouseInfo">
+                                    <button color="primary" [disabled]="!spouseInfo.isValid()" mat-icon-button
+                                        aria-label="Save">
+                                        <mat-icon class="form-button">check_circle</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" aria-label="Cancel"
+                                        (click)="spouseInfo = undefined">
+                                        <mat-icon class="form-button">cancel</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-toolbar-row>
+
+
+
+
+                        </div> -->
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel *ngIf="parents && parents.length>0" [expanded]="true" [hideToggle]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Parents
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+
+                        <div class="row" style="min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
+                            
+                            <div class="col-md-5 list-text-info">
+                                <list-text-info [listInfo]="parents" 
+                                    (expandMemberById)="expandMemById($event)">
+                                    
+                                </list-text-info>
+                            </div>
+                                <!-- <div *ngIf="!spouseInfo" class="col-md-1 add-toolbar">
+                                    <mat-toolbar-row>
+                                        <button  mat-icon-button color="primary"
+                                            (click)="onClickAddSpouseButton()" aria-label="Add">
+                                            <mat-icon class="form-button">add_circle</mat-icon>
+                                        </button>
+                                    </mat-toolbar-row>
+        
+        
+        
+        
+                                </div>
+                            <div *ngIf="spouseInfo" class="edit-form">
+                                <mat-label>
+                                    New Relationship Information
+                                </mat-label>
+                                <mat-form-field appearance="outline" class="add-spouse-field">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput type="text" [(ngModel)]="spouseInfo.firstName">
+
+                                    <button *ngIf="spouseInfo.firstName" matSuffix mat-icon-button aria-label="Name"
+                                        (click)="spouseInfo.firstName=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" class="add-spouse-field">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput type="text" [(ngModel)]="spouseInfo.lastName">
+                                    <button *ngIf="spouseInfo.lastName" matSuffix mat-icon-button aria-label="Name"
+                                        (click)="spouseInfo.lastName=''">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                                <mat-checkbox id="relationship-checkbox"
+                                    [(ngModel)]="spouseInfo.isCurrentlyInRelationShip">
+                                    In Relationship
+                                </mat-checkbox>
+                                <mat-form-field *ngIf="spouseInfo.isCurrentlyInRelationShip" appearance="outline">
+                                    <mat-label>Enter relationship start date</mat-label>
+                                    <input matInput [matDatepicker]="picker"
+                                        [(ngModel)]="spouseInfo.relationShipStartDate">
+                                    <mat-hint>DD/MM/YYYY</mat-hint>
+                                    <mat-datepicker-toggle class="rangeDatePicker" matIconSuffix
+                                        [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <mat-toolbar-row *ngIf="spouseInfo">
+                                <div >
+                                    <button color="primary" [disabled]="!spouseInfo.isValid()" mat-icon-button
+                                        aria-label="Save">
+                                        <mat-icon class="form-button">check_circle</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" aria-label="Cancel"
+                                        (click)="spouseInfo = undefined">
+                                        <mat-icon class="form-button">cancel</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-toolbar-row> -->
+
+                        </div>
+                        
+                    </mat-expansion-panel>
+                    <mat-expansion-panel *ngIf="childrens && childrens.length>0" [expanded]="true" [hideToggle]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Childrens
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+
+                        <div class="row" style="min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
+                            
+                            <div class="col-md-5 list-text-info">
+                                <list-text-info [listInfo]="childrens" 
+                                    (expandMemberById)="expandMemById($event)">
+                                    
+                                </list-text-info>
+                            </div>
+
+                        </div>
+                        
+                    </mat-expansion-panel>
+                    <mat-expansion-panel *ngIf="memberInfo.isOfficeBearer" [expanded]="true" [hideToggle]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Office positions
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+
+                        <div class="row" style="min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
+                            
+                            <div class="col-md-5 list-text-info">
+                                <list-text-info [listInfo]="officeInfo" >
+                                    
+                                </list-text-info>
+                            </div>
+
+                        </div>
+                        
+                    </mat-expansion-panel>
+
+                </mat-accordion>
             </div>
+        </div>
     </div>
 </div>

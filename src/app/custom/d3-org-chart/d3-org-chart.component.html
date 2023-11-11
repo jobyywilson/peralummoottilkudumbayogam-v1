@@ -13,7 +13,7 @@
 
     <div *ngIf="selectedMemberToView!=null" >
      
-       <member-info [memberInfo]="selectedMemberToView" [officeInfo]="selectedMemberOfficeDetails" (close)="closeSideNav()"></member-info>
+       <member-info [memberInfo]="selectedMemberToView" [officeInfo]="selectedMemberOfficeDetails" (close)="closeSideNav()" (expandMemberById)="expandMemById($event)"></member-info>
     </div> 
   </mat-drawer>
   <mat-drawer-content>
@@ -30,7 +30,7 @@
         [minTermLength] = 3
         [(ngModel)]="selectedMemberName">
         <ng-option *ngFor="let item of getData()" [value]="item">
-          <img class="thumbnail" height="15" width="15" [src]="item.profilePic?item.profilePic:'assets/img/user.png'"/> {{ item.name }}
+          <img class="thumbnail" height="30" width="30" [src]="item.profilePic?item.profilePic:'assets/img/user.png'"/> {{ item.name }}
         </ng-option>
         </ng-select>
       </div>

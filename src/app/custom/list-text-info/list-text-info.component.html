@@ -1,12 +1,16 @@
 <div class="listInfo">
-    <span  *ngFor="let office of listInfo">
-        <span style="padding-left: 10px;color: rgba(28,43,51,1);font-size: .875rem!important;;" >
-            {{office.key}}
+
+    <span  *ngFor="let listObj of listInfo">
+        <a class="link" *ngIf="listObj.link"  (click)="openLink(listObj.link)" style="padding-left: 10px;color: rgba(28,43,51,1);font-size: .875rem!important;;" >
+            {{listObj.key}}
+        </a>
+        <span *ngIf="listObj.key && !listObj.link" style="padding-left: 10px;color: rgba(28,43,51,1);font-size: .875rem!important;;" >
+            {{listObj.key}}
         </span>
-        <span  >
-            ({{office.value}})
+        <span  *ngIf="listObj.value">
+            ({{listObj.value}})
         </span>
     </span>
-    <a class="show-more" *ngIf="listInfo.length > limit || fullList.length > limit" (click)="toggle()">Show {{ showMore ? 'less' : 'more' }}</a>
+    <a id="show-more" *ngIf="listInfo.length > limit || fullList.length > limit" (click)="toggle()">Show {{ showMore ? 'less' : 'more' }}</a>
     
 </div>

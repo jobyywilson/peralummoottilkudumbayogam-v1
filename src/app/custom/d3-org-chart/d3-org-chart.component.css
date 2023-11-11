@@ -25,6 +25,7 @@
   }
   .thumbnail{
     margin-right:5px;
+    border-radius: 50%;
 }
 .refresh-btn, .plus-btn, .minus-btn{
   border-radius: 0px;
@@ -261,7 +262,7 @@ mat-drawer-content {
   padding-bottom:10px;
   padding-top:10px;
 }
-#chartContainer svg{
+svg{
   height:100% !important;
 }
 .member-office-postions{
