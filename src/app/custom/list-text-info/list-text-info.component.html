@@ -1,16 +1,24 @@
 <div class="listInfo">
 
-    <span  *ngFor="let listObj of listInfo">
-        <a class="link" *ngIf="listObj.link"  (click)="openLink(listObj.link)" style="padding-left: 10px;color: rgba(28,43,51,1);font-size: .875rem!important;;" >
-            {{listObj.key}}
-        </a>
-        <span *ngIf="listObj.key && !listObj.link" style="padding-left: 10px;color: rgba(28,43,51,1);font-size: .875rem!important;;" >
+    <span *ngFor="let listObj of listInfo">
+        <div *ngIf="listObj.link" class="main-link">
+            <img height="25"  [src]="'https://family-search-image.netlify.app/'+listObj.link+'.png'"
+                width="25" alt=""
+                style="background-color: #ededed;border-top-left-radius: 50%;border-bottom-right-radius: 50%;flex-grow: 0;flex-shrink: 0;border-top-right-radius: 50%;border-bottom-left-radius: 50%;margin-right: 8px;">
+            <a class="link"  (click)="openLink(listObj.link)">
+                {{listObj.key}}
+            </a>
+        </div>
+
+        <span *ngIf="listObj.key && !listObj.link"
+            style="padding-left: 10px;color: rgba(28,43,51,1);font-size: .875rem!important;;">
             {{listObj.key}}
         </span>
-        <span  *ngIf="listObj.value">
+        <span *ngIf="listObj.value">
             ({{listObj.value}})
         </span>
     </span>
-    <a id="show-more" *ngIf="listInfo.length > limit || fullList.length > limit" (click)="toggle()">Show {{ showMore ? 'less' : 'more' }}</a>
-    
+    <a id="show-more" *ngIf="listInfo.length > limit || fullList.length > limit" (click)="toggle()">Show {{ showMore ?
+        'less' : 'more' }}</a>
+
 </div>

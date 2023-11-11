@@ -32,6 +32,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
   isSideMenuOpened: boolean = false;
   chart: any;
   term: string = '';
+  previousSearchedMemberId : string = ''
   isRemovedEventList: boolean = false;
   constructor(private imageService: ImageService, private commonService: CommonService, private cryptoService: CryptoService) {
     try {
@@ -429,9 +430,19 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     this.selectedMemberToView = null
     this.selectedMemberOfficeDetails = []
   }
+
+  onMemberSearch(nodeId:string){
+    if(nodeId && this.previousSearchedMemberId != nodeId){
+      this.expandMemById(nodeId)
+      this.previousSearchedMemberId = nodeId
+    }
+  
+  }
   expandMemById(nodeId:string){
-    this.expandChart(nodeId)
-    this.prepareMemberDataToViewByID(nodeId,false)
+    if(nodeId){
+      this.expandChart(nodeId)
+      this.prepareMemberDataToViewByID(nodeId,false)
+    }
   }
 }
 

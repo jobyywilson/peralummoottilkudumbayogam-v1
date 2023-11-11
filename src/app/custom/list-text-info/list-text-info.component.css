@@ -8,4 +8,10 @@
 .link{
     color: #00008B !important;
     cursor: pointer;
+    font-size: .875rem!important;
+}
+.main-link{
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
 }
