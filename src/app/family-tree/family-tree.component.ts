@@ -57,7 +57,7 @@ export class FamilyTreeComponent implements OnInit {
       for(let unParsedMember of unParsedData){
         let member : any = {};
         member.nameAndCode = unParsedMember.nodeid +"-"+ unParsedMember.name;
-        let photoInfo = this.imageService.getUserPhotoUrl(unParsedMember.nodeId)
+        let photoInfo = this.imageService.getUserPhotoUrl(unParsedMember.nodeid)
         member.profilePic = photoInfo.profilePic;
         member.spousePic = photoInfo.spousePic;
 
