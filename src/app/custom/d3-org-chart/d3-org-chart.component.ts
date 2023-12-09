@@ -152,7 +152,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     this.updateChart();
   }
   updateChart() {
-    if (!this.data) {
+    if (!this.data || this.data['length']  == 0) {
       return;
     }
     if (!this.chart) {

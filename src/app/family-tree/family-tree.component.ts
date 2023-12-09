@@ -52,13 +52,24 @@ export class FamilyTreeComponent implements OnInit {
   loadTree(path:string){
     d3.json(path
       ).then((data:any) => {
-        this.data = this.cryptoService.decryptAndParse(data.data)
-      for(let member of this.data){
-        member.nameAndCode = member.nodeId +"-"+ member.name;
-        let photoInfo = this.imageService.getUserPhotoUrl(member.nodeId)
+        let unParsedData = this.cryptoService.decryptAndParse(data.data)
+        let parsedData : any = [];
+      for(let unParsedMember of unParsedData){
+        let member : any = {};
+        member.nameAndCode = unParsedMember.nodeid +"-"+ unParsedMember.name;
+        let photoInfo = this.imageService.getUserPhotoUrl(unParsedMember.nodeId)
         member.profilePic = photoInfo.profilePic;
         member.spousePic = photoInfo.spousePic;
-    }
+
+       
+        member.nodeId = unParsedMember.nodeid;
+        member.name = unParsedMember.name;
+        member.parentNodeId = unParsedMember.parentnodeid;
+        member.spouse = unParsedMember.spouse;
+        parsedData.push(member)
+      }
+      this.data = parsedData;
+    
       let prevIndex = 0;
       // setInterval((d:any) => {
       //   data[prevIndex]._highlighted = 'false';
