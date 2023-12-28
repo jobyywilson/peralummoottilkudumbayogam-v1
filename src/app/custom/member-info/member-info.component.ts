@@ -59,8 +59,9 @@ export class MemberInfoComponent {
 
   init(){
     let bornOn = this.memberInfo.bornOn?this.memberInfo.bornOn:'';
-    let diedOn = this.memberInfo.diedOn;
-
+    let diedOn = this.memberInfo.diedOn
+    this.memberInfo.formatedBornOn = this.formatDate(bornOn)
+    this.memberInfo.formatedDiedOn = this.formatDate(diedOn)
     let lifeTime = ''
     if(diedOn){
       lifeTime = `${this.formatDate(bornOn)} - ${this.formatDate(diedOn)} `

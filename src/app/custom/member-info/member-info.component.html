@@ -18,10 +18,10 @@ display: flex;
                                         <div aria-level="3" role="heading"
                                             style="word-break: break-word;min-width: 0;text-align: left;word-wrap: break-word;font-weight: 700;white-space: inherit;color: rgba(28,43,51,1);font-size: 1rem!important;font-family: Optimistic Display,system-ui,sans-serif!important;line-height: 1.25!important;">
                                             {{memberInfo.name}}
-                                            <div *ngIf="memberInfo.lifeTime"
+                                            <!-- <div *ngIf="memberInfo.lifeTime"
                                                 style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">
                                                 {{memberInfo.lifeTime}}
-                                            </div>
+                                            </div> -->
                                             <div
                                                 style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">
                                                 {{memberInfo.nodeId}}
@@ -58,8 +58,54 @@ display: flex;
                         </div>
                     </div>
                 </div>
+                <mat-divider></mat-divider>
+                <!-- <mat-toolbar class="toolbar">
+                    
+                    <button mat-icon-button >
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                  </mat-toolbar> -->
+                  <mat-divider></mat-divider>
                 <mat-accordion class="example-headers-align" multi>
-                    <mat-expansion-panel [expanded]="true" [hideToggle]="true">
+                    <mat-expansion-panel *ngIf="memberInfo.formatedDiedOn && memberInfo.formatedDiedOn.trim().length >0" [expanded]="true" [hideToggle]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Vitals
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col vitals-nospace">
+                                    <mat-label class="vitals">Birth : </mat-label> 
+                                </div>
+                                <div class="col vitals-nospace">
+                                    <mat-label>{{memberInfo.formatedBornOn}} </mat-label>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col vitals-nospace">
+                                    <mat-label class="vitals">Death : </mat-label> 
+                                </div>
+                                <div class="col vitals-nospace">
+                                    <mat-label>{{memberInfo.formatedDiedOn}} </mat-label>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col vitals-nospace">
+                                    <mat-label class="vitals">Burial : </mat-label> 
+                                </div>
+                                <div class="col vitals-nospace">
+                                    <mat-label>{{memberInfo.buriedAt}} </mat-label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel [expanded]="true" [hideToggle]="true" *ngIf="memberInfo.about">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 About
@@ -70,20 +116,27 @@ display: flex;
                         <mat-form-field *ngIf="hasEditAccess" appearance="outline">
                             <mat-label>Add about {{memberInfo.name}} </mat-label>
                             <textarea  matInput
-                            cdkTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=5
+                            cdkTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10
                              placeholder="Add about">{{memberInfo.about}}</textarea>
                           </mat-form-field>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel [expanded]="true" [hideToggle]="true">
+                    <!-- <mat-expansion-panel [expanded]="true" [hideToggle]="true">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 Address
                             </mat-panel-title>
                         </mat-expansion-panel-header>
 
-                        <text-info [text]="memberInfo.address"></text-info>
-                    </mat-expansion-panel>
+                        <text-info *ngIf="!hasEditAccess"  [text]="memberInfo.address"></text-info>
+                        <mat-form-field *ngIf="hasEditAccess" appearance="outline">
+                            <mat-label>Add address of {{memberInfo.name}} </mat-label>
+                            <textarea  matInput
+                            cdkTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10
+                             placeholder="Add about">{{memberInfo.address}}</textarea>
+                          </mat-form-field>
+
+                    </mat-expansion-panel> -->
 
                     <mat-expansion-panel *ngIf="memberInfo.spouses && memberInfo.spouses.length>0" [expanded]="true" [hideToggle]="true">
                         <mat-expansion-panel-header>

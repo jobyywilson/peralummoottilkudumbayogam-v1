@@ -20,25 +20,10 @@
 }
 
 .toolbar {
-    display: flex;
-    box-sizing: border-box;
-    padding: 12px 12px 1px 12px;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-end;
-    white-space: nowrap;
+    justify-content: end;
+    background-color: white;
 }
 
-.add-toolbar {
-    display: flex;
-    justify-content: right;
-    align-items: end;
-}
-
-.toolbar-heading {
-    display: flex;
-    align-items: center;
-}
 
 #relationship-checkbox {
     padding: 10px;
@@ -90,4 +75,15 @@ mat-form-field {
 }
 .mat-card{
     padding: 0px;
+}
+::ng-deep .mat-form-field-flex {
+    min-height: 150px !important;
+}
+.vitals{
+    padding-left: 0px;
+    font-weight: 450;
+}
+.vitals-nospace{
+    padding-left: 0px;
+    max-width: max-content;
 }
