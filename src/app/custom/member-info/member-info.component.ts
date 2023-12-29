@@ -75,7 +75,9 @@ export class MemberInfoComponent {
     
     let parentInfo = this.memberInfo.parents
     this.parents = []
+    
     if(parentInfo){
+      this.memberInfo.parentFamilyName = parentInfo.primary.familyName && parentInfo.primary.familyName.family_tree_name
       let primaryInfo = {key:parentInfo.primary.name,link:parentInfo.primary.nodeId}
       let secondaryInfo = {key:parentInfo.secondary.name,link:parentInfo.secondary.nodeId}
       this.parents.push(primaryInfo)
@@ -118,5 +120,6 @@ export class MemberInfoComponent {
   onClickAddSpouseButton(){
     this.spouseInfo = new SpouseInfo();
   }
+  
   
 }

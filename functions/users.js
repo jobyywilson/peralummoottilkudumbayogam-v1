@@ -2,10 +2,10 @@ const axios = require('axios');
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const ENCRYPT_KEY  = process.env.ENCRYPT_KEY
 const PATH = "/.netlify/functions/users/"
-const SUPABASE_HOST = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/user'
-const GET_ALL_MEMBERS_WITHOUT_SPOUSE = `https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/rpc/get_members`
-const GET_ALL_MEMBERS = `${SUPABASE_HOST}?select=nodeId,name,parentNodeId,spouse&order=nodeId.asc`
+const SUPABASE_HOST = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/'
+const MEMBER_DEPLOYED_RESOURCE_NAME = 'user'
 
+const GET_ALL_MEMBERS_WITHOUT_SPOUSE = `https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/rpc/get_members`
 exports.handler = (event, context, callback) => {
     
     let nodeId ;
@@ -18,15 +18,13 @@ exports.handler = (event, context, callback) => {
       };
       let users = []
       let url = GET_ALL_MEMBERS_WITHOUT_SPOUSE
-      if(event.queryStringParameters && event.queryStringParameters.showSpouse){
-        url = GET_ALL_MEMBERS;
-      }
 
      
       if(nodeId){
         let spouseParamName = isSpouseNodeId(nodeId)?'secondaryParentMemberId':'parentNodeId';
-        url = `${SUPABASE_HOST}?nodeId=eq.${nodeId}&select=*,parents:relationship!user_parent_relationship_id_fkey(primary:relationship_primary_member_id_fkey(nodeId,name),secondary:relationship_secondary_member_id_fkey(nodeId,name)),childrens:user!${spouseParamName}(nodeId,name)`
+        url = `${SUPABASE_HOST}${MEMBER_DEPLOYED_RESOURCE_NAME}?nodeId=eq.${nodeId}&select=*,parents:relationship!user_parent_relationship_id_fkey(primary:relationship_primary_member_id_fkey(nodeId,name,familyName:family_tree!user_family_tree_id_fkey(family_tree_name)),secondary:relationship_secondary_member_id_fkey(nodeId,name,familyName:family_tree!user_family_tree_id_fkey(family_tree_name))),childrens:user!${spouseParamName}(nodeId,name)`
       }
+      console.log(url)
       axios.get(url, { headers: myHeaders, responseType: 'json' }) .then(json => {
         callback(null, {
             statusCode: 200,

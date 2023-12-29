@@ -8,8 +8,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ListTextInfoComponent {
 
   @Input() listInfo: any[]=[];
-
+  @Input() editMode: boolean = false;
+  @Input() disableLink: boolean = false;
   @Output() expandMemberById = new EventEmitter<string>();
+  @Output() editMemberById = new EventEmitter<string>();
 
   fullList : any[] = []
   limit : number = 6;
@@ -17,11 +19,18 @@ export class ListTextInfoComponent {
 
 
   ngOnChanges(){
-    this.fullList = this.listInfo
-    this.toggle()
+    if(this.listInfo && this.listInfo.length > 0){
+      this.fullList = this.listInfo
+      this.toggle()
+    }
+    
   }
   openLink(nodeId:string){
     this.expandMemberById.emit(nodeId)
+  }
+
+  openEditLink(nodeId:string){
+    this.editMemberById.emit(nodeId)
   }
 
   toggle() {

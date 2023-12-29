@@ -250,7 +250,8 @@ display: flex;
                         <div class="row" style="min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
                             
                             <div class="col-md-5 list-text-info">
-                                <list-text-info [listInfo]="parents" 
+                                <div *ngIf="memberInfo.parentFamilyName && memberInfo.isSpouse" class="family-name">Family name : {{memberInfo.parentFamilyName}}</div>
+                                <list-text-info [disableLink]="memberInfo.isSpouse" [listInfo]="parents" 
                                     (expandMemberById)="expandMemById($event)">
                                     
                                 </list-text-info>
