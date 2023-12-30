@@ -5,7 +5,7 @@ const PATH = "/.netlify/functions/users/"
 const SUPABASE_HOST = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/'
 const MEMBER_DEPLOYED_RESOURCE_NAME = 'user'
 
-const GET_ALL_MEMBERS_WITHOUT_SPOUSE = `https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/rpc/get_members`
+const GET_ALL_MEMBERS_WITHOUT_SPOUSE = `https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/rpc/get_members?familytreecode=KPK`
 exports.handler = (event, context, callback) => {
     
     let nodeId ;
