@@ -1,0 +1,29 @@
+#sign-in{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    background-color: #efefed;
+}
+.sign-in-field{
+    width: 100%;
+}
+.card-layout{
+    -webkit-box-sizing: border-box;
+    margin: 0 auto;
+    padding: 24px;
+    width: 352px;
+    -webkit-box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    background-color: white;
+}
+.signin-button-layout, .signup-button-layout{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.signin-button, .signup-button{
+    width: 100%;
+    border-radius: 20px;
+}
+

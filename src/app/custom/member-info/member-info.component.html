@@ -341,7 +341,7 @@ display: flex;
                         </div>
                         
                     </mat-expansion-panel>
-                    <mat-expansion-panel *ngIf="memberInfo.isOfficeBearer" [expanded]="true" [hideToggle]="true">
+                    <mat-expansion-panel *ngIf="officeInfo && officeInfo.length>0" [expanded]="true" [hideToggle]="true">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 Office positions
@@ -360,6 +360,7 @@ display: flex;
                         </div>
                         
                     </mat-expansion-panel>
+                    <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> -->
 
                 </mat-accordion>
             </div>

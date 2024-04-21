@@ -8,12 +8,12 @@ import { ImageService } from '../service/image.service';
   styleUrls: ['./office-bearers.component.css']
 })
 export class OfficeBearersComponent implements OnInit {
-  data : any = {}
+  data : any = []
   officeMembers : any = [];
   auditors : any = [];
   sextons : any = [];
   kaisthanasamithy: any = [];
-  selectedOffice : any = null
+  selectedOfficeList : any = []
   years : any = []
   constructor(private commonService : CommonService,private imageService: ImageService) {
     this.loadAllOfficeBearers();
@@ -24,15 +24,20 @@ export class OfficeBearersComponent implements OnInit {
     let isFound = true;
     while(isFound){
       let fyYear = this.getCurrentFinancialYear(date)
-      this.data[fyYear] = {}
+      this.data[fyYear] = []
       this.commonService.doGet(`assets/content/officeBearers/${fyYear}.json`).subscribe(
         (data:any) =>{
-          if(!this.selectedOffice){
+          if(this.selectedOfficeList.length == 0){
             let currentFY = this.getCurrentFinancialYear(new Date())
-            this.selectedOffice = this.data[currentFY]
+            this.selectedOfficeList = this.data[currentFY]
           }
-          this.data[fyYear]['title']=  data.title;
-          this.data[fyYear]['officeMembers']=  this.mapOfficers(data);
+          for(let section of data){
+            let sectionData:any = {}
+            sectionData['title'] = section.title;
+            sectionData['officeMembers']=  this.mapOfficers(section["members"]);
+            this.data[fyYear].push(sectionData)
+          }
+
         },
           (error:any) => {
             isFound = false;
@@ -49,7 +54,10 @@ export class OfficeBearersComponent implements OnInit {
 
   }
   mapOfficers(officeRawData:any){
-    let rawData = officeRawData["members"]
+    let rawData = officeRawData
+    if(!rawData){
+      return rawData;
+    }
     rawData.map((obj:any)=> {
       obj.image = this.imageService.getUserPhotoByUserId(obj.officeBearerUserId)
       if(obj.image=="assets/img/user.png"){
@@ -61,7 +69,7 @@ export class OfficeBearersComponent implements OnInit {
 
   onYearchange(fYear:any){
     let year = fYear.value
-    this.selectedOffice = this.data[year]
+    this.selectedOfficeList = this.data[year]
   }
   getCurrentFinancialYear(date : Date) {
     let fiscalyear = "";
@@ -72,6 +80,9 @@ export class OfficeBearersComponent implements OnInit {
       fiscalyear = today.getFullYear() + "-" + (today.getFullYear() + 1)
     }
     return fiscalyear
+  }
+  getJson(ogj:any){
+    return JSON.stringify(ogj)
   }
 
   ngOnInit(): void {

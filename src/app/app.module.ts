@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {  FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VenueComponent } from './venue/venue.component';
@@ -23,7 +23,6 @@ import { D3OrgChartComponent } from './custom/d3-org-chart/d3-org-chart.componen
 import { BlogComponent } from './blog/blog.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { FamilyTreeComponent } from './family-tree/family-tree.component';
-import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +31,11 @@ import { CommonService } from './service/common.service';
 import { MemberInfoComponent } from './custom/member-info/member-info.component';
 import { TextInfoComponent } from './custom/text-info/text-info.component';
 import { ListTextInfoComponent } from './custom/list-text-info/list-text-info.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { MemberSearchComponent } from './custom/member-search/member-search.component';
+import { NgxGalleryModule } from 'ngx-gallery-9';
+
 export function fetchMemberPhotoInfo(commonService: CommonService) {
   return () => {
     return new Promise((resolve, reject) => {
@@ -79,7 +83,10 @@ export function fetchMemberPhotoInfo(commonService: CommonService) {
     EventDetailsComponent,
     MemberInfoComponent,
     TextInfoComponent,
-    ListTextInfoComponent
+    ListTextInfoComponent,
+    SignUpComponent,
+    SignInComponent,
+    MemberSearchComponent
     
   ],
   imports: [
@@ -88,9 +95,11 @@ export function fetchMemberPhotoInfo(commonService: CommonService) {
     NgbModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgSelectModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxGalleryModule
   ],
   providers: [
     CommonService,

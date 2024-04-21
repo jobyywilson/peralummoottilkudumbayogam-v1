@@ -13,6 +13,9 @@ import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
 import { OfficeBearersComponent } from './office-bearers/office-bearers.component';
 import { VenueComponent } from './venue/venue.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { MemberSearchComponent } from './custom/member-search/member-search.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
@@ -30,6 +33,9 @@ const routes: Routes = [
   { path: 'office-bearers', component: OfficeBearersComponent },
   { path: 'family-tree/:id', component: FamilyTreeComponent },
   { path: 'family-tree', component: FamilyTreeComponent },
+  // { path: 'sign-in', component: SignInComponent },
+  // { path: 'sign-up', component: SignUpComponent },
+  // { path: 'member-search', component: MemberSearchComponent },
   { path: 'events/:type/:id', component: EventDetailsComponent },
   {path: '**', redirectTo: '/home'}
   

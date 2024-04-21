@@ -1,4 +1,4 @@
-{
+[{
     "title": "Committee",
     "members":[
         {
@@ -74,8 +74,5 @@
             "address": "Varaputhra Malayil",
             "postion": "Lady Secretary"
         }
-       
-
-        
     ]
-}
+}]

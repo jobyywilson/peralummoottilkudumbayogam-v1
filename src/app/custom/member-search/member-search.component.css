@@ -1,0 +1,80 @@
+.tab-layout{
+    padding: 15px;
+    
+}
+section{
+    padding: 120px 0 ;
+}
+.container{
+    max-width: 1250px !important;
+}
+.accordion-layout{
+    padding: 10px;
+}
+.tab-inner-layout{
+    background-color: #f3f2f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+#title{
+    max-width: 100px
+}
+@media screen and (min-height: 450px) {
+   
+  }
+/* Styles for screens with width between 0 and 450 pixels */
+@media screen and (max-width: 450px) {
+    #full-name-txt{
+        width:250px;
+    }
+  }
+  
+  /* Styles for screens with width between 451 and 750 pixels */
+  @media screen and (min-width: 451px) and (max-width: 750px) {
+    #full-name-txt{
+        width:350px;
+    }
+  }
+  
+  /* Styles for screens with width greater than 750 pixels */
+  @media screen and (min-width: 751px) {
+    #full-name-txt{
+        width:450px;
+    }
+    #nickname-txt{
+        width:250px;
+    }
+  }
+
+::ng-deep .mat-form-field-infix{
+    display: flex !important;
+    align-items: center !important;
+    height: 55px;
+}
+.aliveCheckbox{
+    display: flex;
+    margin-left : 10px;
+    align-items: center;
+}
+.formField{
+    max-width: fit-content;
+}
+
+.rangeDatePicker {
+    display: flex !important;
+    align-items: center !important;
+}
+.add-toolbar{
+    padding: 10px;
+}
+.save_cancel_spouse_btn{
+    margin: 10px;
+}
+#relationship-checkbox{
+    display: flex;
+    align-items: center;
+}
+.main-action-toolbar{
+    display: flex;
+    justify-content: end;
+}

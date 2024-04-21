@@ -17,3 +17,10 @@ section{
 .member-list{
     padding-top: 15px;
 }
+.position-heading{
+    word-wrap: break-word;
+    width: 200px;
+}
+.position-title{
+    font-weight: bold;
+}

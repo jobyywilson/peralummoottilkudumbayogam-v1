@@ -1,4 +1,4 @@
-{
+[{
     "title": "Committee",
     "members":[
         {
@@ -69,6 +69,5 @@
             "address": "Kakkanattil",
             "postion": "Website Coordinator"
         }
-
     ]
-}
+}]

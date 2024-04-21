@@ -1,8 +1,7 @@
 export class SpouseInfo{
 
-    public firstName: string ='' ;
+    public name: string ='' ;
 
-    public lastName: string ='' ;
 
     public isCurrentlyInRelationShip : boolean = false;
 
@@ -15,7 +14,7 @@ export class SpouseInfo{
     }
 
     isValid():boolean{
-        return this.isNotEmpty(this.firstName) && this.isNotEmpty(this.lastName) && this.isValidRelationShip()
+        return this.isNotEmpty(this.name) && this.isValidRelationShip()
         
     }
   
@@ -25,7 +24,7 @@ export class SpouseInfo{
     }
 
     isValidRelationShip():boolean{
-        return this.relationShipStartDate != undefined && ((this.relationShipEndDate == undefined && this.isCurrentlyInRelationShip)
+        return this.relationShipStartDate != undefined && ( this.isCurrentlyInRelationShip
         ||(this.relationShipEndDate != undefined && !this.isCurrentlyInRelationShip))
 
     }

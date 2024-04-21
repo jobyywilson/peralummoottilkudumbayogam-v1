@@ -1,4 +1,4 @@
-{
+[{
     "title": "Committee",
     "members":[
         {
@@ -101,7 +101,5 @@
             "address": "Malayil Kottackal",
             "postion": "Lady Secretary"
         }
-
-        
     ]
-}
+}]

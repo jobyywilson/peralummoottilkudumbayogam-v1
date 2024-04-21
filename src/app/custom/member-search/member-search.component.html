@@ -1,0 +1,351 @@
+<main id="main">
+
+  <section>
+    <div class="container">
+      <ng-select class="custom" bindLabel="name" bindValue="nodeId" appearance="outline" (search)="searchMember($event)"
+        placeholder="Search member" [minTermLength]=3 (click)="selectMember(selectedMemberId)"
+        [(ngModel)]="selectedMemberId">
+        <ng-option *ngFor="let item of getBestSearchList()" [value]="item">
+          <img class="thumbnail" height="30" width="30"
+            [src]="'https://image.peralummoottilkudumbayogam.org/'+item.nodeId+'.png'" /> {{ item.name }}
+        </ng-option>
+      </ng-select>
+      <div *ngIf="selectedMember">
+        <div style="zoom: 1;">
+          <div style="flex-grow: 1;align-items: center;display: flex;"><img height="88"
+              [src]="'https://image.peralummoottilkudumbayogam.org/'+selectedMember.nodeId+'.png'" width="88" alt=""
+              style="background-color: #ededed;border-top-left-radius: 50%;border-bottom-right-radius: 50%;flex-grow: 0;flex-shrink: 0;border-top-right-radius: 50%;border-bottom-left-radius: 50%;margin-right: 8px;">
+
+            <div>
+              <div aria-level="3" role="heading"
+                style="word-break: break-word;min-width: 0;text-align: left;word-wrap: break-word;font-weight: 700;white-space: inherit;color: rgba(28,43,51,1);font-size: 2rem!important;font-family: Optimistic Display,system-ui,sans-serif!important;line-height: 1.25!important;">
+                {{selectedMember.name}}
+                <div *ngIf="selectedMember.lifeTime"
+                  style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">
+                  {{selectedMember.lifeTime}}
+                </div>
+                <div
+                  style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">
+                  {{selectedMember.nodeId}}
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <mat-tab-group fitInkBarToContent animationDuration="0ms" class="tab-layout">
+            <mat-tab label="Details">
+              <div class="tab-inner-layout">
+                <mat-accordion class="accordion-layout" multi>
+                  <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        About
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                      <div class="col formField">
+                        <mat-form-field appearance="outline" id="title">
+                          <mat-label>Title</mat-label>
+                          <mat-select>
+                            <mat-option value="Mr">Mr</mat-option>
+                            <mat-option value="Ms">Ms</mat-option>
+                            <mat-option value="Mrs">Mrs</mat-option>
+                            <mat-option value="Rev">Rev</mat-option>
+                            <mat-option value="Dr">Dr</mat-option>
+                            <mat-option value="Adv">Adv</mat-option>
+
+
+
+                          </mat-select>
+                        </mat-form-field>
+
+                      </div>
+                      <div class="col formField">
+                        <mat-form-field id="full-name-txt" appearance="outline">
+                          <mat-label>Full name</mat-label>
+                          <input matInput [(ngModel)]="selectedMember.name">
+                        </mat-form-field>
+                      </div>
+                      <div class="col formField">
+                        <mat-form-field id="nickname-txt" appearance="outline">
+                          <mat-label>Nickname</mat-label>
+                          <input matInput [(ngModel)]="selectedMember.nickname">
+                        </mat-form-field>
+
+                      </div>
+                      <div class="col formField">
+                        <mat-form-field appearance="outline" id="title">
+                          <mat-label>Gender</mat-label>
+                          <mat-select [(ngModel)]="selectedMember.gender">
+                            <mat-option value="MALE">Male</mat-option>
+                            <mat-option value="FEMALE">Female</mat-option>
+                            <mat-option value="OTHER">Other</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                      </div>
+
+                      <div class="col formField aliveCheckbox">
+                        <mat-checkbox (click)="isAliveOnClick()">Is Alive</mat-checkbox>
+
+
+                      </div>
+
+
+
+
+                      <!-- <div class="col-md-2 col-lg-2">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Choose a date</mat-label>
+                              <input matInput [matDatepicker]="datepicker">
+                              <mat-hint>MM/DD/YYYY</mat-hint>
+                              <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                              <mat-datepicker #datepicker>
+                                <mat-datepicker-actions>
+                                  <button mat-button matDatepickerCancel>Cancel</button>
+                                  <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                                </mat-datepicker-actions>
+                              </mat-datepicker>
+                            </mat-form-field>
+                            
+                          </div> -->
+                    </div>
+                    <div class="row">
+
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Date of birth</mat-label>
+                          <input matInput [matDatepicker]="datepicker">
+                          <mat-hint>DD/MM/YYYY</mat-hint>
+                          <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                          <mat-datepicker #datepicker class="datePicker">
+                            <mat-datepicker-actions>
+                              <button mat-button matDatepickerCancel>Cancel</button>
+                              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                          </mat-datepicker>
+                        </mat-form-field>
+
+                      </div>
+                      <div *ngIf="selectedMember.expired" class="col ">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Date of death</mat-label>
+                          <input matInput [matDatepicker]="datepicker">
+                          <mat-hint>DD/MM/YYYY</mat-hint>
+                          <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                          <mat-datepicker #datepicker class="datePicker">
+                            <mat-datepicker-actions>
+                              <button mat-button matDatepickerCancel>Cancel</button>
+                              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                          </mat-datepicker>
+                        </mat-form-field>
+
+                      </div>
+                    </div>
+
+
+
+
+
+                  </mat-expansion-panel>
+                  <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Spouse
+                      </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+
+
+                    <div style="margin-top: 0px;">
+                      <p style="
+                          font-size: 11px;
+                          color: #3498db;
+                  ">* Click on a name below to edit or view, or click on the pencil icon to edit spouse relationship.</p>
+                    </div>
+                    <div
+                      style="margin-top: -13px;display:grid;min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
+                      <list-text-info [editMode]="true" (editMemberById)="editSpouse($event)"
+                        [listInfo]="selectedMember.spouses" (expandMemberById)="expandMemById($event)"></list-text-info>
+                      <div *ngIf="spouseInfo" class="edit-form">
+                        <div class="row">
+                          <div class="col">
+                            <mat-form-field appearance="outline" class="add-spouse-field">
+                              <mat-label>Spouse name</mat-label>
+                              <input matInput type="text" [(ngModel)]="spouseInfo.name">
+
+                              <button *ngIf="spouseInfo.name" matSuffix mat-icon-button aria-label="Name"
+                                (click)="spouseInfo.name=''">
+                                <mat-icon>close</mat-icon>
+                              </button>
+                            </mat-form-field>
+                          </div>
+                          <div class="col" id="relationship-checkbox">
+                            <mat-checkbox [(ngModel)]="spouseInfo.isCurrentlyInRelationShip">
+                              In Relationship
+                            </mat-checkbox>
+                          </div>
+                          <div class="col" *ngIf="spouseInfo.isCurrentlyInRelationShip">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Relationship start date</mat-label>
+                              <input matInput [matDatepicker]="picker" [(ngModel)]="spouseInfo.relationShipStartDate">
+                              <mat-hint>DD/MM/YYYY</mat-hint>
+                              <mat-datepicker-toggle class="rangeDatePicker" matIconSuffix
+                                [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div class="col" *ngIf="!spouseInfo.isCurrentlyInRelationShip">
+                            <mat-form-field appearance="outline">
+                              <mat-label> Relationship date range</mat-label>
+                              <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+
+                                <input matStartDate formControlName="start" placeholder="Start date"
+                                  [(ngModel)]="spouseInfo.relationShipStartDate">
+                                <input matEndDate formControlName="end" placeholder="End date"
+                                  [(ngModel)]="spouseInfo.relationShipEndDate">
+
+                              </mat-date-range-input>
+                              <mat-datepicker-toggle class="rangeDatePicker" matIconSuffix
+                                [for]="picker"></mat-datepicker-toggle>
+
+                              <mat-date-range-picker #picker></mat-date-range-picker>
+
+                              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+
+                              <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid
+                                start date</mat-error>
+                              <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end
+                                date</mat-error>
+                            </mat-form-field>
+                          </div>
+
+                        </div>
+
+
+
+
+
+                      </div>
+
+
+
+                    </div>
+                    <div class="col add-toolbar">
+                      <mat-toolbar-row>
+                        <button mat-raised-button *ngIf="!spouseInfo" (click)="onClickAddSpouseButton()">Add
+                          Spouse</button>
+
+                        <div *ngIf="spouseInfo">
+                          <button class="save_cancel_spouse_btn" color="primary" [disabled]="!spouseInfo.isValid()"
+                            mat-raised-button>Save</button>
+
+                          <button class="save_cancel_spouse_btn" mat-raised-button
+                            (click)="spouseInfo = undefined">Cancel</button>
+
+                        </div>
+                      </mat-toolbar-row>
+
+
+
+
+                    </div>
+
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel [expanded]="true"
+                    *ngIf="selectedMember.childrens && selectedMember.childrens.length > 0">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Childrens
+                      </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+
+
+                    <div style="margin-top: 0px;">
+                      <p style="
+                        font-size: 11px;
+                        color: #3498db;
+                ">* Click on a name below to edit or view, or click on the pencil icon to edit parent details.</p>
+                    </div>
+                    <div
+                      style="margin-top: -13px;display:grid;min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
+                      <list-text-info [editMode]="true" (editMemberById)="editChild($event)"
+                        [listInfo]="selectedMember.childrens"
+                        (expandMemberById)="expandMemById($event)"></list-text-info>
+                      <div *ngIf="childInfo" class="edit-form">
+                        <div class="row">
+                          <div class="col">
+                            <mat-form-field appearance="outline" class="add-spouse-field">
+                              <mat-label>Child name</mat-label>
+                              <input matInput type="text" [(ngModel)]="childInfo.name">
+
+                              <button *ngIf="childInfo.name" matSuffix mat-icon-button aria-label="Name"
+                                (click)="childInfo.name=''">
+                                <mat-icon>close</mat-icon>
+                              </button>
+                            </mat-form-field>
+                          </div>
+                          <div class="col formField">
+                            <mat-form-field appearance="outline" >
+                              <mat-label *ngIf="!selectedMember.isSpouse">Mother name</mat-label>
+                              <mat-label *ngIf="selectedMember.isSpouse">Father name</mat-label>
+                              <mat-select [(ngModel)]="childInfo.parent">
+                                <mat-option *ngFor="let parent of childInfo.parentList" [value]="parent.key">{{parent.key}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+    
+                          </div>
+
+                        </div>
+
+
+
+
+
+                      </div>
+
+
+
+                    </div>
+                    <div class="col add-toolbar">
+                      <mat-toolbar-row>
+                        <button mat-raised-button *ngIf="!childInfo" (click)="onClickAddChildButton()">Add
+                          Child</button>
+
+                        <div *ngIf="childInfo">
+                          <button class="save_cancel_spouse_btn" color="primary" [disabled]="!childInfo.isValid()"
+                            mat-raised-button>Save</button>
+
+                          <button class="save_cancel_spouse_btn" mat-raised-button
+                            (click)="childInfo = undefined">Cancel</button>
+
+                        </div>
+                      </mat-toolbar-row>
+
+
+
+
+                    </div>
+
+                  </mat-expansion-panel>
+                </mat-accordion>
+                <div class="main-action-toolbar">
+                  <button color="primary" mat-raised-button>Save as Draft</button>
+
+                </div>
+
+              </div>
+
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+
+
+
+  </section>
+</main>

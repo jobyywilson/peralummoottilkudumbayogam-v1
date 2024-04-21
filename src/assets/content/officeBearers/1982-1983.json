@@ -1,4 +1,4 @@
-{
+[{
     "title": "Committee",
     "members":[
         {
@@ -57,7 +57,5 @@
             "address": "Varaputhra",
             "postion": "Auditor"
         }
-
-        
     ]
-}
+}]

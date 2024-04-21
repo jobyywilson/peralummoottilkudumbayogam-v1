@@ -34,116 +34,119 @@
           </div>
     
         </div>
-        <h3 *ngIf="selectedOffice">{{selectedOffice.title}}</h3>
-        <div *ngIf="selectedOffice" class="row member-list">
-          <div
-            class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
-            *ngFor="let member of selectedOffice.officeMembers" 
-          >
-            <div class="member">
-              <h5>{{ member.postion }}</h5>
-              <div class="member-img">
-                <img [src]="member.image" class="img-fluid off-mem-image" alt="" />
+        <div  *ngFor="let selectedOffice of selectedOfficeList"  >
+          <h3 *ngIf="selectedOffice" class="position-title">{{selectedOffice.title}}</h3>
+          <div *ngIf="selectedOffice" class="row member-list">
+            <div
+              class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
+              *ngFor="let member of selectedOffice.officeMembers" 
+            >
+              <div class="member">
+                <h4 class="position-heading">{{ member.postion }}</h4>
+                <div class="member-img">
+                  <img [src]="member.image" class="img-fluid off-mem-image" alt="" />
+                </div>
+                <div class="member-info">
+                  <h6>{{ member.name }}</h6>
+                  <p  *ngIf="member.mobile && member.mobile!='-'">
+                    {{ member.address }}<br />
+                    Mob: {{ member.mobile }}
+                  </p>
+                  <p *ngIf="!member.mobile">
+                    {{ member.address }}<br />
+                  </p>
+                </div>
               </div>
-              <div class="member-info">
-                <h6>{{ member.name }}</h6>
-                <p  *ngIf="member.mobile && member.mobile!='-'">
-                  {{ member.address }}<br />
-                  Mob: {{ member.mobile }}
-                </p>
-                <p *ngIf="!member.mobile">
-                  {{ member.address }}<br />
-                </p>
+            </div>
+      <!--     
+          <div class="row mb-5 align-items-end">
+            <div class="col-md-6" data-aos="fade-right">
+              <h4>Kaisthanasamithy</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
+              *ngFor="let member of selectedOffice.kaisthanasamithy"
+            >
+              <div class="member">
+                <div class="member-img">
+                  <img
+                    src="assets/img/blank-profile-picture.png"
+                    class="img-fluid off-mem-image"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>{{ member.name }}</h4>
+                  <p>
+                    {{ member.address }}<br />
+                    Mob: {{ member.mobile }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-    <!--     
-        <div class="row mb-5 align-items-end">
-          <div class="col-md-6" data-aos="fade-right">
-            <h4>Kaisthanasamithy</h4>
+          <div class="row mb-5 align-items-end">
+            <div class="col-md-6" data-aos="fade-right">
+              <h4>Auditors</h4>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div
-            class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
-            *ngFor="let member of selectedOffice.kaisthanasamithy"
-          >
-            <div class="member">
-              <div class="member-img">
-                <img
-                  src="assets/img/blank-profile-picture.png"
-                  class="img-fluid off-mem-image"
-                  alt=""
-                />
-              </div>
-              <div class="member-info">
-                <h4>{{ member.name }}</h4>
-                <p>
-                  {{ member.address }}<br />
-                  Mob: {{ member.mobile }}
-                </p>
+          <div class="row">
+            <div
+              class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
+              *ngFor="let member of selectedOffice.auditors"
+            >
+              <div class="member">
+                <div class="member-img">
+                  <img
+                    src="assets/img/blank-profile-picture.png"
+                    class="img-fluid off-mem-image"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>{{ member.name }}</h4>
+                  <p>
+                    {{ member.address }}<br />
+                    Mob: {{ member.mobile }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row mb-5 align-items-end">
-          <div class="col-md-6" data-aos="fade-right">
-            <h4>Auditors</h4>
-          </div>
-        </div>
-        <div class="row">
-          <div
-            class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
-            *ngFor="let member of selectedOffice.auditors"
-          >
-            <div class="member">
-              <div class="member-img">
-                <img
-                  src="assets/img/blank-profile-picture.png"
-                  class="img-fluid off-mem-image"
-                  alt=""
-                />
-              </div>
-              <div class="member-info">
-                <h4>{{ member.name }}</h4>
-                <p>
-                  {{ member.address }}<br />
-                  Mob: {{ member.mobile }}
-                </p>
-              </div>
+      
+          <div class="row mb-5 align-items-end">
+            <div class="col-md-6" data-aos="fade-right">
+              <h4>Sexton</h4>
             </div>
           </div>
-        </div>
-    
-        <div class="row mb-5 align-items-end">
-          <div class="col-md-6" data-aos="fade-right">
-            <h4>Sexton</h4>
+          <div class="row">
+            <div
+              class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
+              *ngFor="let member of selectedOffice.sextons"
+            >
+              <div class="member">
+                <div class="member-img">
+                  <img
+                    src="assets/img/blank-profile-picture.png"
+                    class="img-fluid off-mem-image"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>{{ member.name }}</h4>
+                  <p>
+                    {{ member.address }}<br />
+                    Mob: {{ member.mobile }}
+                  </p>
+                </div>
+              </div>
+            </div>-->
           </div>
+      
         </div>
-        <div class="row">
-          <div
-            class="col-lg-4 col-md-6 d-flex align-items-stretch member-alin"
-            *ngFor="let member of selectedOffice.sextons"
-          >
-            <div class="member">
-              <div class="member-img">
-                <img
-                  src="assets/img/blank-profile-picture.png"
-                  class="img-fluid off-mem-image"
-                  alt=""
-                />
-              </div>
-              <div class="member-info">
-                <h4>{{ member.name }}</h4>
-                <p>
-                  {{ member.address }}<br />
-                  Mob: {{ member.mobile }}
-                </p>
-              </div>
-            </div>
-          </div>-->
-        </div>
-    
+
     
       </div>
     </section>

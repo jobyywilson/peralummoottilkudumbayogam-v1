@@ -6,10 +6,7 @@ const OFFICE_BEARERS_URL = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/off
 const GET_ALL_OFFICE_BEARERS = `${OFFICE_BEARERS_URL}?select=name,address,postion,year&order=year.desc`
 
 exports.handler = (event, context, callback) => {
-    let nodeId ;
-    if(event.path.indexOf(PATH)!== -1){
-        nodeId =event.path.replace(PATH,"")
-    }
+    let nodeId = event.queryStringParameters.memberId;
     const myHeaders = {
         'Authorization': `Bearer ${SUPABASE_API_KEY}`,
         'apiKey': SUPABASE_API_KEY

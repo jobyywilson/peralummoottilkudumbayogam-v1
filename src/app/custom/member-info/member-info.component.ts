@@ -1,14 +1,15 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { SpouseInfo } from './model/spouse-info';
 import { FormControl, FormGroup } from '@angular/forms';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery-9';
 
 @Component({
   selector: 'member-info',
   templateUrl: './member-info.component.html',
   styleUrls: ['./member-info.component.css']
 })
-export class MemberInfoComponent {
+export class MemberInfoComponent implements OnInit{
 
   @Input() memberInfo: any;
 
@@ -31,6 +32,10 @@ export class MemberInfoComponent {
   @Output() expandMemberById = new EventEmitter<string>();
 
   step = 0;
+  galleryOptions: NgxGalleryOptions[] = [];
+  galleryImages: NgxGalleryImage[] = [];
+
+ 
 
   setStep(index: number) {
     this.step = index;
@@ -55,6 +60,33 @@ export class MemberInfoComponent {
 
   ngOnInit(){
     this.init();
+    this.galleryOptions = [
+      { "imageDescription": true,
+      width: '600px',
+      height: '400px',
+      thumbnailsColumns: 4,
+      imageAnimation: NgxGalleryAnimation.Slide },
+      { "image": false, "thumbnailsRemainingCount": true, "height": "100px" },
+      { "breakpoint": 500, "width": "100%", "thumbnailsColumns": 2 }
+      ];
+
+  this.galleryImages = [
+      {
+          small: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
+          medium: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
+          big: 'assets/img/gallery/2007/Managing Commitee/1.jpg'
+      },
+      {
+          small: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
+          medium: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
+          big: 'assets/img/gallery/2007/Managing Commitee/1.jpg'
+      },
+      {
+          small: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
+          medium: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
+          big: 'assets/img/gallery/2007/Managing Commitee/1.jpg'
+      }
+  ];
   }
 
   init(){

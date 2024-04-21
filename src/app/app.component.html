@@ -1,5 +1,5 @@
 
-<app-header></app-header>
-<router-outlet></router-outlet>
+<app-header [logInUserInfo]="logInUserInfo" ></app-header>
+<router-outlet class="main-component" (activate)="onRouterOutletActivate($event)"></router-outlet>
 <app-footer></app-footer>
 
