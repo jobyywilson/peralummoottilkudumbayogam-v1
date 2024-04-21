@@ -19,9 +19,9 @@
           
           
    
-          <li class="dropdown"><a (click)="toggleDropdown()"><span>Kudumbayogam</span> 
+          <li class="dropdown"><a id="kudumbayogam" (click)="toggleDropdown($event)"><span>Kudumbayogam</span> 
             <i class="fa fa-angle-down" ></i></a>
-            <ul class="ul-dropdown">
+            <ul id="ul-dropdown-kudumbayogam">
               <li><a href="/about">About</a></li>
               <li><a href="/history">History</a></li>
               <li><a href="/office-bearers">Office bearers</a></li>
@@ -34,6 +34,16 @@
           </li> 
           <li><a href="/genealogy">Genealogy</a></li>
           <li><a href="/contact">Contact us</a></li>
+          <!-- <li *ngIf="!logInUserInfo"><a href="/sign-in">Sign In</a></li>
+          <li *ngIf="logInUserInfo"><a (click)="signOut()" >Sign Out</a></li> -->
+
+          <!-- <li class="dropdown" *ngIf="logInUserInfo"><a id="loginInfo"(click)="toggleDropdown($event)"><span>Profile</span> 
+            <i class="fa fa-angle-down" ></i></a>
+            <ul id="ul-dropdown-loginInfo">
+              <li><a >{{logInUserInfo.email}}</a></li>
+              <li><a >Sign Out</a></li>
+            </ul>
+          </li>  -->
         </ul>
         <i class="fa fa-bars mobile-nav-toggle" (click)="toggleNavBar()"></i>
       </nav><!-- .navbar -->

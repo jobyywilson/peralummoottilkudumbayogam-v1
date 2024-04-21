@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '../service/auth-service.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -6,22 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  @Input() logInUserInfo: any;
 
-  ngOnInit(): void {
+  constructor(private authService : AuthService) { }
+
+  ngOnInit() {
     
 
 
-
-
   }
-  toggleDropdown(){
-    const dropDown = document.getElementsByClassName('ul-dropdown')[0];
-    if(dropDown.classList.contains('dropdown-active')){
-      dropDown.classList.remove('dropdown-active')
-    }else{
-      dropDown.classList.add('dropdown-active')
+
+  signOut(){
+    this.authService.logout();
+  }
+  toggleDropdown(event:any){
+    console.log(event)
+    const dropDown = document.getElementById(`ul-dropdown-${event.target.id}`);
+    if(dropDown){
+      if(dropDown.classList.contains('dropdown-active')){
+        dropDown.classList.remove('dropdown-active')
+      }else{
+        dropDown.classList.add('dropdown-active')
+      }
     }
+    
     
     
   }
