@@ -26,7 +26,7 @@
             "image1":"/images/uploads/blank-profile-picture.png"
         },
         {
-            "officeBearerUserId":"",
+            "officeBearerUserId":"8A-1.1.2.1.4.2",
             "name": "Varghese P Kuruvila",
             "address": "Vellikkara",
             "postion": "Joint Secretary",
@@ -145,8 +145,8 @@
     "title": "Advisory Board",
     "members":[
         {
-            "officeBearerUserId": "",
-            "name": "P K  Geevrgheese",
+            "officeBearerUserId": "8A-1.1.2.1.4.2",
+            "name": "P K. Geevarughese (Jolly)",
             "address": "Parathanathu",
             "postion": "Advisory Board - Vellikara",
             "mobile": "9446551523"
@@ -159,8 +159,8 @@
             "mobile": "9562459173"
         },
         {
-            "officeBearerUserId": "",
-            "name": "Rejo Zakariya",
+            "officeBearerUserId": "9A-1.1.1.2.2.5.1",
+            "name": "Rejo Zachariah Rajan",
             "address": "Azhakathumannil",
             "postion": "Advisory Board - Vellikara",
             "mobile": "9495683482"
