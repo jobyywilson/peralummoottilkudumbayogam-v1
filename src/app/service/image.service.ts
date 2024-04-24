@@ -54,12 +54,16 @@ public getUserPhotoUrl(userId:string){
         return {profilePic:profilePic,spousePic:spousePic}
   }
 public getUserPhotoByUserId(userId: string): any {
-  let photoInfo = this.getUserPhotoUrl(userId)
-  if(userId && userId.endsWith("S")){
-    return photoInfo.spousePic
-  }
+    if(userId){
+      let photoInfo = this.getUserPhotoUrl(userId)
+      if(userId && userId.endsWith("S")){
+        return photoInfo.spousePic
+      }
+      return photoInfo.profilePic;
+    }
+    return DEFAULT_PROFILE_PIC;
 
-  return photoInfo.profilePic;
+
 }
 
 public getUserPhotos(url: string): any {

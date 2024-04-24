@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   constructor(private commonService :CommonService,private supabaseService: SupabaseService,private router: Router) {
     this.supabaseService.getSession().then(session=>{
-      console.log(session);
+   
       this.session = session;
       
     });
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   
   public ngOnInit(): void {
     this.supabaseService.authChanges((_, session) => {
-      console.log(session);
+     
       this.session = session;
       if(session && session.user){
         this.logInUserInfo = session.user;
