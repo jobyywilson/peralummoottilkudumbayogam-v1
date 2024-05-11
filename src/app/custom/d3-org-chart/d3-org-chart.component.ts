@@ -12,7 +12,8 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { ImageService } from 'src/app/service/image.service';
 import { CommonService } from 'src/app/service/common.service';
 import { CryptoService } from 'src/app/service/crypto.service';
-
+import { NgxGalleryImage } from 'ngx-gallery-9';
+const PHOTO_START_URL='https://image.peralummoottilkudumbayogam.org/.netlify/images?url=/gallery/'
 @Component({
   selector: 'app-d3-org-chart',
   templateUrl: './d3-org-chart.component.html',
@@ -24,7 +25,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
   @Input() data: any[] = [];
   @Input() selectedUserId: any;
-
+  galleryImages: NgxGalleryImage[] =[];
   selectedMemberToView: any;
   selectedMemberName: any;
   selectedMemberOfficeDetails: any = [];
@@ -423,6 +424,18 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
           items.push({ key: info.spouse.name, link: info.spouse.nodeId})
         }
         this.selectedMemberToView.spouses = items
+      });
+      this.commonService.doGet(`.netlify/functions/taggedPhotos?memberId=${memberId}`).subscribe((taggedPhotos) => {
+        let responseData = this.cryptoService.decryptAndParse(taggedPhotos.data)
+        let items = []
+        let end_url ='&h=100&fit=cover'
+        for (let info of responseData) {
+          items.push({
+            big:PHOTO_START_URL+info.photos.big_photo_end_url,
+            medium:PHOTO_START_URL+info.photos.medium_photo_end_url,
+            small:PHOTO_START_URL+info.photos.small_photo_end_url+end_url})
+        }
+        this.galleryImages = items
       });
     });
     this.selectedMemberToView = null

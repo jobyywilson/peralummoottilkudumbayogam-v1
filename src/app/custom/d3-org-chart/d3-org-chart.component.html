@@ -13,7 +13,7 @@
 
     <div *ngIf="selectedMemberToView!=null" >
      
-       <member-info [memberInfo]="selectedMemberToView" [officeInfo]="selectedMemberOfficeDetails" (close)="closeSideNav()" (expandMemberById)="expandMemById($event)"></member-info>
+       <member-info [galleryImages]="galleryImages" [memberInfo]="selectedMemberToView" [officeInfo]="selectedMemberOfficeDetails" (close)="closeSideNav()" (expandMemberById)="expandMemById($event)"></member-info>
     </div> 
   </mat-drawer>
   <mat-drawer-content>

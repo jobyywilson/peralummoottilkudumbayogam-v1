@@ -360,7 +360,22 @@ display: flex;
                         </div>
                         
                     </mat-expansion-panel>
-                    <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> -->
+                    <mat-expansion-panel *ngIf="galleryImages && galleryImages.length>0" [expanded]="true" [hideToggle]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Gallery
+                            </mat-panel-title>
+
+                        </mat-expansion-panel-header>
+
+                        <div class="row" style="min-width: 0;word-wrap: normal;font-weight: 400;white-space: inherit;color: rgba(28,43,51,.65);font-size: .875rem!important;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;line-height: 1.42858!important;">
+                            
+                            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" (previewClose)="previewClose()" (click)="onChange($event)"  (previewOpen)="onChange($event)"></ngx-gallery>
+
+
+                        </div>
+                        
+                    </mat-expansion-panel>
 
                 </mat-accordion>
             </div>

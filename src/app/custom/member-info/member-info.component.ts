@@ -27,13 +27,14 @@ export class MemberInfoComponent implements OnInit{
 
   @Input() officeInfo: any[] =[];
 
+  @Input() galleryImages: NgxGalleryImage[] =[];
+
   @Output() close = new EventEmitter<boolean>();
 
   @Output() expandMemberById = new EventEmitter<string>();
 
   step = 0;
   galleryOptions: NgxGalleryOptions[] = [];
-  galleryImages: NgxGalleryImage[] = [];
 
  
 
@@ -60,33 +61,13 @@ export class MemberInfoComponent implements OnInit{
 
   ngOnInit(){
     this.init();
-    this.galleryOptions = [
-      { "imageDescription": true,
-      width: '600px',
-      height: '400px',
-      thumbnailsColumns: 4,
-      imageAnimation: NgxGalleryAnimation.Slide },
-      { "image": false, "thumbnailsRemainingCount": true, "height": "100px" },
-      { "breakpoint": 500, "width": "100%", "thumbnailsColumns": 2 }
-      ];
+    this.galleryOptions = 
+      [
+        { "image": false, "thumbnailsRemainingCount": true, "height": "100px","thumbnailsColumns":2 },
+        { "breakpoint": 500, "width": "100%", "thumbnailsColumns": 2 }
+        ];
 
-  this.galleryImages = [
-      {
-          small: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
-          medium: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
-          big: 'assets/img/gallery/2007/Managing Commitee/1.jpg'
-      },
-      {
-          small: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
-          medium: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
-          big: 'assets/img/gallery/2007/Managing Commitee/1.jpg'
-      },
-      {
-          small: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
-          medium: 'assets/img/gallery/2007/Managing Commitee/1.jpg',
-          big: 'assets/img/gallery/2007/Managing Commitee/1.jpg'
-      }
-  ];
+    
   }
 
   init(){
@@ -99,6 +80,7 @@ export class MemberInfoComponent implements OnInit{
       lifeTime = `${this.formatDate(bornOn)} - ${this.formatDate(diedOn)} `
     }
     this.memberInfo.lifeTime= lifeTime
+
     if(this.memberInfo.childrens){
       this.childrens = this.memberInfo.childrens.map(function(item:any) {
         return {key:item.name,link:item.nodeId};
@@ -127,7 +109,9 @@ export class MemberInfoComponent implements OnInit{
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
-    
+    if(!inputDate){
+      return;
+    }
     const dateParts = inputDate.split("-");
     const year = dateParts[0];
     const month = months[parseInt(dateParts[1], 10) - 1];
@@ -152,6 +136,32 @@ export class MemberInfoComponent implements OnInit{
   onClickAddSpouseButton(){
     this.spouseInfo = new SpouseInfo();
   }
-  
+  previewOpen(): void {
+    let headerElement = document.getElementsByTagName("header")[0];
+    let backToTopEmenet = document.getElementById("back-to-top")
+    if(headerElement){
+      headerElement.style.zIndex ="1"
+    }
+    if(backToTopEmenet){
+      backToTopEmenet.style.zIndex ="0"
+    }
+    document.body.style.overflow = "hidden"
+    }
+    previewClose(){
+      let headerElement = document.getElementsByTagName("header")[0];
+      let backToTopEmenet = document.getElementById("back-to-top")
+
+    if(headerElement){
+      headerElement.style.zIndex ="1000"
+    }
+    if(backToTopEmenet){
+      backToTopEmenet.style.zIndex ="996"
+    }
+    document.body.style.overflow = "visible"
+
+    }
+    onChange(event:any){
+      this.previewOpen();
+    }
   
 }
