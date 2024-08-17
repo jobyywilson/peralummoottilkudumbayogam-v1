@@ -17,7 +17,7 @@ display: flex;
                                     <div>
                                         <div aria-level="3" role="heading"
                                             style="word-break: break-word;min-width: 0;text-align: left;word-wrap: break-word;font-weight: 700;white-space: inherit;color: rgba(28,43,51,1);font-size: 1rem!important;font-family: Optimistic Display,system-ui,sans-serif!important;line-height: 1.25!important;">
-                                            {{memberInfo.name}}
+                                            {{memberInfo.memberName}}
                                             <!-- <div *ngIf="memberInfo.lifeTime"
                                                 style="min-width: 0; word-wrap: normal; font-weight: 400; white-space: pre; color: rgba(28,43,51,.65); font-size: .875rem!important; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important; line-height: 1.42858!important;">
                                                 {{memberInfo.lifeTime}}
@@ -74,16 +74,24 @@ display: flex;
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <div class="col">
-                            <div class="row">
+                            <div class="row" *ngIf="memberInfo.formatedBornOn">
                                 <div class="col vitals-nospace">
                                     <mat-label class="vitals">Birth : </mat-label> 
                                 </div>
                                 <div class="col vitals-nospace">
                                     <mat-label>{{memberInfo.formatedBornOn}} </mat-label>
                                 </div>
-                                
                             </div>
-                            <div class="row">
+                            <div class="row" *ngIf="memberInfo.age" >
+                                <div class="col vitals-nospace">
+                                    <mat-label class="vitals">Age : </mat-label> 
+                                </div>
+                                <div class="col vitals-nospace">
+                                    <mat-label>{{memberInfo.age}} </mat-label>
+                                </div>
+
+                            </div>
+                            <div class="row" *ngIf="memberInfo.formatedDiedOn" >
                                 <div class="col vitals-nospace">
                                     <mat-label class="vitals">Death : </mat-label> 
                                 </div>
@@ -92,7 +100,7 @@ display: flex;
                                 </div>
 
                             </div>
-                            <div class="row">
+                            <div class="row" *ngIf="memberInfo.buriedAt" >
                                 <div class="col vitals-nospace">
                                     <mat-label class="vitals">Burial : </mat-label> 
                                 </div>

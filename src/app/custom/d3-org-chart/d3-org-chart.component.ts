@@ -394,6 +394,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       let memberName = this.selectedMemberToView.name
       let nickName = this.selectedMemberToView.nickname
       let about = this.selectedMemberToView.about
+      let title = this.selectedMemberToView.title
       let address = this.selectedMemberToView.address ? this.selectedMemberToView.address : ''
       let place = this.selectedMemberToView.place ? this.selectedMemberToView.place : ''
       if (address && place) {
@@ -408,6 +409,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       this.selectedMemberToView.about = about
       this.selectedMemberToView.address = address
       this.selectedMemberToView.memberName = nickName ? `${memberName} (${nickName})` : memberName
+      this.selectedMemberToView.memberName = title ? `${title}. ${this.selectedMemberToView.memberName}` : this.selectedMemberToView.memberName;
       this.commonService.doGet(`.netlify/functions/officeBearers?memberId=${memberId}`).subscribe((memberInfo) => {
         let responseData = this.cryptoService.decryptAndParse(memberInfo.data)
         this.selectedMemberOfficeDetails = responseData;
