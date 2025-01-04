@@ -60,12 +60,19 @@ export class FamilyTreeComponent implements OnInit {
         let photoInfo = this.imageService.getUserPhotoUrl(unParsedMember.nodeid)
         member.profilePic = photoInfo.profilePic;
         member.spousePic = photoInfo.spousePic;
+        if(unParsedMember.spouse){
+          let spouses = unParsedMember.spouse.split("::");
+          for (let i = 0; i < spouses.length; i++) {
+            member.spouseList = spouses;
+          }
+          member.spouse = spouses[spouses.length-1];
+        }
+        
 
-       
         member.nodeId = unParsedMember.nodeid;
         member.name = unParsedMember.name;
         member.parentNodeId = unParsedMember.parentnodeid;
-        member.spouse = unParsedMember.spouse;
+        
         parsedData.push(member)
       }
       this.data = parsedData;
