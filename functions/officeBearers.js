@@ -3,7 +3,8 @@ const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const ENCRYPT_KEY  = process.env.ENCRYPT_KEY
 const PATH = "/.netlify/functions/officeBearers/"
 const OFFICE_BEARERS_URL = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/office_bearers'
-const GET_ALL_OFFICE_BEARERS = `${OFFICE_BEARERS_URL}?select=name,address,postion,year&order=year.desc`
+const GET_ALL_OFFICE_BEARERS = `${OFFICE_BEARERS_URL}?select=*,user(mobile),year&order=year.desc`
+
 
 exports.handler = (event, context, callback) => {
     let nodeId = event.queryStringParameters.memberId;
