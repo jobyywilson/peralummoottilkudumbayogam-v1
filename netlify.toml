@@ -1,5 +1,6 @@
 [build]
   base = "/"
   publish = "dist/"
-  directory = "functions/"
 
+[functions]
+  directory = "functions/"
