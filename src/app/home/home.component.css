@@ -459,10 +459,8 @@
 
 @media (max-width: 800px) {
   .page-shell { width: min(100% - 32px, 1200px); }
-  .hero { min-height: 680px; }
-  .hero-image { object-position: 62% center; }
-  .hero-shade { background: linear-gradient(90deg, rgba(15, 43, 31, 0.94), rgba(15, 43, 31, 0.6) 70%, rgba(15, 43, 31, 0.28)); }
-  .hero h1 { max-width: 600px; }
+  .hero { min-height: 0; height: clamp(300px, 62vw, 520px); }
+  .hero-image { object-position: center center; }
   .story-section, .quick-links-section, .updates-section, .remembrance-section { padding: 82px 0; }
   .story-grid { grid-template-columns: 1fr; }
   .story-image-wrap { max-width: 560px; }
@@ -476,13 +474,7 @@
 
 @media (max-width: 580px) {
   .page-shell { width: calc(100% - 32px); }
-  .hero { min-height: calc(100svh - 76px); }
-  .hero-content { padding: 72px 0 104px; }
-  .hero h1 { font-size: clamp(3.15rem, 15vw, 4.5rem); }
-  .hero-copy { max-width: 93%; font-size: 0.95rem; }
-  .hero-actions { align-items: stretch; flex-direction: column; }
-  .hero-actions .button { width: 100%; }
-  .scroll-cue span { display: none; }
+  .hero { height: clamp(240px, 62vw, 360px); }
   .heritage-grid { padding: 22px 0; grid-template-columns: repeat(2, 1fr); }
   .heritage-item { padding: 16px 12px; border-right: 1px solid rgba(255, 255, 255, 0.13); }
   .heritage-item:nth-child(2) { border-right: 0; }
