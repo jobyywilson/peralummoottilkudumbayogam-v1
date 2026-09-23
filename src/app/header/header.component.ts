@@ -8,6 +8,8 @@ import { AuthService } from '../service/auth-service.service';
 export class HeaderComponent implements OnInit {
 
   @Input() logInUserInfo: any;
+  menuOpen = false;
+  dropdownOpen = false;
 
   constructor(private authService : AuthService) { }
 
@@ -21,30 +23,19 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
   toggleDropdown(event:any){
-    console.log(event)
-    const dropDown = document.getElementById(`ul-dropdown-${event.target.id}`);
-    if(dropDown){
-      if(dropDown.classList.contains('dropdown-active')){
-        dropDown.classList.remove('dropdown-active')
-      }else{
-        dropDown.classList.add('dropdown-active')
-      }
-    }
-    
-    
-    
+    event.preventDefault();
+    this.dropdownOpen = !this.dropdownOpen;
   }
   
   toggleNavBar(){
-    
-    let navbarElement: HTMLElement = document.getElementsByClassName( 'navbar' )[ 0 ] as HTMLElement;
-    if(navbarElement.classList.contains('navbar-mobile')){
-      navbarElement.classList.remove('navbar-mobile');
-    }else{
-      navbarElement.classList.add('navbar-mobile');
+    this.menuOpen = !this.menuOpen;
+    if (!this.menuOpen) {
+      this.dropdownOpen = false;
     }
-    let navBarMobile = document.getElementsByClassName( 'mobile-nav-toggle' )[ 0 ] as HTMLElement;
-    navBarMobile.classList.toggle('bi-list')
-    navBarMobile.classList.toggle('bi-x')
+  }
+
+  closeMenus(){
+    this.menuOpen = false;
+    this.dropdownOpen = false;
   }
 }

@@ -38,24 +38,17 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
 
 export function fetchMemberPhotoInfo(commonService: CommonService) {
   return () => {
-    return new Promise((resolve, reject) => {
-      // Perform the initialization logic, such as calling the API
-      commonService.fetchMemberPhotoInfo().subscribe(
-        (rawData) => {
-          let tree = rawData.tree;
-          let members = new Set();
-          for(let memberPhotoInfo of tree){
-            members.add(memberPhotoInfo.path);
-          }
-          commonService.memberIdWithPhotos = members;
-          resolve(members);
-        },
-        (error) => {
-          console.log(error)
-          resolve({});
+    commonService.fetchMemberPhotoInfo().subscribe(
+      (rawData) => {
+        let tree = rawData.tree;
+        let members = new Set();
+        for(let memberPhotoInfo of tree){
+          members.add(memberPhotoInfo.path);
         }
-      );
-    });
+        commonService.memberIdWithPhotos = members;
+      },
+      (error) => console.log(error)
+    );
   };
 }
 
@@ -107,6 +100,6 @@ export function fetchMemberPhotoInfo(commonService: CommonService) {
     { provide: APP_INITIALIZER, useFactory: fetchMemberPhotoInfo, multi: true, deps: [CommonService]  }
 
   ],
-  bootstrap: [AppComponent,AppRoutingModule]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

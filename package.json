@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "node scripts/generate-content-feed.js",
     "start": "ng serve",
+    "prebuild": "node scripts/generate-content-feed.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

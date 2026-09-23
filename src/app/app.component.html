@@ -3,3 +3,8 @@
 <router-outlet class="main-component" (activate)="onRouterOutletActivate($event)"></router-outlet>
 <app-footer></app-footer>
 
+<div class="page-loader" *ngIf="isPageLoading" role="status" aria-live="polite" aria-label="Loading page">
+  <div class="spinner-container">
+    <div class="spinner" aria-hidden="true"></div>
+  </div>
+</div>

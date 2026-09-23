@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { combineLatest, Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
-  configUrl = 'https://api.github.com/repos/jobyywilson/peralummoottilkudumbayogam-v1/git/trees/main?recursive=1';
+  configUrl = 'assets/data/content-feed.json';
   memberPhotoUrl = 'https://api.github.com/repos/jobyywilson/peralummoottil-resource/git/trees/main?recursive=1';
   memberIdWithPhotos = new Set();
   postInfo : any = [];
   eventsInfo : any = [];
   obituariesInfo : any = [];
+  private contentFeed$?: Observable<any>;
+  private mappedContent: any;
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +22,10 @@ export class CommonService {
     return this.doGet(this.memberPhotoUrl) 
   }
   getPostedInfo(){
-    return this.doGet(this.configUrl);
+    if (!this.contentFeed$) {
+      this.contentFeed$ = this.doGet(this.configUrl).pipe(shareReplay(1));
+    }
+    return this.contentFeed$;
   }
 
   doGet(url:string){
@@ -48,27 +54,27 @@ export class CommonService {
   }
 
   async mapPostedInfo(data:any){
-    let eventPath = "src/assets/content/events/";
-    let postsPath = "src/assets/content/posts/";
-    let obituariesPath = "src/assets/content/obituaries/";
-    for(let file of data["tree"]){
-      let fileName = file.path;
-      
-      if(fileName.includes(eventPath)){
+    if (this.mappedContent) {
+      return this.mappedContent;
+    }
 
-        let event = await this.doGet(fileName.replace("src/","")).toPromise()
-        this.eventsInfo.push(this.mapEvent(event,fileName))
-      }
-      else if(fileName.includes(postsPath)){
-        let posts = await this.doGet(fileName.replace("src/","")).toPromise()
-        this.postInfo.push(this.mapPost(posts,fileName))
-        
-      }
-      else if(fileName.includes(obituariesPath)){
-        let obituary = await this.doGet(fileName.replace("src/","")).toPromise()
-        this.obituariesInfo.push(this.mapObituaries(obituary,fileName))
+    this.eventsInfo = [];
+    this.postInfo = [];
+    this.obituariesInfo = [];
+
+    for (const item of data.items || []) {
+      const rawData = { ...item.data };
+
+      if (item.type === 'events') {
+        this.eventsInfo.push(this.mapEvent(rawData, item.path));
+      } else if (item.type === 'posts') {
+        this.postInfo.push(this.mapPost(rawData, item.path));
+      } else if (item.type === 'obituaries') {
+        rawData.sortTime = rawData.funeralAt;
+        this.obituariesInfo.push(this.mapObituaries(rawData, item.path));
       }
     }
+
     this.postInfo.push(...this.eventsInfo);
     this.postInfo = this.postInfo.sort(function (left :any, right: any) {
       let leftTime = left.time ? left.time:left.publishedAt;
@@ -76,12 +82,13 @@ export class CommonService {
       return -(moment(leftTime).diff(moment(rightTime)))
     });
     this.obituariesInfo = this.obituariesInfo.sort(function (left :any, right: any) {
-      return (moment(right.funeralAt).diff(moment(left.funeralAt)))
+      return (moment(right.sortTime).diff(moment(left.sortTime)))
     });
 
     localStorage.setItem('posts', JSON.stringify(this.postInfo));
     localStorage.setItem('obituaries', JSON.stringify(this.obituariesInfo));
-    return {"posts":this.postInfo,"obituaries":this.obituariesInfo}
+    this.mappedContent = {"posts":this.postInfo,"obituaries":this.obituariesInfo};
+    return this.mappedContent;
   }
 
   mapDate(rawDate:any){

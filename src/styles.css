@@ -13,8 +13,10 @@
 
 @import "./spinner.css";
 body {
-  font-family: "Open Sans", sans-serif;
-  color: #444444;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #34483d;
+  background: #faf8f2;
+  -webkit-font-smoothing: antialiased;
 }
 html {
   scroll-behavior: smooth;
@@ -30,7 +32,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: Poppins,sans-serif ;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 /*--------------------------------------------------------------
@@ -1072,10 +1074,58 @@ section {
     background: linear-gradient(to right, #188ef4 0%, #316ce8 100%);
 }
 .container{
-  max-width: 100% !important;
+  max-width: 1200px !important;
 }
 
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { min-height: 100%; }
+body { margin: 0; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+
+/* Shared visual refresh for the inner pages. */
+::selection {
+  color: #fff;
+  background: #a65d3b;
+}
+
+.breadcrumbs {
+  min-height: 96px;
+  margin-top: 92px;
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  background: #f1ede3;
+}
+
+.breadcrumbs h2 {
+  color: #19362a;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+}
+
+.breadcrumbs ol { color: #758078; }
+.breadcrumbs ol li + li::before { color: #b96742; }
+
+.section-title h2 {
+  color: #19362a;
+  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  font-weight: 600;
+  text-transform: none;
+}
+
+.section-title h2::before { background: #ded8ca; }
+.section-title h2::after { background: #b96742; }
+
+.btn-primary {
+  border-color: #1d412f !important;
+  background: #1d412f !important;
+}
+
+.btn-primary:hover {
+  border-color: #a65d3b !important;
+  background: #a65d3b !important;
+}
+
+@media (max-width: 1030px) {
+  .breadcrumbs { margin-top: 76px; }
+}

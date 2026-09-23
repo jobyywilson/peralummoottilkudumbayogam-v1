@@ -24,7 +24,7 @@
                       <div class="entry-content">
                         <p *ngIf="type=='posts' || type=='obituaries'">{{data.description}}</p>
                       </div>
-                      <div *ngIf="data.galleryImages && type=='posts'" id="portfolio" class="portfolio-area area-padding fix">
+                      <div *ngIf="type == 'posts' && data.galleryImages && data.galleryImages.length > 0" id="portfolio" class="portfolio-area area-padding fix">
                           <div class="container">
                             <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

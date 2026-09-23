@@ -1,52 +1,49 @@
-<header id="header" class="fixed-top">
-    <div class="container d-flex  justify-content-between">
-      <!-- Uncomment below if you prefer to use an image logo -->
-      
-      <div style=" display: flex;align-items: center;">
-        <a href="#" class="logo logoimg"><img src="assets/img/logo.jpg" alt="" class="img-fluid"></a>
-        
-          <div class="row">
-            <h1 class="logo sub1"><a href="#">Kallooppara</a></h1>
-            <h1 class="logo sub2"><a href="#">Peralummoottil Kudumbayogam</a></h1>
-            
-          </div>
+<header id="header" class="site-header">
+  <div class="header-inner">
+    <a routerLink="/home" class="brand" (click)="closeMenus()" aria-label="Peralummoottil Kudumbayogam home">
+      <span class="brand-mark">
+        <img src="assets/img/logo.jpg" alt="Peralummoottil Kudumbayogam family tree" />
+      </span>
+      <span class="brand-copy">
+        <span class="brand-place">Kallooppara</span>
+        <span class="brand-name">Peralummoottil Kudumbayogam</span>
+      </span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      [class.is-open]="menuOpen"
+      (click)="toggleNavBar()"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="primary-navigation"
+      aria-label="Toggle navigation"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="primary-navigation" class="site-nav" [class.is-open]="menuOpen" aria-label="Primary navigation">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenus()">Home</a>
+
+      <div class="nav-dropdown" [class.is-open]="dropdownOpen">
+        <button type="button" class="dropdown-trigger" (click)="toggleDropdown($event)" [attr.aria-expanded]="dropdownOpen">
+          Kudumbayogam
+          <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+        <div class="dropdown-panel">
+          <a routerLink="/about" routerLinkActive="active" (click)="closeMenus()">About</a>
+          <a routerLink="/history" routerLinkActive="active" (click)="closeMenus()">History</a>
+          <a routerLink="/office-bearers" routerLinkActive="active" (click)="closeMenus()">Office bearers</a>
+          <a routerLink="/administration" routerLinkActive="active" (click)="closeMenus()">Administration</a>
+          <a routerLink="/finance" routerLinkActive="active" (click)="closeMenus()">Finance</a>
+          <a routerLink="/venue" routerLinkActive="active" (click)="closeMenus()">Venue</a>
+          <a routerLink="/family-tree" routerLinkActive="active" (click)="closeMenus()">Family tree</a>
+          <a routerLink="/gallery" routerLinkActive="active" (click)="closeMenus()">Gallery</a>
         </div>
-      
+      </div>
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="active" href="/home">Home</a></li>
-          
-          
-   
-          <li class="dropdown"><a id="kudumbayogam" (click)="toggleDropdown($event)"><span>Kudumbayogam</span> 
-            <i class="fa fa-angle-down" ></i></a>
-            <ul id="ul-dropdown-kudumbayogam">
-              <li><a href="/about">About</a></li>
-              <li><a href="/history">History</a></li>
-              <li><a href="/office-bearers">Office bearers</a></li>
-              <li><a href="/administration">Administration</a></li>
-              <li><a href="/finance">Finance</a></li>
-              <li><a href="/venue">Venue</a></li>
-              <li><a href="/family-tree">Family tree</a></li>
-              <li><a href="/gallery">Gallery</a></li>
-            </ul>
-          </li> 
-          <li><a href="/genealogy">Genealogy</a></li>
-          <li><a href="/contact">Contact us</a></li>
-          <!-- <li *ngIf="!logInUserInfo"><a href="/sign-in">Sign In</a></li>
-          <li *ngIf="logInUserInfo"><a (click)="signOut()" >Sign Out</a></li> -->
-
-          <!-- <li class="dropdown" *ngIf="logInUserInfo"><a id="loginInfo"(click)="toggleDropdown($event)"><span>Profile</span> 
-            <i class="fa fa-angle-down" ></i></a>
-            <ul id="ul-dropdown-loginInfo">
-              <li><a >{{logInUserInfo.email}}</a></li>
-              <li><a >Sign Out</a></li>
-            </ul>
-          </li>  -->
-        </ul>
-        <i class="fa fa-bars mobile-nav-toggle" (click)="toggleNavBar()"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header>
+      <a routerLink="/genealogy" routerLinkActive="active" (click)="closeMenus()">Genealogy</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMenus()">Contact</a>
+    </nav>
+  </div>
+</header>

@@ -1,3 +1,43 @@
-.main-component{
-    margin-top:10px;
+:host { display: block; min-height: 100%; }
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  background: rgba(250, 248, 242, 0.78);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  animation: loader-in 160ms ease-out;
+}
+
+.page-loader .spinner-container {
+  width: 88px;
+  height: 88px;
+  border: 1px solid rgba(29, 65, 47, 0.12);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 40px rgba(29, 65, 47, 0.12);
+}
+
+.page-loader .spinner {
+  width: 42px;
+  height: 42px;
+  border-width: 4px;
+  border-top-color: #1d412f;
+}
+
+.page-loader .spinner::before {
+  top: 4px;
+  right: 4px;
+  bottom: 4px;
+  left: 4px;
+  border-width: 3px;
+  border-top-color: #b96742;
+}
+
+@keyframes loader-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

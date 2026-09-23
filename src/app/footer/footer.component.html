@@ -1,23 +1,41 @@
-<footer id="footer">
-  <div class="container">
-    <h3>Kallooppara Peralummoottil Kudumbayogam</h3>
-    <p>PURAMATTOM P.O, 689 543<br>
-      peralummoottil100@gmail.com</p>
-    <div class="social-links">
-      <!-- <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> -->
-      <a href="https://www.facebook.com/Peralummoottil-Kudumbayogam-164784514009461"><i class="fa fa-facebook-square social-media-icon" ></i></a>
-      <!-- <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-      <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-      <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
+<footer id="footer" class="site-footer">
+  <div class="footer-shell">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <span class="footer-mark"><img src="assets/img/logo.jpg" alt="" /></span>
+        <div>
+          <span class="footer-place">Kallooppara</span>
+          <h2>Peralummoottil<br />Kudumbayogam</h2>
+        </div>
+      </div>
+
+      <div class="footer-nav-group">
+        <p class="footer-label">Explore</p>
+        <nav aria-label="Footer navigation">
+          <a routerLink="/about">Our story</a>
+          <a routerLink="/family-tree">Family tree</a>
+          <a routerLink="/gallery">Gallery</a>
+          <a routerLink="/events/posts">News &amp; events</a>
+        </nav>
+      </div>
+
+      <div class="footer-contact">
+        <p class="footer-label">Stay in touch</p>
+        <p>Puramattom P.O.<br />Kerala 689 543, India</p>
+        <a href="mailto:peralummoottil100@gmail.com">peralummoottil100@gmail.com</a>
+        <a class="social-link" href="https://www.facebook.com/Peralummoottil-Kudumbayogam-164784514009461" target="_blank" rel="noopener" aria-label="Visit our Facebook page">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>
-    <div class="copyright">
-      <!-- &copy; Copyright <strong><span>MeFamily</span></strong>. All Rights Reserved -->
-      
-    </div> 
-    <div class="credits">
-      Designed by <a href="https://www.linkedin.com/in/joby-wilson-mathews-616a26123/">Joby Wilson Mathews</a>
+
+    <div class="footer-bottom">
+      <span>Preserving our heritage. Connecting our generations.</span>
+      <span>Designed by <a href="https://www.linkedin.com/in/joby-wilson-mathews-616a26123/" target="_blank" rel="noopener">Joby Wilson Mathews</a></span>
     </div>
   </div>
-</footer><!-- End Footer -->
+</footer>
 
-<a id="back-to-top" (click)="scroll()" *ngIf="showScrollUp" class="back-to-top d-flex align-items-center justify-content-center"><i class="fa fa-arrow-up"></i></a>
+<button id="back-to-top" type="button" (click)="scroll()" *ngIf="showScrollUp" class="back-to-top" aria-label="Back to top">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</button>
