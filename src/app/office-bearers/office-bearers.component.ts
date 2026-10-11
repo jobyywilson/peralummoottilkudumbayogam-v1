@@ -26,59 +26,50 @@ export class OfficeBearersComponent implements OnInit {
     this.loadAllOfficeBearers();
   }
 
-  loadAllOfficeBearers() {
-    let date = new Date();
-    let isFound = true;
-    this.selectedYear = this.getCurrentFinancialYear(new Date())
-    this.commonService
-      .doGet(`.netlify/functions/officeBearers`)
-      .subscribe((officeBearers: any) => {
-        let wholeMembers = this.cryptoService.decryptAndParse(
-          officeBearers.data
-        );
-        this.officeBearersGroupedByYear = wholeMembers.reduce((acc: any, bearer: any) => {
-          let year = bearer.year;
-          if (!acc[year]) {
-            acc[year] = [];
-          }
-          acc[year].push(bearer);
-          return acc;
-        }, {});
-        while (isFound) {
-          let fyYear = this.getCurrentFinancialYear(date);
-          this.data[fyYear] = [];
-    
-          this.commonService
-            .doGet(`assets/content/officeBearers/${fyYear}.json`)
-            .subscribe(
-              (data: any) => {
-                if (this.selectedOfficeList.length == 0) {
-                  let currentFY = this.selectedYear;
-                  this.selectedOfficeList = this.data[currentFY];
-                }
-                for (let section of data) {
-                  let sectionData: any = {};
-                  sectionData["title"] = section.title;
-                  sectionData["officeMembers"] = this.mapOfficers(
-                    section["members"]
-                  );
-                  this.data[fyYear].push(sectionData);
-                }
-              },
-              (error: any) => {
-                isFound = false;
-                console.log("officeMembers not found for " + fyYear);
-              }
-            );
-    
-          date.setFullYear(date.getFullYear() - 1);
-          if (fyYear == "1973-1974") {
-            isFound = false;
-          }
-        }
-        this.years = Object.keys(this.data);
-      });
+  loading = true;
+  loadError = false;
 
+  loadAllOfficeBearers() {
+    this.commonService.doGet('assets/data/office-bearers.json').subscribe(
+      (lists: any) => {
+        this.data = lists;
+        this.years = Object.keys(lists).sort().reverse();
+        const currentYear = this.getCurrentFinancialYear(new Date());
+        this.selectedYear = this.years.includes(currentYear) ? currentYear : this.years[0];
+        this.updateSelectedOfficeList();
+        this.loading = false;
+        this.loadContactDetails();
+      },
+      () => {
+        this.loading = false;
+        this.loadError = true;
+      }
+    );
+  }
+
+  loadContactDetails() {
+    this.commonService.doGet('.netlify/functions/officeBearers').subscribe(
+      (response: any) => {
+        try {
+          const members = this.cryptoService.decryptAndParse(response.data);
+          this.officeBearersGroupedByYear = members.reduce((groups: any, member: any) => {
+            (groups[member.year] = groups[member.year] || []).push(member);
+            return groups;
+          }, {});
+          this.updateSelectedOfficeList();
+        } catch {
+          // The saved office bearer lists remain available without contact details.
+        }
+      },
+      () => { /* Contact details are optional. */ }
+    );
+  }
+
+  updateSelectedOfficeList() {
+    this.selectedOfficeList = (this.data[this.selectedYear] || []).map((section: any) => ({
+      title: section.title,
+      officeMembers: this.mapOfficers(section.members)
+    }));
   }
 
   mapOfficers(officeRawData: any) {
@@ -86,7 +77,7 @@ export class OfficeBearersComponent implements OnInit {
     if (!rawData) {
       return rawData;
     }
-    let selectedYearOfficeMembers = this.officeBearersGroupedByYear[this.selectedYear] 
+    let selectedYearOfficeMembers = this.officeBearersGroupedByYear?.[this.selectedYear];
     rawData.map((obj: any) => {
       obj.image = this.imageService.getUserPhotoByUserId(
         obj.officeBearerUserId
@@ -106,7 +97,7 @@ export class OfficeBearersComponent implements OnInit {
     }
     for(let member of officeMembers){
       if(member.officeBearerUserId == memberId){
-       let mobileNo =  member.user.mobile;
+       let mobileNo =  member.user?.mobile;
        if(mobileNo =="undefined" || !mobileNo){
         return ""
        }else{
@@ -114,14 +105,14 @@ export class OfficeBearersComponent implements OnInit {
        }
       }
     }
-    
+    return "";
   }
 
 
   onYearchange(fYear: any) {
     let year = fYear.value;
     this.selectedYear = year;
-    this.selectedOfficeList = this.data[year];
+    this.updateSelectedOfficeList();
   }
   getCurrentFinancialYear(date: Date) {
     let fiscalyear = "";

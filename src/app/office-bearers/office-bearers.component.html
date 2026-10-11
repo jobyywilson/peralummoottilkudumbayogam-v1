@@ -19,14 +19,17 @@
       <div class="container">
         
 
-        <div class="col-sm-4 col-md-4 year-selection" data-aos="fade-right">
+        <p *ngIf="loading" role="status">Loading office bearers…</p>
+        <p *ngIf="loadError" role="alert">Unable to load office bearers. Please refresh to try again.</p>
+        <p *ngIf="!loading && !loadError && !years.length">No office bearers have been published yet.</p>
+        <div *ngIf="years.length" class="col-sm-4 col-md-4 year-selection" data-aos="fade-right">
           <div class="row">
             <div class="col-sm-2 col-md-5 year">
               <h4>Year : </h4>
             </div>
             <div class="col-sm-5 col-md-7">
               <select (change)="onYearchange($event.target)" class="form-select" aria-label="Default select example">
-                <option *ngFor="let year of years">{{year}}</option>
+                <option *ngFor="let year of years" [value]="year" [selected]="year === selectedYear">{{year}}</option>
               </select>
               
             </div>

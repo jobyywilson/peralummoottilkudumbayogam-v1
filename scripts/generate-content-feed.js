@@ -35,3 +35,11 @@ fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify({ items }, null, 2)}\n`);
 
 console.log(`Generated content feed with ${items.length} items.`);
+
+// Bundle the published lists so the page does not depend on the contacts API.
+const officeDirectory = path.join(contentRoot, 'officeBearers');
+const officeLists = {};
+for (const fileName of fs.readdirSync(officeDirectory).filter(name => /^\d{4}-\d{4}\.json$/.test(name)).sort()) {
+  officeLists[fileName.slice(0, -5)] = JSON.parse(fs.readFileSync(path.join(officeDirectory, fileName), 'utf8'));
+}
+fs.writeFileSync(path.join(path.dirname(outputPath), 'office-bearers.json'), `${JSON.stringify(officeLists, null, 2)}\n`);
