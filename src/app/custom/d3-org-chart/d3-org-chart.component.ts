@@ -165,9 +165,113 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     }));
   }
 
+  readonly cardWidth = 160;
+  readonly cardGap = 40;
+  readonly familyColors = ['#2879b9', '#8b5ab5', '#168d86', '#b27822'];
+
   getNodeWidth(node: any): number {
-    const count = this.getSpouseCards(node.data).length;
-    return 120 * (1 + (count || (node.children || node._children ? 1 : 0)));
+    const count = 1 + (this.getSpouseCards(node.data).length || (node.children || node._children ? 1 : 0));
+    return count * this.cardWidth + (count - 1) * this.cardGap;
+  }
+
+  private indexedData: any[] | undefined;
+  private membersById = new Map<string, any>();
+
+  getParentPair(member: any): any {
+    if (this.indexedData !== this.data) {
+      this.membersById = new Map(this.data.map(item => [item.nodeId, item]));
+      this.indexedData = this.data;
+    }
+    const parent = this.membersById.get(member.parentNodeId);
+    if (!parent || this.getSpouseCards(parent).length < 2) return null;
+    const spouses = this.getSpouseCards(parent);
+    const index = spouses.findIndex(spouse => spouse.nodeId && spouse.nodeId === member.secondaryParentMemberId);
+    return {
+      index,
+      color: index < 0 ? '#727780' : this.familyColors[index % this.familyColors.length],
+      label: index < 0 ? `${parent.name} · Other parent not recorded` : `${parent.name} & ${spouses[index].name}`
+    };
+  }
+
+  getNodeHeight(member: any): number {
+    return 200;
+  }
+
+  getCardCenter(node: any, index: number): number {
+    const columns = node.familyColumns || Array.from({ length: Math.round((node.width + this.cardGap) / (this.cardWidth + this.cardGap)) }, () => this.cardWidth);
+    return columns.slice(0, index).reduce((sum: number, width: number) => sum + width + this.cardGap, 0) + columns[index] / 2;
+  }
+
+  getFamilyAnchorX(node: any, index: number): number {
+    const center = this.getCardCenter(node, index);
+    return index > 0 ? center - this.cardWidth / 2 - this.cardGap / 2 : center;
+  }
+
+  getParentLinkX(node: any): number {
+    const pair = this.getParentPair(node.data);
+    if (!pair) return node.parent.x;
+    return node.parent.x - node.parent.width / 2 + this.getFamilyAnchorX(node.parent, pair.index + 1);
+  }
+
+  getExpandCardIndex(node: any): number {
+    const children = node.children || node._children || [];
+    const groups = new Set<number>(children.map((child: any) => {
+      const pair = this.getParentPair(child.data);
+      return pair ? pair.index + 1 : 0;
+    }));
+    return groups.size === 1 ? Array.from(groups)[0] : 0;
+  }
+
+  getExpandButtonX(node: any): number {
+    const index = this.getExpandCardIndex(node);
+    return this.getFamilyAnchorX(node, index);
+  }
+
+  getExpandButtonY(node: any): number {
+    return this.getExpandCardIndex(node) > 0 ? node.height / 2 : node.height;
+  }
+
+  layoutParentGroups(root: any): void {
+    const gap = 60;
+    const measure = (node: any): number => {
+      const children = node.children || [];
+      children.forEach(measure);
+      const count = Math.round((this.getNodeWidth(node) + this.cardGap) / (this.cardWidth + this.cardGap));
+      const grouped = this.getSpouseCards(node.data).length > 1;
+      node.familyGroups = Array.from({ length: grouped ? count : 1 }, () => []);
+      for (const child of children) {
+        const pair = this.getParentPair(child.data);
+        node.familyGroups[grouped && pair ? pair.index + 1 : 0].push(child);
+      }
+      const groupWidth = (group: any[]) => group.reduce((sum, child) => sum + child.familyWidth, 0) + Math.max(0, group.length - 1) * gap;
+      node.familyColumns = Array.from({ length: count }, (_, index) => grouped ? Math.max(this.cardWidth, groupWidth(node.familyGroups[index])) : this.cardWidth);
+      node.width = node.familyColumns.reduce((sum: number, width: number) => sum + width, 0) + (count - 1) * this.cardGap;
+      node.familyWidth = grouped ? node.width : Math.max(node.width, groupWidth(children));
+      return node.familyWidth;
+    };
+    const place = (node: any, center: number) => {
+      node.x = center;
+      node.familyGroups.forEach((group: any[], index: number) => {
+        const width = group.reduce((sum, child) => sum + child.familyWidth, 0) + Math.max(0, group.length - 1) * gap;
+        const groupCenter = node.familyGroups.length > 1 ? center - node.width / 2 + this.getFamilyAnchorX(node, index) : center;
+        let left = groupCenter - width / 2;
+        group.forEach(child => { place(child, left + child.familyWidth / 2); left += child.familyWidth + gap; });
+      });
+    };
+    measure(root);
+    place(root, 0);
+  }
+
+  getChartData(): any[] {
+    // Stable sibling grouping follows the displayed spouses, with unknown parentage last.
+    return [...this.data].sort((a, b) => {
+      if (a.parentNodeId !== b.parentNodeId) return String(a.parentNodeId || '').localeCompare(String(b.parentNodeId || ''));
+      const rank = (member: any) => {
+        const pair = this.getParentPair(member);
+        return pair && pair.index >= 0 ? pair.index : Number.MAX_SAFE_INTEGER;
+      };
+      return rank(a) - rank(b);
+    });
   }
 
   escapeCardText(value: string): string {
@@ -184,12 +288,22 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       return;
     }
     let _this = this
+    const bindings = this.chart.getChartState().layoutBindings;
+    if (bindings?.top) {
+      bindings.top.swap = (node: any) => { if (!node.parent) this.layoutParentGroups(node); };
+      bindings.top.linkParentX = (node: any) => this.getParentLinkX(node);
+      bindings.top.linkParentY = (node: any) => node.parent.y + node.parent.height * (this.getParentPair(node.data)?.index >= 0 ? 0.5 : 1);
+      // Incoming links attach to the member card.
+      bindings.top.linkX = (node: any) => node.x - node.width / 2 + this.getCardCenter(node, 0);
+      bindings.top.linkY = (node: any) => node.y;
+    }
     this.chart
       .container(this.chartContainer.nativeElement)
 
-      .data(this.data)
+      .data(this.getChartData())
       .nodeWidth((d: any) => this.getNodeWidth(d))
-      .nodeHeight((d: any) => 180)
+      .nodeHeight((d: any) => this.getNodeHeight(d.data))
+      .childrenMargin(() => 90)
       .compact(false)
       .compactMarginBetween((d: any) => 65)
       .compactMarginPair((d: any) => 100)
@@ -228,7 +342,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
         d3.select(arr[index])
 
           .attr('stroke', (d: any) =>
-            d.data._upToTheRootHighlighted ? '#14760D' : '#bab4a2'
+            _this.getParentPair(d.data)?.color || (d.data._upToTheRootHighlighted ? '#14760D' : '#bab4a2')
           )
           .attr("stroke-width", (d: any) => '3px')
 
@@ -246,6 +360,8 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       //   }
       // })
       .nodeUpdate((node: any, i: any, arr: any) => {
+        d3.select(arr[i]).select('.node-button-g')
+          .attr('transform', `translate(${this.getExpandButtonX(node)},${this.getExpandButtonY(node)})`);
         // if (this.isSideMenuOpened && _this.selectedMemberName == node.data.nodeId) {
         //   _this.prepareMemberDataToView(node, false);
         //   _this.toogleSideNav()
@@ -271,27 +387,32 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
         if (!spouses.length && (d.children || d._children)) {
           spouses.push({ name: 'Spouse', nodeId: `${d.data.nodeId}S`, profilePic: d.data.spousePic });
         }
+        const cardHeight = d.height;
         const people = [{ name: d.data.name, profilePic: d.data.profilePic }, ...spouses];
         const cards = people.map((person: any, index: number) => {
           const first = index === 0;
-          const last = index === people.length - 1;
-          return `<div ${first ? 'id="main-node"' : `class="spouse-card" data-spouse-index="${index - 1}"`}
-            onmouseout="this.style.opacity=1;" onmouseover="this.style.opacity=0.5;"
-            style="box-sizing:border-box;flex:0 0 120px;width:120px;height:${d.height}px;
-              background:white;border-top:4px solid ${first ? 'blue' : '#ce4b75'};
-              ${first ? 'border-radius:10px 0 0 10px;' : 'border-left:1px solid rgb(230 216 220);'}
-              ${last ? 'border-top-right-radius:10px;border-bottom-right-radius:10px;' : ''}
-              cursor:${first || person.nodeId ? 'pointer' : 'default'};">
-            <div style="height:90px;display:flex;justify-content:center;align-items:center;">
-              <img src="${_this.escapeCardText(_this.imageService.getUserPhotos(person.profilePic))}"
-                style="border-radius:100px;width:80px;height:80px;background:#ededed;" />
+          const color = first ? '#40556c' : _this.familyColors[(index - 1) % _this.familyColors.length];
+          const columnWidth = d.familyColumns?.[index] || _this.cardWidth;
+          return `<div style="width:${columnWidth}px;flex:0 0 ${columnWidth}px;display:flex;justify-content:center;"><div ${first ? 'id="main-node"' : `class="spouse-card" data-spouse-index="${index - 1}"`}
+            style="box-sizing:border-box;flex:0 0 ${_this.cardWidth}px;width:${_this.cardWidth}px;height:${cardHeight}px;
+              background:white;border:1px solid #dce1e5;border-top:3px solid ${color};border-radius:12px;
+              box-shadow:0 2px 6px rgb(0 0 0 / 10%);cursor:${first || person.nodeId ? 'pointer' : 'default'};">
+            <div style="height:88px;display:flex;justify-content:center;align-items:center;">
+              <img alt="" src="${_this.escapeCardText(_this.imageService.getUserPhotos(person.profilePic))}"
+                style="border-radius:100px;width:72px;height:72px;background:#ededed;" />
             </div>
-            <div style="padding:0 5px;overflow-wrap:anywhere;font-size:15px;color:black;text-align:center;font-weight:bold;">
+            <div style="padding:0 8px;overflow-wrap:anywhere;font-size:14px;line-height:18px;color:#202b36;text-align:center;font-weight:600;">
               ${_this.escapeCardText(person.name)}
             </div>
-          </div>`;
+          </div></div>`;
         }).join('');
-        return `<div style="display:flex;width:${d.width}px;height:${d.height}px;box-shadow:0 0 6px rgb(0 0 0 / 20%);border-radius:10px;">${cards}</div>`;
+        const partnerLine = spouses.length ? `<svg class="partner-connector" aria-label="Partners of ${_this.escapeCardText(d.data.name)}" width="${d.width}" height="${cardHeight}"
+          style="position:absolute;left:0;top:0;pointer-events:none;overflow:visible;">
+          <path d="M ${_this.getCardCenter(d, 0)} ${cardHeight / 2} H ${_this.getCardCenter(d, people.length - 1)}" fill="none" stroke="#b7c0c8" stroke-width="2" />
+        </svg>` : '';
+        return `<div style="position:relative;width:${d.width}px;height:${d.height}px;">${partnerLine}<div style="position:relative;display:flex;gap:${_this.cardGap}px;">${cards}</div></div>`;
+
+
       })
       .render();
     this.chart.expand('2X-1');
@@ -305,27 +426,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
   }
   updateLink() {
-    let elements = document.querySelectorAll(".links-wrapper > .link")
-    if (elements) {
-      elements.forEach(path => {
-        let dRaw = path.getAttribute("d");
-        if (dRaw) {
-          let dFormated = dRaw.replace(/\s+/g, " ").trim();
-          let dArray = dFormated.split(" ");
-          let isPositive = Number(dArray[1]) >= 0;
-          dArray[1] = this.formatPath(dArray[1], isPositive)
-
-          dArray[4] = this.formatPath(dArray[4], isPositive)
-          dArray[7] = this.formatPath(dArray[7], isPositive)
-          dArray[10] = this.formatPath(dArray[10], isPositive)
-          dArray[13] = this.formatPath(dArray[13], isPositive)
-          dArray[15] = this.formatPath(dArray[15], isPositive)
-          dArray[17] = this.formatPath(dArray[17], isPositive)
-          let formatedD = dArray.join(" ")
-          path.setAttribute("d", formatedD)
-        }
-      })
-    }
+    // Link endpoints are handled by the chart layout, including spouse-specific anchors.
   }
 
   formatPath(str: string, isPositive: boolean) {

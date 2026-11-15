@@ -77,6 +77,19 @@ export class FamilyTreeComponent implements OnInit {
       // The tree feed contains names only. Resolve real IDs for multiple spouses
       // rather than assuming that the name order matches numbered spouse IDs.
       for (const member of parsedData.filter((item: any) => item.spouseList?.length > 1)) {
+        // Child records carry the actual co-parent ID; never infer it from spouse order.
+        this.commonService.doGet(`.netlify/functions/users?nodeId=${encodeURIComponent(member.nodeId)}`)
+          .subscribe({
+            next: (response: any) => {
+              const details = this.cryptoService.decryptAndParse(response.data);
+              for (const child of details[0]?.childrens || []) {
+                const treeChild = parsedData.find((item: any) => item.nodeId === child.nodeId);
+                if (treeChild) treeChild.secondaryParentMemberId = child.secondaryParentMemberId;
+              }
+              this.data = [...parsedData];
+            },
+            error: () => { /* Unknown parentage stays explicitly unconfirmed. */ }
+          });
         this.commonService.doGet(`.netlify/functions/relationship?memberId=${encodeURIComponent(member.nodeId)}`)
           .subscribe({
             next: (response: any) => {
@@ -88,7 +101,10 @@ export class FamilyTreeComponent implements OnInit {
                 const index = remaining.findIndex((spouse: any) => spouse.name.trim() === name);
                 return index >= 0 ? remaining.splice(index, 1)[0] : { name };
               });
-              member.spouses = [...ordered, ...remaining].map((spouse: any) => ({
+              member.spouses = [...ordered, ...remaining].sort((a: any, b: any) => {
+                const rank = (person: any) => person.nodeId?.match(/S(\d*)$/)?.[1] || '0';
+                return Number(rank(a)) - Number(rank(b));
+              }).map((spouse: any) => ({
                 ...spouse,
                 profilePic: this.imageService.getUserPhotoByUserId(spouse.nodeId)
               }));
