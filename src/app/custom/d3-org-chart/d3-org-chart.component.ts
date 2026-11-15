@@ -419,13 +419,16 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
         }
         this.selectedMemberOfficeDetails = items
       });
+      const memberForRelationships = this.selectedMemberToView;
       this.commonService.doGet(`.netlify/functions/relationship?memberId=${memberId}`).subscribe((relationShipInfo) => {
         let responseData = this.cryptoService.decryptAndParse(relationShipInfo.data)
         let items = []
         for (let info of responseData) {
-          items.push({ key: info.spouse.name, link: info.spouse.nodeId})
+          if (info.spouse) {
+            items.push({ key: info.spouse.name, link: info.spouse.nodeId})
+          }
         }
-        this.selectedMemberToView.spouses = items
+        memberForRelationships.spouses = items
       });
       this.commonService.doGet(`.netlify/functions/taggedPhotos?memberId=${memberId}`).subscribe((taggedPhotos) => {
         let responseData = this.cryptoService.decryptAndParse(taggedPhotos.data)

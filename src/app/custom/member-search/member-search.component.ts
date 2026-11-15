@@ -58,7 +58,7 @@ export class MemberSearchComponent {
 
       }
       if (this.selectedMember.isOfficeBearer) {
-        this.commonService.doGet(`.netlify/functions/officeBearers/${selectedMemberId}`).subscribe((memberInfo) => {
+        this.commonService.doGet(`.netlify/functions/officeBearers?memberId=${selectedMemberId}`).subscribe((memberInfo) => {
           let responseData = this.cryptoService.decryptAndParse(memberInfo.data)
           this.selectedMember.officeInfo = responseData;
           

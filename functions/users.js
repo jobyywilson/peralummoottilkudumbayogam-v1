@@ -1,9 +1,6 @@
 const axios = require('axios');
 
-const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJocnFwanF2b3BjZXZodWNhemxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMyNzA2ODQsImV4cCI6MTk5ODg0NjY4NH0.sWqpgYXhcdsrjhLloL4lzD3GvQ9Ix4l4m1nXQnc471Q';
-const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY || process.env.SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY;
-// Keep the fallback aligned with the browser CryptoService. Netlify should still provide ENCRYPT_KEY.
-const ENCRYPT_KEY = process.env.ENCRYPT_KEY || 'hf8685345fhjs9h';
+const { SUPABASE_API_KEY, ENCRYPT_KEY } = require('./lib/family-api-config');
 const PATH = '/.netlify/functions/users';
 const SUPABASE_HOST = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/';
 const MEMBER_RESOURCE = 'user';

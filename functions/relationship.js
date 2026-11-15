@@ -1,11 +1,14 @@
 const axios = require('axios');
-const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
-const ENCRYPT_KEY  = process.env.ENCRYPT_KEY
+const { SUPABASE_API_KEY, ENCRYPT_KEY } = require('./lib/family-api-config');
 const RELATIONSHIP_URL = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/relationship'
 
-exports.handler = (event, context, callback) => {
+exports.handler = async (event) => {
 
-    let nodeId = event.queryStringParameters.memberId;
+    const memberId = event.queryStringParameters?.memberId;
+    if (!memberId || !/^[A-Za-z0-9.-]+$/.test(memberId)) {
+      return jsonResponse(400, { error: 'A valid memberId is required.' });
+    }
+    const nodeId = encodeURIComponent(memberId);
     const myHeaders = {
         'Authorization': `Bearer ${SUPABASE_API_KEY}`,
         'apiKey': SUPABASE_API_KEY
@@ -17,15 +20,22 @@ exports.handler = (event, context, callback) => {
         url = `${RELATIONSHIP_URL}?primary_member_id=eq.${nodeId}&select=spouse:relationship_secondary_member_id_fkey(nodeId,name)`
       }
 
-      axios.get(url, { headers: myHeaders, responseType: 'json' }) .then(json => {
-        callback(null, {
+      try {
+        const json = await axios.get(url, { headers: myHeaders, responseType: 'json', timeout: 15000 });
+        return {
             statusCode: 200,
+            headers: { 'Content-Type': 'application/json' },
             body: getEncryptedData(json.data)
-        });
-    })
-    .catch(ex => callback(ex));
+        };
+      } catch (error) {
+        console.error('Relationship function failed', { status: error.response?.status, message: error.message });
+        return jsonResponse(502, { error: 'Unable to load spouse details.' });
+      }
 };
 
+function jsonResponse(statusCode, body) {
+    return { statusCode, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
+}
 
 function getEncryptedData(data){
     let encryptedData = encrypt(JSON.stringify(data))
