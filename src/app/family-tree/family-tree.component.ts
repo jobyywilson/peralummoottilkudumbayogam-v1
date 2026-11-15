@@ -19,8 +19,8 @@ export class FamilyTreeComponent implements OnInit {
     let paramMap = this.route.snapshot.paramMap;
     if(paramMap){
       let selectedUserId : any = paramMap.get("id");
-      if(selectedUserId && selectedUserId.endsWith("S")){
-        selectedUserId = selectedUserId.slice(0, selectedUserId.length - 1);
+      if(selectedUserId && /S\d*$/.test(selectedUserId)){
+        selectedUserId = selectedUserId.replace(/S\d*$/, "");
       }
       this.selectedUserId = selectedUserId
     }
@@ -61,11 +61,9 @@ export class FamilyTreeComponent implements OnInit {
         member.profilePic = photoInfo.profilePic;
         member.spousePic = photoInfo.spousePic;
         if(unParsedMember.spouse){
-          let spouses = unParsedMember.spouse.split("::");
-          for (let i = 0; i < spouses.length; i++) {
-            member.spouseList = spouses;
-          }
-          member.spouse = spouses[spouses.length-1];
+          member.spouseList = unParsedMember.spouse.split("::")
+            .map((name: string) => name.trim()).filter((name: string) => !!name);
+          member.spouse = member.spouseList[member.spouseList.length - 1];
         }
         
 
@@ -76,6 +74,29 @@ export class FamilyTreeComponent implements OnInit {
         parsedData.push(member)
       }
       this.data = parsedData;
+      // The tree feed contains names only. Resolve real IDs for multiple spouses
+      // rather than assuming that the name order matches numbered spouse IDs.
+      for (const member of parsedData.filter((item: any) => item.spouseList?.length > 1)) {
+        this.commonService.doGet(`.netlify/functions/relationship?memberId=${encodeURIComponent(member.nodeId)}`)
+          .subscribe({
+            next: (response: any) => {
+              const relationships = this.cryptoService.decryptAndParse(response.data);
+              const spouses = relationships.map((item: any) => item.spouse)
+                .filter((spouse: any) => spouse && spouse.nodeId);
+              const remaining = [...spouses];
+              const ordered = member.spouseList.map((name: string) => {
+                const index = remaining.findIndex((spouse: any) => spouse.name.trim() === name);
+                return index >= 0 ? remaining.splice(index, 1)[0] : { name };
+              });
+              member.spouses = [...ordered, ...remaining].map((spouse: any) => ({
+                ...spouse,
+                profilePic: this.imageService.getUserPhotoByUserId(spouse.nodeId)
+              }));
+              this.data = [...parsedData];
+            },
+            error: () => { /* Keep the spouse names visible if details cannot load. */ }
+          });
+      }
     
       let prevIndex = 0;
       // setInterval((d:any) => {

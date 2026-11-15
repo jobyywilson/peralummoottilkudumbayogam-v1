@@ -10,12 +10,22 @@ export class VenueComponent implements OnInit {
 
   constructor(private commonService : CommonService) { }
 
-  venueDetails : any;
+  venueDetails: { slNo: number; year: number; nameAndPlace: string }[] = [];
+  filteredVenues = this.venueDetails;
+  searchTerm = '';
 
   ngOnInit(): void {
     this.commonService.readFile("./assets/data/venue.json").subscribe((data:any)=>{
-      this.venueDetails = data;
+      this.venueDetails = [...data].sort((a, b) => b.year - a.year);
+      this.filterVenues();
     });
+  }
+
+  filterVenues(): void {
+    const query = this.searchTerm.trim().toLowerCase();
+    this.filteredVenues = this.venueDetails.filter(venue =>
+      `${venue.year} ${venue.slNo} ${venue.nameAndPlace}`.toLowerCase().includes(query)
+    );
   }
 
   ordinal_suffix_of(i : number) {

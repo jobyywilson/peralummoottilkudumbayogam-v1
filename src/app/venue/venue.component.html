@@ -1,63 +1,69 @@
-<main id="main">
-  <section id="breadcrumbs" class="breadcrumbs">
+<main id="main" class="venue-page">
+  <section class="venue-intro" aria-labelledby="venue-title">
     <div class="container">
-      <div class="d-flex justify-content-between align-items-center">
-        <h2>Venue</h2>
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li>Venue</li>
-        </ol>
+      <nav class="venue-breadcrumb" aria-label="Breadcrumb">
+        <a routerLink="/home">Home</a><span aria-hidden="true">/</span><span>Venue</span>
+      </nav>
+      <div class="intro-grid">
+        <div>
+          <p class="eyebrow">OUR ANNUAL GATHERINGS</p>
+          <h1 id="venue-title">Places we gather.<br><em>Memories we share.</em></h1>
+          <p class="intro-copy">Every year, a different place brings our family together.
+            Explore the homes, halls, and communities that have hosted our Kudumbayogam through the years.</p>
+          <a class="archive-link" href="/venue#venue-archive">Explore the venue archive <span aria-hidden="true">↓</span></a>
+        </div>
+        <aside class="tradition-note" aria-labelledby="tradition-title">
+          <span class="note-icon" aria-hidden="true"><i class="fa fa-calendar-o"></i></span>
+          <p class="eyebrow">A TRADITION OF TOGETHERNESS</p>
+          <h2 id="tradition-title">Home for the holidays</h2>
+          <p>Our annual general meeting is traditionally held over two convenient days between Christmas and New Year.</p>
+          <div class="note-footer">Family fellowship <span>·</span> Arts &amp; sports <span>·</span> Women's conference</div>
+        </aside>
       </div>
+      <details class="history-note">
+        <summary><span>Our gathering story</span><span class="history-preview">Reorganised in 1973. Carried forward by every Sakha.</span></summary>
+        <div class="history-copy">
+          <p>The first Annual General Body meeting after the reorganisation of the Kudumbayogam was held at the residence of Shri. K.C. Issac, Kottackal Puthuparampil, on Thursday, 27 December 1973, under the committee formed in April that year.</p>
+          <p>Based on an entry in the 1917 diary of Kottackal GeeVarghese Chandy, the 1973 gathering is estimated to have been the 57th annual meeting. Since 1975, a different Sakha has hosted the gathering each year under the guidance of the Managing Committee.</p>
+        </div>
+      </details>
     </div>
   </section>
 
-  <section id="about" class="about">
+  <section id="venue-archive" class="venue-archive" aria-labelledby="archive-title">
     <div class="container">
-      <div class="section-title">
-        <h2>Venue</h2>
-      </div>
-      <div class="row content col">
-        <h3>Annual general meeting</h3>
-        <p>
-          The annual meeting is regularly convened on the convenient two days
-          between the X'mas day and the New Year day including the meeting of
-          young men. Arts and Sports Contest and Women's conference.
-        </p>
-        <h3>Venue of Annual General Body were held.</h3>
-        <p>
-          The Annual General body was held under the auspices of the committee
-          formed in April 1973. The First Annual General Body meeting after the
-          re-organization of the Kudumbayogam was held in the residence of Shri.
-          K.C. Issac, Kottackal Puthuparampil, on the 27th of December 1973
-          Thursday.
-          <br />  As per the entry in the Diary of Kottackal GeeVarghese Chandy
-          in 1917 counting the years from then, the Annual Meeting of 1973 is
-          estimated to be the 57th. Since 1975, the Annual General Body is
-          conducted under the auspices of each Sakha every year under the
-          control of the Managing Committee.
-        </p>
-
-
-        <div class="row venue-details">
-          <div>
-            <h3 class="list-heading">List</h3>
-            <ul class="timeline">
-              <li *ngFor="let venue of venueDetails">
-                <h4 class="timelineData"
-                  >{{ venue.slNo
-                  }}<sup>{{ ordinal_suffix_of(venue.slNo) }}</sup>
-                  Kudumbayogam</h4
-                >
-                <h5 class="timelineData" class="float-right">{{ venue.year }}</h5>
-                <p class="timelineData">{{ venue.nameAndPlace }}</p>
-                <hr>
-              </li>
-            </ul>
+      <div class="archive-header">
+        <div>
+          <p class="eyebrow">THE VENUE ARCHIVE</p>
+          <h2 id="archive-title">A place in our history</h2>
+          <p class="archive-description">{{ venueDetails.length }} recorded gatherings <span aria-hidden="true">·</span> Most recent first</p>
+        </div>
+        <div class="archive-search">
+          <label for="venue-search">Find a gathering</label>
+          <div class="search-field">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input id="venue-search" type="search" placeholder="Search year, host, or place" [(ngModel)]="searchTerm" (ngModelChange)="filterVenues()">
           </div>
         </div>
       </div>
+      <p class="search-results" *ngIf="searchTerm" role="status">{{ filteredVenues.length }} {{ filteredVenues.length === 1 ? 'gathering' : 'gatherings' }} found</p>
+      <div class="archive-columns" aria-hidden="true"><span>YEAR</span><span>GATHERING</span><span>HOST &amp; VENUE</span></div>
+      <ol class="venue-list" aria-label="Past annual gathering venues">
+        <li *ngFor="let venue of filteredVenues" class="venue-row">
+          <div class="venue-year">{{ venue.year }}<span class="year-dot" aria-hidden="true"></span></div>
+          <div class="gathering-title">
+            <h3>{{ venue.slNo }}<sup>{{ ordinal_suffix_of(venue.slNo) }}</sup> <span>Kudumbayogam</span></h3>
+            <span class="centenary-label" *ngIf="venue.slNo === 100">Centenary gathering</span>
+          </div>
+          <p class="venue-place"><i class="fa fa-map-marker" aria-hidden="true"></i><span>{{ venue.nameAndPlace }}</span></p>
+        </li>
+      </ol>
+      <div class="empty-state" *ngIf="searchTerm && !filteredVenues.length">
+        <h3>No gatherings found</h3>
+        <p>Try another year, host name, or place.</p>
+        <button type="button" (click)="searchTerm = ''; filterVenues()">Clear search</button>
+      </div>
+      <p class="archive-end" *ngIf="!searchTerm && venueDetails.length"><span aria-hidden="true">✦</span> Many places. One family.</p>
     </div>
-
-    <!-- ======= Features Section ======= -->
   </section>
 </main>

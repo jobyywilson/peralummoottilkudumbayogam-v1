@@ -152,6 +152,30 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.updateChart();
   }
+  getSpouseCards(member: any): any[] {
+    if (member.spouses?.length) {
+      return member.spouses;
+    }
+    const names = member.spouseList?.length ? member.spouseList : (member.spouse ? [member.spouse] : []);
+    return names.map((name: string) => ({
+      name,
+      // Only a single spouse can safely use the legacy ID and photo.
+      nodeId: names.length === 1 ? `${member.nodeId}S` : undefined,
+      profilePic: names.length === 1 ? member.spousePic : undefined
+    }));
+  }
+
+  getNodeWidth(node: any): number {
+    const count = this.getSpouseCards(node.data).length;
+    return 120 * (1 + (count || (node.children || node._children ? 1 : 0)));
+  }
+
+  escapeCardText(value: string): string {
+    return (value || '').replace(/[&<>"']/g, char => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[char] || char));
+  }
+
   updateChart() {
     if (!this.data || this.data['length']  == 0) {
       return;
@@ -164,7 +188,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       .container(this.chartContainer.nativeElement)
 
       .data(this.data)
-      .nodeWidth((d: any) => d.children || d._children || d.data.spouse ? 240 : 120)
+      .nodeWidth((d: any) => this.getNodeWidth(d))
       .nodeHeight((d: any) => 180)
       .compact(false)
       .compactMarginBetween((d: any) => 65)
@@ -231,73 +255,43 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
           _this.toogleSideNav()
 
         })
-        d3.select(arr[i]).select('#spouse').on('click', d => {
-          _this.prepareMemberDataToView(d.currentTarget.__data__, true);
-          _this.toogleSideNav()
-
-        })
+        d3.select(arr[i]).selectAll<HTMLElement, any>('.spouse-card').on('click', event => {
+          const index = Number(event.currentTarget.getAttribute('data-spouse-index'));
+          const spouse = _this.getSpouseCards(node.data)[index] || {
+            nodeId: `${node.data.nodeId}S`, profilePic: node.data.spousePic
+          };
+          if (spouse?.nodeId) {
+            _this.prepareMemberDataToView({ data: spouse }, false);
+            _this.toogleSideNav();
+          }
+        });
       })
       .nodeContent(function (d: any) {
-        const color = 'white';
-
-        let width = d.width / 2;
-        let start = 0
-        if (!d.parent) {
-          start = 60
+        const spouses = _this.getSpouseCards(d.data);
+        if (!spouses.length && (d.children || d._children)) {
+          spouses.push({ name: 'Spouse', nodeId: `${d.data.nodeId}S`, profilePic: d.data.spousePic });
         }
-        let hasSpouse = d.children || d._children || d.data.spouse;
-        if (!hasSpouse) {
-
-          width = width * 2;
-
-        }
-        // let bornOn;
-        // if(d.data.bornOn){
-        //   bornOn = `
-        //   <div style="color:white;margin-left:20px;margin-top:3px;font-size:10px;">${
-        //     d.data.bornOn
-        //   } - ${
-        //     d.data.diedOn?d.data.diedOn:''
-        //   } </div>
-        //   `
-        // }
-        //onmouseover="this.style.opacity= 0.7;"
-        //onmouseout="this.style.backgroundColor='white'; this.style.color='white';"
-        let mainNodeHtml = `
-        <div id="main-node" class="col" onmouseout="this.style.opacity= 1;" onmouseover="this.style.opacity= 0.5;" style="display: flex;justify-content: center;width:${width + 14}px;background-color:${color};border-top: 4px solid blue;${hasSpouse ? 'border-top-left-radius: 10px;border-bottom-left-radius: 10px;' : 'border-radius:10px'}">
-        <div class="row" style=" display: flex;justify-content: center;height:${d.height}px;">
-           <div style="height: 90px;display: flex;justify-content: center;align-items: center;">
-
-           <div style="background-color:white;display: flex;justify-content: center;border-radius:100px;" >
-           <img src=" ${_this.imageService.getUserPhotos(d.data.profilePic)
-          }" style="border-radius:100px;width:80px;height:80px;background-color:#ededed;" />
-           </div>
-           </div>
-          <div style="width:${width + 12}px;word-wrap: break-word;font-size:15px;color:black;text-align: center;font-weight: bold;">  <h7>${d.data.name
-          }  </h7></div>
-          <div style="color:black;margin-left:20px;margin-top:3px;font-size:10px;"> </div>
-       </div></div>`;
-        let spouseHtml = ''
-        if (hasSpouse) {
-
-          spouseHtml = `<div id="spouse" class="col" onmouseout="this.style.opacity= 1;" onmouseover="this.style.opacity= 0.5;" style="    border-left: 1px solid rgb(230 216 220);width:${width + 10}px;display: flex;justify-content: center;background-color:${color};border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-top: 4px solid #ce4b75;">
-        <div class="row" style="display: flex;justify-content: center;height:${d.height}px;">
-           <div style="height: 90px;display: flex;justify-content: center;align-items: center;">
-
-           <div style="background-color:white;display: flex;justify-content: center;border-radius:100px;" >
-           <img src=" ${_this.imageService.getUserPhotos(d.data.spousePic)
-            }" style="border-radius:100px;width:80px;height:80px;background-color:#ededed;" />
-           </div>
-           </div>
-          <div style="width:${width + 10}px; word-wrap: break-word;font-size:15px;color:black;text-align: center;font-weight: bold;"> <h7> ${d.data.spouse ? d.data.spouse : `Spouse`
-            } </h7></div>
-          <div style="color:black;margin-left:20px;margin-top:3px;font-size:10px;"> </div>`;
-        }
-        return `<div class="row" style="display: flex;justify-content: center;box-shadow: 0 0px 6px 0 rgb(0 0 0 / 20%);border-radius:13px;">
-       ${mainNodeHtml}
-       ${spouseHtml}
-
-       </div>`;
+        const people = [{ name: d.data.name, profilePic: d.data.profilePic }, ...spouses];
+        const cards = people.map((person: any, index: number) => {
+          const first = index === 0;
+          const last = index === people.length - 1;
+          return `<div ${first ? 'id="main-node"' : `class="spouse-card" data-spouse-index="${index - 1}"`}
+            onmouseout="this.style.opacity=1;" onmouseover="this.style.opacity=0.5;"
+            style="box-sizing:border-box;flex:0 0 120px;width:120px;height:${d.height}px;
+              background:white;border-top:4px solid ${first ? 'blue' : '#ce4b75'};
+              ${first ? 'border-radius:10px 0 0 10px;' : 'border-left:1px solid rgb(230 216 220);'}
+              ${last ? 'border-top-right-radius:10px;border-bottom-right-radius:10px;' : ''}
+              cursor:${first || person.nodeId ? 'pointer' : 'default'};">
+            <div style="height:90px;display:flex;justify-content:center;align-items:center;">
+              <img src="${_this.escapeCardText(_this.imageService.getUserPhotos(person.profilePic))}"
+                style="border-radius:100px;width:80px;height:80px;background:#ededed;" />
+            </div>
+            <div style="padding:0 5px;overflow-wrap:anywhere;font-size:15px;color:black;text-align:center;font-weight:bold;">
+              ${_this.escapeCardText(person.name)}
+            </div>
+          </div>`;
+        }).join('');
+        return `<div style="display:flex;width:${d.width}px;height:${d.height}px;box-shadow:0 0 6px rgb(0 0 0 / 20%);border-radius:10px;">${cards}</div>`;
       })
       .render();
     this.chart.expand('2X-1');

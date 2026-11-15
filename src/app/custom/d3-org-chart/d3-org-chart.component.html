@@ -49,10 +49,10 @@
     </div>
 
     
-    <div #chartContainer id="chartContainer">
-      <div *ngIf="data==null"  class="tree-spinner">
+    <div #chartContainer id="chartContainer" [attr.aria-busy]="data == null">
+      <div *ngIf="data==null" class="tree-spinner" role="status" aria-label="Loading family tree">
         <div class="spinner-container">
-          <div class="spinner"></div>
+          <div class="spinner" aria-hidden="true"></div>
       </div>
       </div>
     </div>

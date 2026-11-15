@@ -1,4 +1,21 @@
-#main{
-    height: 100%;
-    padding-top: 80px;
+:host {
+    display: block;
+    --tree-header-height: 92px;
+}
+
+#main {
+    padding-top: var(--tree-header-height);
+}
+
+app-d3-org-chart {
+    display: block;
+    height: calc(100vh - var(--tree-header-height));
+    height: calc(100dvh - var(--tree-header-height));
+    min-height: 320px;
+}
+
+@media (max-width: 1030px) {
+    :host {
+        --tree-header-height: 76px;
+    }
 }
