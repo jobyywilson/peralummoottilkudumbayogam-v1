@@ -11,7 +11,7 @@ function loadHandler(name, data = []) {
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, `../functions/${name}.js`), 'utf8'), {
     exports, console: { error() {} },
     require: name => name === './lib/family-api-config'
-      ? { SUPABASE_API_KEY: 'configured-key', ENCRYPT_KEY: 'hf8685345fhjs9h' }
+      ? { SUPABASE_API_KEY: 'configured-key', ENCRYPT_KEY: 'hf8685345fhjs9h8', serializeFamilyData: require('../functions/lib/family-api-config').serializeFamilyData }
       : { get: async (url, options) => {
         calls.push({ url, options });
         if (data instanceof Error) throw data;
@@ -22,7 +22,7 @@ function loadHandler(name, data = []) {
 }
 
 function decrypt(body) {
-  const key = 'hf8685345fhjs9h';
+  const key = 'hf8685345fhjs9h8';
   return JSON.parse(Array.from(JSON.parse(body).data, (char, i) =>
     String.fromCharCode((char.charCodeAt(0) - key.charCodeAt(i % key.length) + 256) % 256)
   ).join(''));

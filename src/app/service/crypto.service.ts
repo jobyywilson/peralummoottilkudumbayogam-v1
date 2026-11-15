@@ -18,18 +18,29 @@ export class CryptoService {
     return encryptedText;
 }
 
-  decrypt(data: string) {
+  decrypt(data: string, key: string = this.key) {
     var decryptedText = '';
     for (var i = 0; i < data.length; i++) {
         var encryptedChar = data[i];
-        var keyChar = this.key[i % this.key.length]; // Repeats key if it's shorter than encryptedText
+        var keyChar = key[i % key.length]; // Repeats key if shorter than the encrypted text
         var decryptedChar = String.fromCharCode((encryptedChar.charCodeAt(0) - keyChar.charCodeAt(0) + 256) % 256);
         decryptedText += decryptedChar;
     }
     return decryptedText;
 }
 decryptAndParse(data: string){
-  return JSON.parse(this.decrypt(data).replace(/[\x00-\x1F\x7F-\x9F]/g, ''))
+  if (typeof data !== 'string' || !data.length) {
+    throw new Error('The family data response is missing.');
+  }
+  // Read the former API default during a rolling frontend/function deployment.
+  for (const key of [this.key, 'hf8685345fhjs9h']) {
+    try {
+      return JSON.parse(this.decrypt(data, key));
+    } catch {
+      // Try only the known legacy key; do not repair or silently alter invalid JSON.
+    }
+  }
+  throw new Error('Unable to decode family data. Check that the API and browser response keys match.');
 }
 
 }

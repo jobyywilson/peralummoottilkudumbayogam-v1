@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { SUPABASE_API_KEY, ENCRYPT_KEY } = require('./lib/family-api-config');
+const { SUPABASE_API_KEY, ENCRYPT_KEY, serializeFamilyData } = require('./lib/family-api-config');
 const PHOTO_TAG_URL = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/photo_tag';
 
 exports.handler = async (event) => {
@@ -31,7 +31,7 @@ function jsonResponse(statusCode, body) {
 }
 
 function getEncryptedData(data){
-    let encryptedData = encrypt(JSON.stringify(data))
+    let encryptedData = encrypt(serializeFamilyData(data))
     return JSON.stringify({"data":encryptedData})
 }
 

@@ -89,7 +89,7 @@ test('unknown co-parent stays unknown and sibling groups follow spouse order', (
   assert.deepEqual(Array.from(chart.getChartData(), item => item.nodeId), ['A', 'B', 'C', 'D']);
 });
 
-test('children stay beneath their own spouse column with enough room for siblings and descendants', () => {
+test('wide child groups stay separated while adult cards remain compact', () => {
   const chart = makeChart();
   const parent = { nodeId: 'A', name: 'Alex', spouses: [
     { nodeId: 'AS', name: 'Anna' }, { nodeId: 'AS1', name: 'Beth' }, { nodeId: 'AS2', name: 'Clara' }
@@ -102,9 +102,8 @@ test('children stay beneath their own spouse column with enough room for sibling
   children.forEach(child => { child.parent = root; });
   chart.layoutParentGroups(root);
   const spouseCenter = index => root.x - root.width / 2 + chart.getFamilyAnchorX(root, index + 1);
-  assert.equal((children[0].x + children[1].x) / 2, spouseCenter(0));
-  assert.equal(children[2].x, spouseCenter(1));
-  assert.equal(children[3].x, spouseCenter(2));
+  assert.equal(root.width, 760);
+  assert.deepEqual(Array.from(root.familyColumns), [160, 160, 160, 160]);
   assert.ok(children[1].x + children[1].width / 2 < children[2].x - children[2].width / 2);
   assert.equal(chart.getParentLinkX(children[3]), spouseCenter(2));
   // A fresh layout after collapse must release the extra column width.
@@ -157,4 +156,82 @@ test('legacy spouse child lists recover parentage when child summaries omit the 
   chart.layoutParentGroups(root);
   assert.equal(chart.getParentLinkX(childNode), childNode.x);
   assert.equal(childNode.x, root.x - root.width / 2 + chart.getExpandButtonX(root));
+});
+
+function hierarchy(chart, id) {
+  function build(record, parent, depth) {
+    const node = { data: record, parent, y: depth * 290, height: 200 };
+    const children = chart.data.filter(item => item.parentNodeId === record.nodeId).map(item => build(item, node, depth + 1));
+    if (children.length) node.children = children;
+    return node;
+  }
+  return build(chart.data.find(item => item.nodeId === id), null, 0);
+}
+
+function verifyGeometry(chart, root) {
+  chart.layoutParentGroups(root);
+  const nodes = [];
+  function walk(node) { nodes.push(node); (node.children || []).forEach(walk); }
+  walk(root);
+  const cards = nodes.flatMap(node => node.familyColumns.map((_, i) => ({
+    id: node.data.nodeId, left: node.x - node.width / 2 + chart.getCardCenter(node, i) - 80,
+    right: node.x - node.width / 2 + chart.getCardCenter(node, i) + 80,
+    top: node.y, bottom: node.y + 200
+  })));
+  for (let i = 0; i < cards.length; i++) for (let j = i + 1; j < cards.length; j++) {
+    const a = cards[i], b = cards[j];
+    assert.ok(!(a.left < b.right - 0.01 && a.right > b.left + 0.01 && a.top < b.bottom && a.bottom > b.top), `cards overlap: ${a.id} / ${b.id}`);
+  }
+  for (const node of nodes.filter(item => item.parent)) {
+    const source = { x: chart.getParentLinkX(node), y: chart.getParentLinkY(node) };
+    const target = { x: node.x - node.width / 2 + chart.getCardCenter(node, 0), y: node.y };
+    const path = chart.getFamilyLinkPath(target, source);
+    const numbers = path.match(/-?\d+(?:\.\d+)?/g).map(Number);
+    assert.ok(numbers.every(Number.isFinite));
+    const bendY = numbers[2];
+    assert.ok(bendY >= node.parent.y + node.parent.height, `branch bends inside adult row: ${node.data.nodeId}`);
+    const points = [source, { x: source.x, y: bendY }, { x: target.x, y: bendY }, target];
+    for (let i = 1; i < points.length; i++) for (const card of cards) {
+      const a = points[i - 1], b = points[i];
+      const intersects = a.x === b.x
+        ? a.x > card.left + 0.01 && a.x < card.right - 0.01 && Math.max(a.y, b.y) > card.top + 0.01 && Math.min(a.y, b.y) < card.bottom - 0.01
+        : a.y > card.top + 0.01 && a.y < card.bottom - 0.01 && Math.max(a.x, b.x) > card.left + 0.01 && Math.min(a.x, b.x) < card.right - 0.01;
+      assert.ok(!intersects, `connector to ${node.data.nodeId} crosses card ${card.id}`);
+    }
+  }
+  return nodes;
+}
+
+for (const [name, id] of [['C T Thomas', '8C-1.7.3.1.3.2'], ['Roja', '10C-1.1.2.1.2.2.1.1']]) {
+  test(`real ${name} family: compact partners, no card overlaps or connectors through cards`, () => {
+    const chart = makeChart();
+    chart.data = require('./fixtures/family-layout.json');
+    const root = hierarchy(chart, id);
+    const expanded = verifyGeometry(chart, root).map(node => [node.data.nodeId, node.x, node.width]);
+    assert.equal(root.width, 560);
+    assert.equal(chart.getCardCenter(root, 1) - chart.getCardCenter(root, 0), 200);
+    root._children = root.children;
+    root.children = null;
+    verifyGeometry(chart, root);
+    assert.equal(root.width, 560);
+    root.children = root._children;
+    root._children = null;
+    assert.deepEqual(verifyGeometry(chart, root).map(node => [node.data.nodeId, node.x, node.width]), expanded);
+  });
+}
+
+test('three-spouse stress cases: wide siblings, grandchildren, and missing co-parent links', () => {
+  for (let scenario = 0; scenario < 30; scenario++) {
+    const chart = makeChart();
+    const parent = { nodeId: 'A', name: 'Member', spouses: [0, 1, 2].map(i => ({ nodeId: `AS${i}`, name: `Partner ${i}` })) };
+    chart.data = [parent];
+    for (let i = 0; i < 6 + scenario; i++) {
+      const child = { nodeId: `C${i}`, parentNodeId: 'A', name: 'Child', secondaryParentMemberId: i % 5 ? `AS${(i + scenario) % 3}` : undefined, spouse: i % 2 ? 'Partner' : '' };
+      chart.data.push(child);
+      for (let j = 0; j < (i + scenario) % 4; j++) chart.data.push({ nodeId: `G${i}-${j}`, parentNodeId: child.nodeId, name: 'Grandchild' });
+    }
+    const root = hierarchy(chart, 'A');
+    verifyGeometry(chart, root);
+    assert.equal(root.width, 760);
+  }
 });

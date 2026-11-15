@@ -208,18 +208,35 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     return index > 0 ? center - this.cardWidth / 2 - this.cardGap / 2 : center;
   }
 
-  getParentLinkX(node: any): number {
+  private linkClearance = new Map<string, number>();
+
+  getChildParentIndex(node: any): number {
     const pair = this.getParentPair(node.data);
-    if (!pair) return node.parent.x;
-    return node.parent.x - node.parent.width / 2 + this.getFamilyAnchorX(node.parent, pair.index + 1);
+    if (pair) return pair.index + 1;
+    return this.getNodeWidth(node.parent) > this.cardWidth ? 1 : 0;
+  }
+
+  getParentLinkY(node: any): number {
+    return node.parent.y + node.parent.height * (this.getChildParentIndex(node) > 0 ? 0.5 : 1);
+  }
+
+  getParentLinkX(node: any): number {
+    const index = this.getChildParentIndex(node);
+    const x = node.parent.x - node.parent.width / 2 + this.getFamilyAnchorX(node.parent, index);
+    this.linkClearance.set(`${x},${this.getParentLinkY(node)}`, node.parent.y + node.parent.height + 24 + Math.min(index, 4) * 8);
+    return x;
+  }
+
+  getFamilyLinkPath(child: any, parent: any): string {
+    // Stay in the gap between partners until below the complete adult row.
+    const clearance = this.linkClearance.get(`${parent.x},${parent.y}`) || parent.y + 24;
+    const bendY = Math.min(child.y - 24, clearance);
+    return `M ${parent.x} ${parent.y} V ${bendY} H ${child.x} V ${child.y}`;
   }
 
   getExpandCardIndex(node: any): number {
     const children = node.children || node._children || [];
-    const groups = new Set<number>(children.map((child: any) => {
-      const pair = this.getParentPair(child.data);
-      return pair ? pair.index + 1 : 0;
-    }));
+    const groups = new Set<number>(children.map((child: any) => this.getChildParentIndex({ ...child, parent: node })));
     return groups.size === 1 ? Array.from(groups)[0] : 0;
   }
 
@@ -234,29 +251,46 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
 
   layoutParentGroups(root: any): void {
     const gap = 60;
-    const measure = (node: any): number => {
+    this.linkClearance.clear();
+    const measure = (node: any): void => {
       const children = node.children || [];
       children.forEach(measure);
       const count = Math.round((this.getNodeWidth(node) + this.cardGap) / (this.cardWidth + this.cardGap));
       const grouped = this.getSpouseCards(node.data).length > 1;
-      node.familyGroups = Array.from({ length: grouped ? count : 1 }, () => []);
+      node.familyColumns = Array.from({ length: count }, () => this.cardWidth);
+      node.width = this.getNodeWidth(node);
+      const groups: any[][] = Array.from({ length: grouped ? count : 1 }, () => []);
       for (const child of children) {
         const pair = this.getParentPair(child.data);
-        node.familyGroups[grouped && pair ? pair.index + 1 : 0].push(child);
+        groups[grouped && pair ? pair.index + 1 : 0].push(child);
       }
-      const groupWidth = (group: any[]) => group.reduce((sum, child) => sum + child.familyWidth, 0) + Math.max(0, group.length - 1) * gap;
-      node.familyColumns = Array.from({ length: count }, (_, index) => grouped ? Math.max(this.cardWidth, groupWidth(node.familyGroups[index])) : this.cardWidth);
-      node.width = node.familyColumns.reduce((sum: number, width: number) => sum + width, 0) + (count - 1) * this.cardGap;
-      node.familyWidth = grouped ? node.width : Math.max(node.width, groupWidth(children));
-      return node.familyWidth;
-    };
-    const place = (node: any, center: number) => {
-      node.x = center;
-      node.familyGroups.forEach((group: any[], index: number) => {
+      const occupied = groups.map((group, index) => {
         const width = group.reduce((sum, child) => sum + child.familyWidth, 0) + Math.max(0, group.length - 1) * gap;
-        const groupCenter = node.familyGroups.length > 1 ? center - node.width / 2 + this.getFamilyAnchorX(node, index) : center;
-        let left = groupCenter - width / 2;
-        group.forEach(child => { place(child, left + child.familyWidth / 2); left += child.familyWidth + gap; });
+        const desired = grouped ? -node.width / 2 + this.getFamilyAnchorX(node, index) : -node.width / 2 + this.getFamilyAnchorX(node, count > 1 ? 1 : 0);
+        return { children: group, width, desired, center: desired };
+      }).filter(group => group.children.length);
+      // Spread wide sibling groups without stretching the adult cards.
+      occupied.forEach((group, index) => {
+        if (index) {
+          const previous = occupied[index - 1];
+          group.center = Math.max(group.desired, previous.center + previous.width / 2 + gap + group.width / 2);
+        }
+      });
+      const shift = occupied.length ? occupied.reduce((sum, group) => sum + group.center - group.desired, 0) / occupied.length : 0;
+      occupied.forEach(group => group.center -= shift);
+      node.familyGroups = occupied;
+      node.familyLeft = Math.min(-node.width / 2, ...occupied.map(group => group.center - group.width / 2));
+      node.familyRight = Math.max(node.width / 2, ...occupied.map(group => group.center + group.width / 2));
+      node.familyWidth = node.familyRight - node.familyLeft;
+    };
+    const place = (node: any, center: number): void => {
+      node.x = center;
+      node.familyGroups.forEach((group: any) => {
+        let left = center + group.center - group.width / 2;
+        group.children.forEach((child: any) => {
+          place(child, left - child.familyLeft);
+          left += child.familyWidth + gap;
+        });
       });
     };
     measure(root);
@@ -293,7 +327,8 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
     if (bindings?.top) {
       bindings.top.swap = (node: any) => { if (!node.parent) this.layoutParentGroups(node); };
       bindings.top.linkParentX = (node: any) => this.getParentLinkX(node);
-      bindings.top.linkParentY = (node: any) => node.parent.y + node.parent.height * (this.getParentPair(node.data)?.index >= 0 ? 0.5 : 1);
+      bindings.top.linkParentY = (node: any) => this.getParentLinkY(node);
+      bindings.top.diagonal = (child: any, parent: any) => this.getFamilyLinkPath(child, parent);
       // Incoming links attach to the member card.
       bindings.top.linkX = (node: any) => node.x - node.width / 2 + this.getCardCenter(node, 0);
       bindings.top.linkY = (node: any) => node.y;

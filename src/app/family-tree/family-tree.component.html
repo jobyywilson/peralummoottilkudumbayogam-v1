@@ -1,6 +1,10 @@
 
 <main id="main">
 
-      <app-d3-org-chart [data]="data" [selectedUserId]="selectedUserId"></app-d3-org-chart>
+      <div *ngIf="loadError" role="alert" style="padding:24px;text-align:center;">
+        <p>{{ loadError }}</p>
+        <button type="button" class="btn btn-outline-secondary" (click)="loadTree('.netlify/functions/users')">Try again</button>
+      </div>
+      <app-d3-org-chart *ngIf="!loadError" [data]="data" [selectedUserId]="selectedUserId"></app-d3-org-chart>
 
     </main>

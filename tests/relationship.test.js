@@ -41,7 +41,7 @@ test('missing environment uses the browser public key and compatible encryption'
   assert.equal(config.SUPABASE_API_KEY, browserSource.match(/SUPABASE_API_KEY = '([^']+)'/)[1]);
   const result = await handler({ queryStringParameters: { memberId: '2X-1' } });
   assert.equal(result.statusCode, 200);
-  assert.deepEqual(decrypt(result, 'hf8685345fhjs9h'), records);
+  assert.deepEqual(decrypt(result, 'hf8685345fhjs9h8'), records);
   assert.match(calls[0].url, /primary_member_id=eq.2X-1&select=spouse:relationship_secondary_member_id_fkey/);
 });
 

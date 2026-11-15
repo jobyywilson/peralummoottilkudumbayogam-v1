@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const { SUPABASE_API_KEY, ENCRYPT_KEY } = require('./lib/family-api-config');
+const { SUPABASE_API_KEY, ENCRYPT_KEY, serializeFamilyData } = require('./lib/family-api-config');
 const PATH = '/.netlify/functions/users';
 const SUPABASE_HOST = 'https://hzqpjqvopcevhucgazlh.supabase.co/rest/v1/';
 const MEMBER_RESOURCE = 'user';
@@ -44,7 +44,7 @@ exports.handler = async (event) => {
         'Content-Type': 'application/json',
         'Cache-Control': 'public, max-age=60'
       },
-      body: JSON.stringify({ data: encrypt(JSON.stringify(response.data)) })
+      body: JSON.stringify({ data: encrypt(serializeFamilyData(response.data)) })
     };
   } catch (error) {
     const upstreamStatus = error.response?.status;

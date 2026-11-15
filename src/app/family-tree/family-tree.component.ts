@@ -13,6 +13,8 @@ import { ImageService } from '../service/image.service';
 export class FamilyTreeComponent implements OnInit {
 
   data:any;
+  loadError = '';
+
   selectedUserId : any;
 
   constructor(private commonService : CommonService, private cryptoService:CryptoService,private route: ActivatedRoute,private imageService:ImageService) {
@@ -50,7 +52,9 @@ export class FamilyTreeComponent implements OnInit {
   }
 
   loadTree(path:string){
-    d3.json(path
+    this.loadError = '';
+    this.data = null;
+    return d3.json(path
       ).then((data:any) => {
         let unParsedData = this.cryptoService.decryptAndParse(data.data)
         let parsedData : any = [];
@@ -114,6 +118,9 @@ export class FamilyTreeComponent implements OnInit {
       //   this.data = Object.assign([], data);
       // }, 1000);
 
+    }).catch(() => {
+      this.data = [];
+      this.loadError = 'Unable to load the family tree. Please try again.';
     });
   }
 

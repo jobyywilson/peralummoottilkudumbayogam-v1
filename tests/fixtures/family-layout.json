@@ -1,0 +1,109 @@
+[
+  {
+    "nodeId": "10C-1.1.2.1.2.2.1.1",
+    "name": "Roja Abraham Raju",
+    "parentNodeId": null,
+    "secondaryParentMemberId": "9C-1.1.2.1.2.2.1S",
+    "spouseList": [
+      "Ann Joseph",
+      "Anitta J"
+    ],
+    "spouses": [
+      {
+        "nodeId": "10C-1.1.2.1.2.2.1.1S",
+        "name": "Ann Joseph"
+      },
+      {
+        "nodeId": "10C-1.1.2.1.2.2.1.1S1",
+        "name": "Anitta J "
+      }
+    ]
+  },
+  {
+    "nodeId": "10C-1.7.3.1.3.2.1.1",
+    "name": "Angel",
+    "parentNodeId": "9C-1.7.3.1.3.2.1",
+    "secondaryParentMemberId": "9C-1.7.3.1.3.2.1S",
+    "spouseList": []
+  },
+  {
+    "nodeId": "10C-1.7.3.1.3.2.1.2",
+    "name": "Hanna",
+    "parentNodeId": "9C-1.7.3.1.3.2.1",
+    "secondaryParentMemberId": "9C-1.7.3.1.3.2.1S",
+    "spouseList": []
+  },
+  {
+    "nodeId": "10C-1.7.3.1.3.2.4.1",
+    "name": "Dan Aby",
+    "parentNodeId": "9C-1.7.3.1.3.2.4",
+    "secondaryParentMemberId": "9C-1.7.3.1.3.2.4S",
+    "spouseList": []
+  },
+  {
+    "nodeId": "10C-1.7.3.1.3.2.4.2",
+    "name": "Mithra S. Aby",
+    "parentNodeId": "9C-1.7.3.1.3.2.4",
+    "secondaryParentMemberId": "9C-1.7.3.1.3.2.4S",
+    "spouseList": []
+  },
+  {
+    "nodeId": "11C-1.1.2.1.2.2.1.1.1",
+    "name": "Rihanna Raichal Roja",
+    "parentNodeId": "10C-1.1.2.1.2.2.1.1",
+    "secondaryParentMemberId": "10C-1.1.2.1.2.2.1.1S1",
+    "spouseList": []
+  },
+  {
+    "nodeId": "8C-1.7.3.1.3.2",
+    "name": "C T Thomas",
+    "parentNodeId": null,
+    "secondaryParentMemberId": "7C-1.7.3.1.3S",
+    "spouseList": [
+      "Ponnamma",
+      "Elizabeth"
+    ],
+    "spouses": [
+      {
+        "nodeId": "8C-1.7.3.1.3.2S",
+        "name": "Ponnamma"
+      },
+      {
+        "nodeId": "8C-1.7.3.1.3.2S1",
+        "name": "Elizabeth"
+      }
+    ]
+  },
+  {
+    "nodeId": "9C-1.7.3.1.3.2.1",
+    "name": "Chacko",
+    "parentNodeId": "8C-1.7.3.1.3.2",
+    "secondaryParentMemberId": "8C-1.7.3.1.3.2S",
+    "spouseList": [
+      "Lija Varughese"
+    ]
+  },
+  {
+    "nodeId": "9C-1.7.3.1.3.2.2",
+    "name": "Sosamma",
+    "parentNodeId": "8C-1.7.3.1.3.2",
+    "secondaryParentMemberId": "8C-1.7.3.1.3.2S",
+    "spouseList": []
+  },
+  {
+    "nodeId": "9C-1.7.3.1.3.2.3",
+    "name": "Mini Thomas",
+    "parentNodeId": "8C-1.7.3.1.3.2",
+    "secondaryParentMemberId": "8C-1.7.3.1.3.2S",
+    "spouseList": []
+  },
+  {
+    "nodeId": "9C-1.7.3.1.3.2.4",
+    "name": "Aby Thomas",
+    "parentNodeId": "8C-1.7.3.1.3.2",
+    "secondaryParentMemberId": "8C-1.7.3.1.3.2S",
+    "spouseList": [
+      "Saumya"
+    ]
+  }
+]
