@@ -129,3 +129,32 @@ test('expand control sits in the gap before Anitta at the partner line, expanded
   node.children = null;
   assert.equal(chart.getExpandButtonX(node), chart.getCardCenter(node, 2) - chart.cardWidth / 2 - chart.cardGap / 2);
 });
+
+const FamilyTree = loadComponent('src/app/family-tree/family-tree.component.ts', 'FamilyTreeComponent');
+
+test('legacy spouse child lists recover parentage when child summaries omit the co-parent ID', () => {
+  const responses = {
+    '/.netlify/functions/users/AS': [{ nodeId: 'AS', childrens: [] }],
+    '/.netlify/functions/users/AS1': [{ nodeId: 'AS1', childrens: [{ nodeId: 'B', name: 'Rihanna' }, { nodeId: 'C' }] }]
+  };
+  const requests = [];
+  const treeComponent = new FamilyTree({
+    doGet: url => ({ subscribe: observer => { requests.push(url); observer.next({ data: responses[url] }); } })
+  }, { decryptAndParse: value => value }, { snapshot: { paramMap: null } }, {});
+  const parent = { nodeId: 'A', name: 'Roja', spouses: [{ nodeId: 'AS', name: 'Ann' }, { nodeId: 'AS1', name: 'Anitta' }] };
+  const child = { nodeId: 'B', name: 'Rihanna', parentNodeId: 'A' };
+  const unrelated = { nodeId: 'C', parentNodeId: 'OtherMember' };
+  treeComponent.loadSpouseChildren(parent, [parent, child, unrelated]);
+  assert.equal(requests.length, 2);
+  assert.equal(child.secondaryParentMemberId, 'AS1');
+  assert.equal(unrelated.secondaryParentMemberId, undefined);
+  const chart = makeChart();
+  chart.data = treeComponent.data;
+  assert.equal(chart.getParentPair(child).index, 1);
+  const childNode = { data: child, width: 160 };
+  const root = { data: parent, children: [childNode], height: 200 };
+  childNode.parent = root;
+  chart.layoutParentGroups(root);
+  assert.equal(chart.getParentLinkX(childNode), childNode.x);
+  assert.equal(childNode.x, root.x - root.width / 2 + chart.getExpandButtonX(root));
+});

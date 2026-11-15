@@ -28,7 +28,7 @@ exports.handler = async (event) => {
     if (nodeId) {
       const spouseParamName = isSpouseNodeId(nodeId) ? 'secondaryParentMemberId' : 'parentNodeId';
       const encodedNodeId = encodeURIComponent(nodeId);
-      const select = '*,parents:relationship!user_parent_relationship_id_fkey(primary:relationship_primary_member_id_fkey(nodeId,name,familyName:family_tree!user_family_tree_id_fkey(family_tree_name)),secondary:relationship_secondary_member_id_fkey(nodeId,name,familyName:family_tree!user_family_tree_id_fkey(family_tree_name))),childrens:user!' + spouseParamName + '(nodeId,name)';
+      const select = '*,parents:relationship!user_parent_relationship_id_fkey(primary:relationship_primary_member_id_fkey(nodeId,name,familyName:family_tree!user_family_tree_id_fkey(family_tree_name)),secondary:relationship_secondary_member_id_fkey(nodeId,name,familyName:family_tree!user_family_tree_id_fkey(family_tree_name))),childrens:user!' + spouseParamName + '(nodeId,name,secondaryParentMemberId,parent_relationship_id)';
       url = `${SUPABASE_HOST}${MEMBER_RESOURCE}?nodeId=eq.${encodedNodeId}&select=${encodeURIComponent(select)}`;
     }
 

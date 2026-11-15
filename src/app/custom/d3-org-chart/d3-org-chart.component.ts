@@ -32,6 +32,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
   previousNodeId: any;
   isSideMenuOpened: boolean = false;
   chart: any;
+  private hasRendered = false;
   term: string = '';
   previousSearchedMemberId : string = ''
   isRemovedEventList: boolean = false;
@@ -416,7 +417,10 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       })
       .render();
     this.chart.expand('2X-1');
-    this.chart.fit();
+    if (!this.hasRendered) {
+      this.chart.fit();
+      this.hasRendered = true;
+    }
     this.chart.getChartState().svg.on("wheel.zoom", null);
     this.updateLink()
     if (this.selectedUserId) {

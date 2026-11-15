@@ -70,6 +70,7 @@ export class FamilyTreeComponent implements OnInit {
         member.nodeId = unParsedMember.nodeid;
         member.name = unParsedMember.name;
         member.parentNodeId = unParsedMember.parentnodeid;
+        member.secondaryParentMemberId = unParsedMember.secondaryParentMemberId || unParsedMember.secondaryparentmemberid;
         
         parsedData.push(member)
       }
@@ -77,19 +78,6 @@ export class FamilyTreeComponent implements OnInit {
       // The tree feed contains names only. Resolve real IDs for multiple spouses
       // rather than assuming that the name order matches numbered spouse IDs.
       for (const member of parsedData.filter((item: any) => item.spouseList?.length > 1)) {
-        // Child records carry the actual co-parent ID; never infer it from spouse order.
-        this.commonService.doGet(`.netlify/functions/users?nodeId=${encodeURIComponent(member.nodeId)}`)
-          .subscribe({
-            next: (response: any) => {
-              const details = this.cryptoService.decryptAndParse(response.data);
-              for (const child of details[0]?.childrens || []) {
-                const treeChild = parsedData.find((item: any) => item.nodeId === child.nodeId);
-                if (treeChild) treeChild.secondaryParentMemberId = child.secondaryParentMemberId;
-              }
-              this.data = [...parsedData];
-            },
-            error: () => { /* Unknown parentage stays explicitly unconfirmed. */ }
-          });
         this.commonService.doGet(`.netlify/functions/relationship?memberId=${encodeURIComponent(member.nodeId)}`)
           .subscribe({
             next: (response: any) => {
@@ -109,6 +97,7 @@ export class FamilyTreeComponent implements OnInit {
                 profilePic: this.imageService.getUserPhotoByUserId(spouse.nodeId)
               }));
               this.data = [...parsedData];
+              this.loadSpouseChildren(member, parsedData);
             },
             error: () => { /* Keep the spouse names visible if details cannot load. */ }
           });
@@ -126,6 +115,30 @@ export class FamilyTreeComponent implements OnInit {
       // }, 1000);
 
     });
+  }
+
+  loadSpouseChildren(member: any, tree: any[]): void {
+    const children = new Map(tree.filter(item => item.parentNodeId === member.nodeId)
+      .map(item => [item.nodeId, item]));
+    for (const spouse of member.spouses || []) {
+      if (!spouse.nodeId) continue;
+      // Existing member endpoints already return a spouse's children by ID.
+      // This also works with deployed APIs that omit co-parent fields in child summaries.
+      this.commonService.doGet(`/.netlify/functions/users/${encodeURIComponent(spouse.nodeId)}`)
+        .subscribe({
+          next: (response: any) => {
+            const records = this.cryptoService.decryptAndParse(response.data);
+            const record = records.find((item: any) => item.nodeId === spouse.nodeId);
+            if (!record) return;
+            for (const child of record.childrens || []) {
+              const treeChild = children.get(child.nodeId);
+              if (treeChild) treeChild.secondaryParentMemberId = spouse.nodeId;
+            }
+            this.data = [...tree];
+          },
+          error: () => { /* Keep unresolved parentage unassigned; never guess a spouse. */ }
+        });
+    }
   }
 
 }
