@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { SpouseInfo } from './model/spouse-info';
 import { FormControl, FormGroup } from '@angular/forms';
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery-9';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryImageSize } from 'ngx-gallery-9';
 
 @Component({
   selector: 'member-info',
@@ -63,8 +63,14 @@ export class MemberInfoComponent implements OnInit{
     this.init();
     this.galleryOptions = 
       [
-        { "image": false, "thumbnailsRemainingCount": true, "height": "100px","thumbnailsColumns":2 },
-        { "breakpoint": 500, "width": "100%", "thumbnailsColumns": 2 }
+        {
+          image: false,
+          width: '100%',
+          height: '160px',
+          thumbnailsRemainingCount: true,
+          thumbnailsColumns: 2,
+          thumbnailSize: NgxGalleryImageSize.Contain
+        }
         ];
 
     

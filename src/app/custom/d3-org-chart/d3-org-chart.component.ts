@@ -567,7 +567,7 @@ export class D3OrgChartComponent implements OnInit, OnChanges {
       this.commonService.doGet(`.netlify/functions/taggedPhotos?memberId=${memberId}`).subscribe((taggedPhotos) => {
         let responseData = this.cryptoService.decryptAndParse(taggedPhotos.data)
         let items = []
-        let end_url ='&h=100&fit=cover'
+        let end_url ='&h=320&fit=contain'
         for (let info of responseData) {
           items.push({
             big:PHOTO_START_URL+info.photos.big_photo_end_url,
